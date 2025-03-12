@@ -1,0 +1,3063 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<orbat model-version="4.8.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schemas/6.22.2/exercise/orbat.xsd">
+  <parties>
+    <party force-create="true" id="1" name="AZUL" sort-id="0" type="friend">
+      <objects/>
+      <tactical>
+        <formation id="5" level="x" name="Formación [5]" sort-id="0">
+          <formation id="6" level="ii" name="Formación [6]" original-superior="5" sort-id="0">
+            <automat id="33" knowledge-group="2" leader="true" level="i" name="EC.Compañía Infantería [33]" overridden-symbol="true" sort-id="0" symbol="symbols/sfgpuci" type="EC.Compañía Infantería">
+              <unit command-post="true" id="34" name="EC.INF.Pelotón [34]" sort-id="0" type="EC.INF.Pelotón">
+                <position x="71175.578125" y="101358.2421875">17MQU6616405735</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="1" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="1" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="2" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="2" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="3" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="3" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="4" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="4" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="5" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="5" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="6" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="6" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="7" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="7" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="8" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="8" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="9" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="9" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="10" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="10" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="11" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="11" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="12" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="12" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="13" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="13" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="14" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="14" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="15" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="15" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="16" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="16" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="17" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="17" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="18" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="18" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="19" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="19" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="20" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="20" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="21" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="21" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="22" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="22" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="23" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="23" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="24" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="24" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="25" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="25" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="26" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="26" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="27" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="27" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="28" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="28" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="29" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="29" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="30" type="EC.Oficial">
+                    <humans>
+                      <human id="30" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <human-factors>
+                  <experience>Conscrit</experience>
+                </human-factors>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN.5.56-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN-9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666607" name="Agua" quantity="540" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666661" name="Alimentos" quantity="90" total-consumption="0"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="61" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="35" name="EC.INF.Pelotón [35]" sort-id="1" type="EC.INF.Pelotón">
+                <position x="71175.578125" y="101458.2421875">17MQU6616405834</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="31" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="31" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="32" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="32" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="33" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="33" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="34" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="34" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="35" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="35" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="36" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="36" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="37" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="37" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="38" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="38" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="39" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="39" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="40" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="40" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="41" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="41" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="42" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="42" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="43" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="43" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="44" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="44" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="45" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="45" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="46" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="46" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="47" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="47" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="48" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="48" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="49" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="49" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="50" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="50" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="51" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="51" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="52" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="52" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="53" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="53" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="54" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="54" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="55" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="55" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="56" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="56" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="57" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="57" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="58" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="58" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="59" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="59" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="60" type="EC.Oficial">
+                    <humans>
+                      <human id="60" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <human-factors>
+                  <experience>Conscrit</experience>
+                </human-factors>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN.5.56-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN-9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666607" name="Agua" quantity="540" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666661" name="Alimentos" quantity="90" total-consumption="0"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="62" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="36" name="EC.INF.Pelotón [36]" sort-id="2" type="EC.INF.Pelotón">
+                <position x="71175.578125" y="101258.2421875">17MQU6616405635</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="61" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="61" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="62" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="62" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="63" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="63" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="64" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="64" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="65" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="65" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="66" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="66" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="67" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="67" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="68" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="68" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="69" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="69" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="70" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="70" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="71" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="71" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="72" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="72" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="73" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="73" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="74" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="74" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="75" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="75" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="76" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="76" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="77" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="77" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="78" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="78" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="79" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="79" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="80" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="80" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="81" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="81" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="82" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="82" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="83" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="83" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="84" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="84" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="85" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="85" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="86" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="86" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="87" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="87" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="88" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="88" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="89" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="89" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="90" type="EC.Oficial">
+                    <humans>
+                      <human id="90" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <human-factors>
+                  <experience>Conscrit</experience>
+                </human-factors>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN.5.56-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN-9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666607" name="Agua" quantity="540" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666661" name="Alimentos" quantity="90" total-consumption="0"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="63" sensor-mode="0"/>
+              </unit>
+            </automat>
+            <automat id="37" knowledge-group="2" leader="false" level="i" name="EC.Compañía Infantería [37]" overridden-symbol="true" sort-id="1" symbol="symbols/sfgpuci" type="EC.Compañía Infantería">
+              <unit command-post="true" id="38" name="EC.INF.Pelotón [38]" sort-id="0" type="EC.INF.Pelotón">
+                <position x="70582.84375" y="95134.4921875">17MQT6556399550</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="91" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="91" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="92" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="92" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="93" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="93" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="94" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="94" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="95" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="95" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="96" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="96" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="97" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="97" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="98" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="98" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="99" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="99" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="100" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="100" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="101" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="101" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="102" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="102" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="103" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="103" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="104" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="104" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="105" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="105" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="106" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="106" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="107" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="107" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="108" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="108" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="109" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="109" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="110" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="110" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="111" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="111" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="112" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="112" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="113" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="113" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="114" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="114" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="115" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="115" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="116" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="116" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="117" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="117" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="118" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="118" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="119" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="119" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="120" type="EC.Oficial">
+                    <humans>
+                      <human id="120" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN.5.56-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN-9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666607" name="Agua" quantity="540" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666661" name="Alimentos" quantity="90" total-consumption="0"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="64" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="39" name="EC.INF.Pelotón [39]" sort-id="1" type="EC.INF.Pelotón">
+                <position x="70582.84375" y="95234.4921875">17MQT6556399650</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="121" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="121" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="122" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="122" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="123" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="123" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="124" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="124" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="125" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="125" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="126" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="126" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="127" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="127" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="128" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="128" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="129" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="129" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="130" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="130" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="131" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="131" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="132" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="132" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="133" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="133" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="134" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="134" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="135" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="135" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="136" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="136" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="137" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="137" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="138" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="138" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="139" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="139" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="140" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="140" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="141" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="141" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="142" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="142" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="143" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="143" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="144" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="144" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="145" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="145" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="146" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="146" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="147" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="147" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="148" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="148" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="149" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="149" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="150" type="EC.Oficial">
+                    <humans>
+                      <human id="150" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN.5.56-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN-9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666607" name="Agua" quantity="540" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666661" name="Alimentos" quantity="90" total-consumption="0"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="65" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="40" name="EC.INF.Pelotón [40]" sort-id="2" type="EC.INF.Pelotón">
+                <position x="70582.84375" y="95034.4921875">17MQT6556399451</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="151" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="151" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="152" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="152" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="153" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="153" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="154" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="154" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="155" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="155" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="156" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="156" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="157" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="157" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="158" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="158" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="159" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="159" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="160" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="160" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="161" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="161" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="162" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="162" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="163" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="163" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="164" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="164" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="165" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="165" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="166" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="166" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="167" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="167" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="168" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="168" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="169" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="169" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="170" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="170" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="171" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="171" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="172" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="172" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="173" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="173" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="174" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="174" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="175" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="175" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="176" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="176" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="177" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="177" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="178" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="178" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="179" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="179" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="180" type="EC.Oficial">
+                    <humans>
+                      <human id="180" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN.5.56-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN-9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666607" name="Agua" quantity="540" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666661" name="Alimentos" quantity="90" total-consumption="0"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="66" sensor-mode="0"/>
+              </unit>
+            </automat>
+            <automat id="41" knowledge-group="2" leader="false" level="i" name="EC.Compañía Infantería [41]" overridden-symbol="true" sort-id="2" symbol="symbols/sfgpuci" type="EC.Compañía Infantería">
+              <unit command-post="true" id="42" name="EC.INF.Pelotón [42]" sort-id="0" type="EC.INF.Pelotón">
+                <position x="70138.2890625" y="86391.6015625">17MQT6510790862</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="181" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="181" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="182" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="182" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="183" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="183" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="184" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="184" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="185" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="185" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="186" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="186" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="187" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="187" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="188" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="188" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="189" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="189" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="190" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="190" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="191" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="191" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="192" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="192" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="193" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="193" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="194" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="194" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="195" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="195" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="196" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="196" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="197" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="197" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="198" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="198" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="199" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="199" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="200" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="200" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="201" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="201" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="202" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="202" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="203" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="203" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="204" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="204" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="205" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="205" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="206" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="206" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="207" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="207" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="208" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="208" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="209" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="209" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="210" type="EC.Oficial">
+                    <humans>
+                      <human id="210" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN.5.56-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN-9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666607" name="Agua" quantity="540" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666661" name="Alimentos" quantity="90" total-consumption="0"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="67" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="43" name="EC.INF.Pelotón [43]" sort-id="1" type="EC.INF.Pelotón">
+                <position x="70138.2890625" y="86491.6015625">17MQT6510790962</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="211" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="211" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="212" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="212" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="213" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="213" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="214" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="214" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="215" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="215" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="216" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="216" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="217" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="217" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="218" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="218" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="219" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="219" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="220" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="220" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="221" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="221" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="222" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="222" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="223" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="223" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="224" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="224" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="225" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="225" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="226" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="226" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="227" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="227" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="228" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="228" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="229" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="229" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="230" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="230" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="231" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="231" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="232" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="232" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="233" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="233" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="234" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="234" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="235" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="235" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="236" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="236" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="237" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="237" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="238" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="238" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="239" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="239" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="240" type="EC.Oficial">
+                    <humans>
+                      <human id="240" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN.5.56-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN-9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666607" name="Agua" quantity="540" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666661" name="Alimentos" quantity="90" total-consumption="0"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="68" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="44" name="EC.INF.Pelotón [44]" sort-id="2" type="EC.INF.Pelotón">
+                <position x="70138.2890625" y="86291.6015625">17MQT6510790763</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="241" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="241" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="242" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="242" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="243" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="243" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="244" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="244" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="245" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="245" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="246" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="246" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="247" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="247" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="248" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="248" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="249" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="249" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="250" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="250" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="251" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="251" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="252" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="252" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="253" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="253" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="254" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="254" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="255" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="255" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="256" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="256" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="257" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="257" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="258" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="258" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="259" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="259" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="260" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="260" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="261" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="261" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="262" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="262" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="263" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="263" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="264" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="264" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="265" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="265" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="266" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="266" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="267" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="267" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="268" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="268" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="269" type="EC.INF.Soldado.Fusil-HK-5.56mm">
+                    <humans>
+                      <human id="269" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="270" type="EC.Oficial">
+                    <humans>
+                      <human id="270" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN.5.56-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="EC.MUN-9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666607" name="Agua" quantity="540" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="96.666666666666671" last-day-consumption="-1" low-threshold="9.6666666666666661" name="Alimentos" quantity="90" total-consumption="0"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="69" sensor-mode="0"/>
+              </unit>
+            </automat>
+          </formation>
+        </formation>
+      </tactical>
+      <communication>
+        <knowledge-group id="2" leader="false" name="Grupo de conocimiento [2]" type="Standard"/>
+        <knowledge-group id="86" leader="false" name="knowledge group[86]" type="Standard"/>
+      </communication>
+      <populations/>
+      <inhabitants/>
+      <logistics/>
+    </party>
+    <party force-create="true" id="3" name="ROJO" sort-id="1" type="enemy">
+      <objects/>
+      <tactical>
+        <formation id="11" level="x" name="Formación [11]" sort-id="0">
+          <formation id="12" level="ii" name="Formación [12]" original-superior="11" sort-id="0">
+            <automat id="45" knowledge-group="4" leader="true" level="i" name="PE.Compañía Infantería [45]" overridden-symbol="true" sort-id="0" symbol="symbols/shgpuci" type="PE.Compañía Infantería">
+              <unit command-post="true" id="46" name="PE.INF.Pelotón [46]" sort-id="0" type="PE.INF.Pelotón">
+                <position x="45836.0234375" y="101358.2421875">17MQU4081405765</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="271" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="271" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="272" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="272" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="273" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="273" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="274" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="274" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="275" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="275" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="276" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="276" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="277" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="277" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="278" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="278" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="279" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="279" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="280" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="280" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="281" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="281" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="282" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="282" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="283" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="283" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="284" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="284" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="285" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="285" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="286" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="286" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="287" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="287" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="288" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="288" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="289" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="289" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="290" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="290" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="291" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="291" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="292" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="292" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="293" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="293" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="294" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="294" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="295" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="295" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="296" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="296" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="297" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="297" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="298" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="298" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="299" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="299" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="300" type="PE.Oficial">
+                    <humans>
+                      <human id="300" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <human-factors>
+                  <experience>Conscrit</experience>
+                </human-factors>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.7.62-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0.19666666666666668" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666666" name="Food" quantity="89.803333333335189" total-consumption="0.19666666666666668"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="1.2291666666666665" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666661" name="Water" quantity="538.77083333335122" total-consumption="1.2291666666666665"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="70" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="47" name="PE.INF.Pelotón [47]" sort-id="1" type="PE.INF.Pelotón">
+                <position x="45836.0234375" y="101458.2421875">17MQU4081405865</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="301" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="301" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="302" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="302" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="303" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="303" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="304" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="304" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="305" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="305" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="306" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="306" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="307" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="307" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="308" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="308" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="309" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="309" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="310" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="310" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="311" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="311" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="312" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="312" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="313" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="313" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="314" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="314" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="315" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="315" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="316" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="316" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="317" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="317" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="318" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="318" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="319" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="319" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="320" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="320" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="321" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="321" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="322" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="322" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="323" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="323" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="324" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="324" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="325" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="325" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="326" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="326" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="327" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="327" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="328" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="328" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="329" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="329" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="330" type="PE.Oficial">
+                    <humans>
+                      <human id="330" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <human-factors>
+                  <experience>Conscrit</experience>
+                </human-factors>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.7.62-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0.19666666666666668" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666666" name="Food" quantity="89.803333333335189" total-consumption="0.19666666666666668"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="1.2291666666666665" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666661" name="Water" quantity="538.77083333335122" total-consumption="1.2291666666666665"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="71" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="48" name="PE.INF.Pelotón [48]" sort-id="2" type="PE.INF.Pelotón">
+                <position x="45836.0234375" y="101258.2421875">17MQU4081405666</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="331" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="331" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="332" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="332" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="333" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="333" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="334" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="334" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="335" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="335" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="336" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="336" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="337" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="337" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="338" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="338" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="339" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="339" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="340" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="340" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="341" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="341" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="342" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="342" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="343" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="343" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="344" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="344" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="345" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="345" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="346" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="346" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="347" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="347" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="348" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="348" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="349" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="349" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="350" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="350" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="351" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="351" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="352" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="352" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="353" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="353" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="354" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="354" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="355" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="355" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="356" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="356" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="357" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="357" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="358" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="358" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="359" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="359" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="360" type="PE.Oficial">
+                    <humans>
+                      <human id="360" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <human-factors>
+                  <experience>Conscrit</experience>
+                </human-factors>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.7.62-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0.19666666666666668" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666666" name="Food" quantity="89.803333333335189" total-consumption="0.19666666666666668"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="1.2291666666666665" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666661" name="Water" quantity="538.77083333335122" total-consumption="1.2291666666666665"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="72" sensor-mode="0"/>
+              </unit>
+            </automat>
+            <automat id="49" knowledge-group="4" leader="false" level="i" name="PE.Compañía Infantería [49]" overridden-symbol="true" sort-id="1" symbol="symbols/shgpuci" type="PE.Compañía Infantería">
+              <unit command-post="true" id="50" name="PE.INF.Pelotón [50]" sort-id="0" type="PE.INF.Pelotón">
+                <position x="44798.734375" y="93504.4609375">17MQT3976797963</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="361" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="361" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="362" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="362" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="363" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="363" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="364" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="364" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="365" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="365" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="366" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="366" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="367" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="367" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="368" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="368" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="369" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="369" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="370" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="370" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="371" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="371" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="372" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="372" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="373" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="373" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="374" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="374" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="375" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="375" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="376" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="376" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="377" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="377" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="378" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="378" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="379" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="379" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="380" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="380" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="381" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="381" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="382" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="382" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="383" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="383" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="384" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="384" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="385" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="385" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="386" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="386" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="387" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="387" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="388" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="388" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="389" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="389" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="390" type="PE.Oficial">
+                    <humans>
+                      <human id="390" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.7.62-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0.19666666666666668" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666666" name="Food" quantity="89.803333333335189" total-consumption="0.19666666666666668"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="1.2291666666666665" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666661" name="Water" quantity="538.77083333335122" total-consumption="1.2291666666666665"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="61" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="51" name="PE.INF.Pelotón [51]" sort-id="1" type="PE.INF.Pelotón">
+                <position x="44798.734375" y="93604.4609375">17MQT3976798062</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="391" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="391" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="392" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="392" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="393" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="393" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="394" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="394" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="395" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="395" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="396" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="396" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="397" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="397" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="398" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="398" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="399" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="399" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="400" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="400" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="401" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="401" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="402" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="402" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="403" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="403" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="404" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="404" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="405" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="405" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="406" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="406" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="407" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="407" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="408" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="408" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="409" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="409" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="410" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="410" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="411" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="411" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="412" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="412" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="413" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="413" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="414" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="414" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="415" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="415" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="416" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="416" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="417" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="417" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="418" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="418" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="419" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="419" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="420" type="PE.Oficial">
+                    <humans>
+                      <human id="420" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.7.62-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0.19666666666666668" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666666" name="Food" quantity="89.803333333335189" total-consumption="0.19666666666666668"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="1.2291666666666665" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666661" name="Water" quantity="538.77083333335122" total-consumption="1.2291666666666665"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="62" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="52" name="PE.INF.Pelotón [52]" sort-id="2" type="PE.INF.Pelotón">
+                <position x="44798.734375" y="93404.4609375">17MQT3976797863</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="421" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="421" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="422" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="422" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="423" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="423" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="424" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="424" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="425" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="425" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="426" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="426" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="427" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="427" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="428" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="428" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="429" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="429" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="430" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="430" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="431" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="431" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="432" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="432" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="433" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="433" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="434" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="434" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="435" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="435" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="436" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="436" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="437" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="437" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="438" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="438" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="439" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="439" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="440" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="440" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="441" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="441" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="442" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="442" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="443" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="443" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="444" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="444" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="445" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="445" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="446" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="446" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="447" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="447" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="448" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="448" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="449" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="449" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="450" type="PE.Oficial">
+                    <humans>
+                      <human id="450" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.7.62-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0.19666666666666668" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666666" name="Food" quantity="89.803333333335189" total-consumption="0.19666666666666668"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="1.2291666666666665" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666661" name="Water" quantity="538.77083333335122" total-consumption="1.2291666666666665"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="63" sensor-mode="0"/>
+              </unit>
+            </automat>
+            <automat id="53" knowledge-group="4" leader="false" level="i" name="PE.Compañía Infantería [53]" overridden-symbol="true" sort-id="2" symbol="symbols/shgpuci" type="PE.Compañía Infantería">
+              <unit command-post="true" id="54" name="PE.INF.Pelotón [54]" sort-id="0" type="PE.INF.Pelotón">
+                <position x="43613.25" y="86539.7890625">17MQT3857291044</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="451" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="451" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="452" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="452" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="453" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="453" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="454" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="454" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="455" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="455" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="456" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="456" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="457" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="457" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="458" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="458" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="459" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="459" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="460" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="460" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="461" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="461" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="462" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="462" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="463" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="463" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="464" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="464" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="465" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="465" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="466" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="466" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="467" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="467" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="468" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="468" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="469" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="469" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="470" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="470" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="471" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="471" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="472" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="472" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="473" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="473" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="474" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="474" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="475" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="475" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="476" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="476" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="477" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="477" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="478" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="478" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="479" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="479" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="480" type="PE.Oficial">
+                    <humans>
+                      <human id="480" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.7.62-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0.19666666666666668" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666666" name="Food" quantity="89.803333333335189" total-consumption="0.19666666666666668"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="1.2291666666666665" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666661" name="Water" quantity="538.77083333335122" total-consumption="1.2291666666666665"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="64" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="55" name="PE.INF.Pelotón [55]" sort-id="1" type="PE.INF.Pelotón">
+                <position x="43613.25" y="86639.7890625">17MQT3857291143</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="481" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="481" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="482" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="482" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="483" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="483" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="484" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="484" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="485" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="485" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="486" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="486" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="487" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="487" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="488" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="488" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="489" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="489" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="490" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="490" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="491" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="491" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="492" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="492" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="493" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="493" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="494" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="494" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="495" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="495" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="496" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="496" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="497" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="497" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="498" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="498" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="499" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="499" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="500" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="500" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="501" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="501" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="502" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="502" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="503" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="503" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="504" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="504" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="505" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="505" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="506" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="506" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="507" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="507" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="508" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="508" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="509" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="509" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="510" type="PE.Oficial">
+                    <humans>
+                      <human id="510" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.7.62-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0.19666666666666668" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666666" name="Food" quantity="89.803333333335189" total-consumption="0.19666666666666668"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="1.2291666666666665" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666661" name="Water" quantity="538.77083333335122" total-consumption="1.2291666666666665"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="65" sensor-mode="0"/>
+              </unit>
+              <unit command-post="false" id="56" name="PE.INF.Pelotón [56]" sort-id="2" type="PE.INF.Pelotón">
+                <position x="43613.25" y="86439.7890625">17MQT3857290945</position>
+                <direction x="0" y="1"/>
+                <equipments major-operational-state="1" operational-state="1">
+                  <equipment id="511" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="511" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="512" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="512" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="513" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="513" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="514" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="514" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="515" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="515" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="516" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="516" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="517" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="517" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="518" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="518" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="519" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="519" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="520" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="520" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="521" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="521" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="522" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="522" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="523" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="523" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="524" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="524" rank="Oficial"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="525" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="525" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="526" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="526" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="527" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="527" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="528" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="528" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="529" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="529" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="530" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="530" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="531" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="531" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="532" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="532" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="533" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="533" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="534" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="534" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="535" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="535" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="536" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="536" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="537" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="537" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="538" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="538" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="539" type="PE.INF.Soldado.Fusil-Arad-7.62mm">
+                    <humans>
+                      <human id="539" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                  <equipment id="540" type="PE.Oficial">
+                    <humans>
+                      <human id="540" rank="Tropa"/>
+                    </humans>
+                  </equipment>
+                </equipments>
+                <resources consumption-date="20250310" previous-consumption-mode="ArretMoteurEteint">
+                  <resource blocked="false" capacity="5220" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.7.62-mm" quantity="5220" total-consumption="0"/>
+                  <resource blocked="false" capacity="26" consumption-reservation="0" current-day-consumption="0" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10" name="PE.MUN.9mm" quantity="26" total-consumption="0"/>
+                  <resource blocked="false" capacity="90" consumption-reservation="0" current-day-consumption="0.19666666666666668" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666666" name="Food" quantity="89.803333333335189" total-consumption="0.19666666666666668"/>
+                  <resource blocked="false" capacity="540" consumption-reservation="0" current-day-consumption="1.2291666666666665" fire-reservation="0" high-threshold="100" last-day-consumption="-1" low-threshold="10.666666666666661" name="Water" quantity="538.77083333335122" total-consumption="1.2291666666666665"/>
+                </resources>
+                <posture current="posture poste amenage" last="posture arret"/>
+                <decision force-ratio="2"/>
+                <loading end-time="0" loaded="false" state="2"/>
+                <perceiver fire-observer="false" next-peripheral-vision-step="66" sensor-mode="0"/>
+              </unit>
+            </automat>
+          </formation>
+        </formation>
+      </tactical>
+      <communication>
+        <knowledge-group id="4" leader="false" name="Grupo de conocimiento [4]" type="Standard"/>
+        <knowledge-group id="87" leader="false" name="knowledge group[87]" type="Standard"/>
+      </communication>
+      <populations/>
+      <inhabitants/>
+      <logistics/>
+    </party>
+  </parties>
+  <diplomacy>
+    <party id="1">
+      <relationship diplomacy="enemy" party="3"/>
+    </party>
+    <party id="3">
+      <relationship diplomacy="enemy" party="1"/>
+    </party>
+  </diplomacy>
+</orbat>

@@ -1,0 +1,1022 @@
+  "operational-state": "1",
+                            "equipment": {
+                              "id": "10194",
+                              "type": "PE.FAP.Shukoi-25",
+                              "humans": {
+                                "human": [
+                                  {
+                                    "id": "14739",
+                                    "rank": "Oficial"
+                                  },
+                                  {
+                                    "id": "14740",
+                                    "rank": "Oficial"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "resources": {
+                            "consumption-date": "20241203",
+                            "resource": [
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "1"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Antitank Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "20000",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "200",
+                                "last-day-consumption": "0",
+                                "low-threshold": "20",
+                                "name": "Kerosene",
+                                "quantity": "20000",
+                                "total-consumption": "112.77777777777682"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Water",
+                                "quantity": "0",
+                                "total-consumption": "2.7458333333334495"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Food",
+                                "quantity": "0.83999999999999098",
+                                "total-consumption": "0.43931111111115634"
+                              }
+                            ]
+                          },
+                          "posture": {
+                            "current": "posture poste amenage",
+                            "last": "posture poste"
+                          },
+                          "decision": {
+                            "force-ratio": "2"
+                          },
+                          "perceiver": {
+                            "fire-observer": "false",
+                            "next-peripheral-vision-step": "69963",
+                            "sensor-mode": "0"
+                          }
+                        },
+                        {
+                          "color": "0xff0000",
+                          "command-post": "false",
+                          "id": "4163687",
+                          "name": "4/GAE/.SHUKOI-25",
+                          "sort-id": "3",
+                          "type": "PE.Escuadron.Ataque.SHUKOI-25",
+                          "position": {
+                            "_": "17MQT3296977920",
+                            "x": "38029.36328125",
+                            "y": "73323.7421875"
+                          },
+                          "direction": {
+                            "x": "-0.95544816415465994",
+                            "y": "-0.29515894974316781"
+                          },
+                          "equipments": {
+                            "major-operational-state": "1",
+                            "operational-state": "1",
+                            "equipment": {
+                              "id": "10195",
+                              "type": "PE.FAP.Shukoi-25",
+                              "humans": {
+                                "human": [
+                                  {
+                                    "id": "14741",
+                                    "rank": "Oficial"
+                                  },
+                                  {
+                                    "id": "14742",
+                                    "rank": "Oficial"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "resources": {
+                            "consumption-date": "20241203",
+                            "resource": [
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "3"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Antitank Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "20000",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "200",
+                                "last-day-consumption": "0",
+                                "low-threshold": "20",
+                                "name": "Kerosene",
+                                "quantity": "20000",
+                                "total-consumption": "132.77777777777638"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Water",
+                                "quantity": "0",
+                                "total-consumption": "2.7458333333334495"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Food",
+                                "quantity": "0.83999999999999098",
+                                "total-consumption": "0.43931111111115634"
+                              }
+                            ]
+                          },
+                          "posture": {
+                            "current": "posture poste amenage",
+                            "last": "posture poste"
+                          },
+                          "decision": {
+                            "force-ratio": "2"
+                          },
+                          "perceiver": {
+                            "fire-observer": "false",
+                            "next-peripheral-vision-step": "69964",
+                            "sensor-mode": "0"
+                          }
+                        },
+                        {
+                          "color": "0xff0000",
+                          "command-post": "false",
+                          "id": "4163688",
+                          "name": "5/GAE/.SHUKOI-25",
+                          "sort-id": "4",
+                          "type": "PE.Escuadron.Ataque.SHUKOI-25",
+                          "position": {
+                            "_": "17MQT3296977920",
+                            "x": "38029.36328125",
+                            "y": "73323.7421875"
+                          },
+                          "direction": {
+                            "x": "-0.91986223198968142",
+                            "y": "-0.39224160176982958"
+                          },
+                          "equipments": {
+                            "major-operational-state": "1",
+                            "operational-state": "1",
+                            "equipment": {
+                              "id": "10196",
+                              "type": "PE.FAP.Shukoi-25",
+                              "humans": {
+                                "human": [
+                                  {
+                                    "id": "14743",
+                                    "rank": "Oficial"
+                                  },
+                                  {
+                                    "id": "14744",
+                                    "rank": "Oficial"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "resources": {
+                            "consumption-date": "20241203",
+                            "resource": [
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "1"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Antitank Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "20000",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "200",
+                                "last-day-consumption": "0",
+                                "low-threshold": "20",
+                                "name": "Kerosene",
+                                "quantity": "20000",
+                                "total-consumption": "103.88888888888813"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Water",
+                                "quantity": "0",
+                                "total-consumption": "2.7458333333334495"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Food",
+                                "quantity": "0.83999999999999098",
+                                "total-consumption": "0.43931111111115634"
+                              }
+                            ]
+                          },
+                          "posture": {
+                            "current": "posture poste amenage",
+                            "last": "posture poste"
+                          },
+                          "decision": {
+                            "force-ratio": "2"
+                          },
+                          "perceiver": {
+                            "fire-observer": "false",
+                            "next-peripheral-vision-step": "69965",
+                            "sensor-mode": "0"
+                          }
+                        },
+                        {
+                          "color": "0xff0000",
+                          "command-post": "false",
+                          "id": "4163689",
+                          "name": "6/GAE/.SHUKOI-25",
+                          "sort-id": "5",
+                          "type": "PE.Escuadron.Ataque.SHUKOI-25",
+                          "position": {
+                            "_": "17MQT3296977920",
+                            "x": "38029.36328125",
+                            "y": "73323.7421875"
+                          },
+                          "direction": {
+                            "x": "-0.84859141903954927",
+                            "y": "-0.52904877235699554"
+                          },
+                          "equipments": {
+                            "major-operational-state": "0",
+                            "operational-state": "0",
+                            "equipment": {
+                              "id": "10197",
+                              "state": "ReparableAvecEvacuation",
+                              "type": "PE.FAP.Shukoi-25",
+                              "humans": {
+                                "human": [
+                                  {
+                                    "id": "14745",
+                                    "rank": "Oficial"
+                                  },
+                                  {
+                                    "id": "14746",
+                                    "rank": "Oficial"
+                                  }
+                                ]
+                              },
+                              "breakdown": {
+                                "repair-time": "54000",
+                                "type": "Electronics Breakdown 3"
+                              }
+                            }
+                          },
+                          "resources": {
+                            "consumption-date": "20241203",
+                            "resource": [
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "2"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Antitank Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "20000",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "200",
+                                "last-day-consumption": "0",
+                                "low-threshold": "20",
+                                "name": "Kerosene",
+                                "quantity": "20000",
+                                "total-consumption": "194.99999999999719"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Water",
+                                "quantity": "0",
+                                "total-consumption": "2.7458333333334495"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Food",
+                                "quantity": "0.83999999999999098",
+                                "total-consumption": "0.43931111111115634"
+                              }
+                            ]
+                          },
+                          "posture": {
+                            "current": "posture poste amenage",
+                            "last": "posture poste"
+                          },
+                          "decision": {
+                            "force-ratio": "2",
+                            "op-state": "0"
+                          },
+                          "perceiver": {
+                            "fire-observer": "false",
+                            "next-peripheral-vision-step": "69966",
+                            "sensor-mode": "0"
+                          }
+                        },
+                        {
+                          "color": "0xff0000",
+                          "command-post": "false",
+                          "id": "4163690",
+                          "name": "7/GAE/.SHUKOI-25",
+                          "sort-id": "6",
+                          "type": "PE.Escuadron.Ataque.SHUKOI-25",
+                          "position": {
+                            "_": "17MQT3296977920",
+                            "x": "38029.36328125",
+                            "y": "73323.7421875"
+                          },
+                          "direction": {
+                            "x": "0",
+                            "y": "1"
+                          },
+                          "equipments": {
+                            "major-operational-state": "1",
+                            "operational-state": "1",
+                            "equipment": {
+                              "id": "10198",
+                              "type": "PE.FAP.Shukoi-25",
+                              "humans": {
+                                "human": [
+                                  {
+                                    "id": "14747",
+                                    "rank": "Oficial"
+                                  },
+                                  {
+                                    "id": "14748",
+                                    "rank": "Oficial"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "resources": {
+                            "consumption-date": "20241203",
+                            "resource": [
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Antitank Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "20000",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "200",
+                                "last-day-consumption": "0",
+                                "low-threshold": "20",
+                                "name": "Kerosene",
+                                "quantity": "20000",
+                                "total-consumption": "8.8888888888888893"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Water",
+                                "quantity": "0",
+                                "total-consumption": "2.7458333333334495"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Food",
+                                "quantity": "0.83999999999999098",
+                                "total-consumption": "0.43931111111115634"
+                              }
+                            ]
+                          },
+                          "posture": {
+                            "current": "posture poste amenage",
+                            "last": "posture poste"
+                          },
+                          "decision": {
+                            "force-ratio": "2"
+                          },
+                          "perceiver": {
+                            "fire-observer": "false",
+                            "next-peripheral-vision-step": "69967",
+                            "sensor-mode": "0"
+                          }
+                        },
+                        {
+                          "color": "0xff0000",
+                          "command-post": "false",
+                          "id": "4163691",
+                          "name": "8/GAE/.SHUKOI-25",
+                          "sort-id": "7",
+                          "type": "PE.Escuadron.Ataque.SHUKOI-25",
+                          "position": {
+                            "_": "17MQT3296977920",
+                            "x": "38029.36328125",
+                            "y": "73323.7421875"
+                          },
+                          "direction": {
+                            "x": "0",
+                            "y": "1"
+                          },
+                          "equipments": {
+                            "major-operational-state": "1",
+                            "operational-state": "1",
+                            "equipment": {
+                              "id": "10199",
+                              "type": "PE.FAP.Shukoi-25",
+                              "humans": {
+                                "human": [
+                                  {
+                                    "id": "14749",
+                                    "rank": "Oficial"
+                                  },
+                                  {
+                                    "id": "14750",
+                                    "rank": "Oficial"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "resources": {
+                            "consumption-date": "20241203",
+                            "resource": [
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Antitank Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "20000",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "200",
+                                "last-day-consumption": "0",
+                                "low-threshold": "20",
+                                "name": "Kerosene",
+                                "quantity": "20000",
+                                "total-consumption": "8.8888888888888893"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Water",
+                                "quantity": "0",
+                                "total-consumption": "2.7458333333334495"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Food",
+                                "quantity": "0.83999999999999098",
+                                "total-consumption": "0.43931111111115634"
+                              }
+                            ]
+                          },
+                          "posture": {
+                            "current": "posture poste amenage",
+                            "last": "posture poste"
+                          },
+                          "decision": {
+                            "force-ratio": "2"
+                          },
+                          "perceiver": {
+                            "fire-observer": "false",
+                            "next-peripheral-vision-step": "69968",
+                            "sensor-mode": "0"
+                          }
+                        },
+                        {
+                          "color": "0xff0000",
+                          "command-post": "false",
+                          "id": "4163692",
+                          "name": "9/GAE/.SHUKOI-25",
+                          "sort-id": "8",
+                          "type": "PE.Escuadron.Ataque.SHUKOI-25",
+                          "position": {
+                            "_": "17MQT3296977920",
+                            "x": "38029.36328125",
+                            "y": "73323.7421875"
+                          },
+                          "direction": {
+                            "x": "0",
+                            "y": "1"
+                          },
+                          "equipments": {
+                            "major-operational-state": "1",
+                            "operational-state": "1",
+                            "equipment": {
+                              "id": "10200",
+                              "type": "PE.FAP.Shukoi-25",
+                              "humans": {
+                                "human": [
+                                  {
+                                    "id": "14751",
+                                    "rank": "Oficial"
+                                  },
+                                  {
+                                    "id": "14752",
+                                    "rank": "Oficial"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "resources": {
+                            "consumption-date": "20241203",
+                            "resource": [
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Antitank Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "20000",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "200",
+                                "last-day-consumption": "0",
+                                "low-threshold": "20",
+                                "name": "Kerosene",
+                                "quantity": "20000",
+                                "total-consumption": "8.8888888888888893"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Water",
+                                "quantity": "0",
+                                "total-consumption": "2.7458333333334495"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Food",
+                                "quantity": "0.83999999999999098",
+                                "total-consumption": "0.43931111111115634"
+                              }
+                            ]
+                          },
+                          "posture": {
+                            "current": "posture poste amenage",
+                            "last": "posture poste"
+                          },
+                          "decision": {
+                            "force-ratio": "2"
+                          },
+                          "perceiver": {
+                            "fire-observer": "false",
+                            "next-peripheral-vision-step": "69969",
+                            "sensor-mode": "0"
+                          }
+                        },
+                        {
+                          "color": "0xff0000",
+                          "command-post": "false",
+                          "id": "4163693",
+                          "name": "10/GAE/.SHUKOI-25",
+                          "sort-id": "9",
+                          "type": "PE.Escuadron.Ataque.SHUKOI-25",
+                          "position": {
+                            "_": "17MQT3296977920",
+                            "x": "38029.36328125",
+                            "y": "73323.7421875"
+                          },
+                          "direction": {
+                            "x": "0",
+                            "y": "1"
+                          },
+                          "equipments": {
+                            "major-operational-state": "1",
+                            "operational-state": "1",
+                            "equipment": {
+                              "id": "10201",
+                              "type": "PE.FAP.Shukoi-25",
+                              "humans": {
+                                "human": [
+                                  {
+                                    "id": "14753",
+                                    "rank": "Oficial"
+                                  },
+                                  {
+                                    "id": "14754",
+                                    "rank": "Oficial"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          "resources": {
+                            "consumption-date": "20241203",
+                            "resource": [
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "8",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "125",
+                                "last-day-consumption": "0",
+                                "low-threshold": "12.5",
+                                "name": "Antitank Air Bomb",
+                                "quantity": "8",
+                                "total-consumption": "0"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "20000",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "200",
+                                "last-day-consumption": "0",
+                                "low-threshold": "20",
+                                "name": "Kerosene",
+                                "quantity": "20000",
+                                "total-consumption": "8.8888888888888893"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Water",
+                                "quantity": "0",
+                                "total-consumption": "2.7458333333334495"
+                              },
+                              {
+                                "blocked": "false",
+                                "capacity": "1",
+                                "consumption-reservation": "0",
+                                "current-day-consumption": "0",
+                                "fire-reservation": "0",
+                                "high-threshold": "100",
+                                "last-day-consumption": "0",
+                                "low-threshold": "10",
+                                "name": "Food",
+                                "quantity": "0.83999999999999098",
+                                "total-consumption": "0.43931111111115634"
+                              }
+                            ]
+                          },
+                          "posture": {
+                            "current": "posture poste amenage",
+                            "last": "posture poste"
+                          },
+                          "decision": {
+                            "force-ratio": "2"
+                          },
+                          "perceiver": {
+                            "fire-observer": "false",
+                            "next-peripheral-vision-step": "69970",
+                            "sensor-mode": "0"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "communication": {
+            "knowledge-group": [
+              {
+                "id": "1849",
+                "leader": "false",
+                "name": "ROJOS",
+                "type": "Standard"
+              },
+              {
+                "id": "5060",
+                "leader": "false",
+                "name": "knowledge group[3215]",
+                "type": "Standard"
+              },
+              {
+                "id": "1145459",
+                "leader": "false",
+                "name": "knowledge group[1145458]",
+                "type": "Standard"
+              },
+              {
+                "id": "4165272",
+                "leader": "false",
+                "name": "knowledge group[4165272]",
+                "type": "Standard"
+              },
+              {
+                "id": "9428148",
+                "leader": "false",
+                "name": "knowledge group[9428148]",
+                "type": "Standard"
+              }
+            ]
+          },
+          "populations": "",
+          "inhabitants": "",
+          "logistics": ""
+        }
+      ]
+    },
+    "diplomacy": {
+      "party": [
+        {
+          "id": "1846",
+          "relationship": {
+            "diplomacy": "enemy",
+            "party": "1848"
+          }
+        },
+        {
+          "id": "1848",
+          "relationship": {
+            "diplomacy": "enemy",
+            "party": "1846"
+          }
+        }
+      ]
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
