@@ -93,6 +93,7 @@
             treeContainer.appendChild(ul);
         }
 
+
         function extractFormations(parentNode, parentElement) {
             const formations = parentNode.children;
 
@@ -144,21 +145,31 @@
         }
 
         function extractUnits(automatNode, parentElement) {
-            // Buscar SOLO los hijos directos <unit>, evitando los de subniveles
-            const units = automatNode.children;
+        const units = automatNode.children;
 
-            Array.from(units).forEach(unit => {
-                if (unit.tagName === "unit") { // Solo nodos <unit>
-                    const unitId = unit.getAttribute("id");
-                    const unitName = unit.getAttribute("name");
+        Array.from(units).forEach(unit => {
+            if (unit.tagName === "unit") {
+                const unitId = unit.getAttribute("id");
+                const unitName = unit.getAttribute("name");
 
-                    let liUnit = document.createElement("li");
-                    liUnit.textContent = unitName;
-                    liUnit.className = "file"; // No es una carpeta
-                    parentElement.appendChild(liUnit);
-                }
-            });
-        }
+                // Extraer los valores de `major-operational-state` y `operational-state`
+                let equipments = unit.getElementsByTagName("equipments")[0];
+                let majorState = equipments ? equipments.getAttribute("major-operational-state") : "N/A";
+                let operationalState = equipments ? equipments.getAttribute("operational-state") : "N/A";
+
+                // Crear el elemento de la unidad en la lista
+                let liUnit = document.createElement("li");
+                liUnit.className = "file";
+
+                // Mostrar nombre de la unidad y sus estados operacionales
+                liUnit.innerHTML = `${unitName} 
+                    <span style="color:red;">[Major: ${majorState}]</span> 
+                    <span style="color:green;">[Operational: ${operationalState}]</span>`;
+
+                parentElement.appendChild(liUnit);
+            }
+        });
+    }
 
 
         function toggleChildren(event, element) {
@@ -203,29 +214,74 @@
             return barContainer;
         }
 
+        // Extrae los valores de operational-state de cada unit
+        function extractUnitStates(unitElement) {
+            let equipments = unitElement.querySelectorAll("equipment");
+            let totalMajor = 0, totalOperational = 0, count = 0;
+
+            equipments.forEach(equipment => {
+                let majorState = parseInt(equipment.getAttribute("major-operational-state")) || 1;
+                let operationalState = parseInt(equipment.getAttribute("operational-state")) || 1;
+                totalMajor += majorState;
+                totalOperational += operationalState;
+                count++;
+            });
+
+            console.log(`Unit: ${unitElement.textContent.trim()} - Major: ${totalMajor}, Operational: ${totalOperational}, Count: ${count}`);
+
+            return {
+                majorState: count > 0 ? totalMajor / count : 1,
+                operationalState: count > 0 ? totalOperational / count : 1
+            };
+        }
+
         function calculateAverages(node) {
+            console.log("Procesando nodo:", node); // Ver si node es null o undefined
+
+            if (!node) {
+                console.log("❌ El nodo es null o undefined");
+                return { avgMajor: 1, avgOperational: 1 };
+            }
+
             let units = node.querySelectorAll(".unit");
             let totalMajor = 0, totalOperational = 0, count = 0;
 
             units.forEach(unit => {
-                let major = parseInt(unit.dataset.majorState) || 0;
-                let operational = parseInt(unit.dataset.operationalState) || 0;
-                totalMajor += major;
-                totalOperational += operational;
+                let states = extractUnitStates(unit);
+                totalMajor += states.majorState;
+                totalOperational += states.operationalState;
                 count++;
             });
 
+            console.log(`✔ Formation/Automata: ${node.textContent.trim()} - Avg Major: ${totalMajor}, Avg Operational: ${totalOperational}, Count: ${count}`);
+
             return {
-                avgMajor: count > 0 ? totalMajor / count : 0,
-                avgOperational: count > 0 ? totalOperational / count : 0
+                avgMajor: count > 0 ? totalMajor / count : 1,
+                avgOperational: count > 0 ? totalOperational / count : 1
             };
         }
 
+        // Revisar si los nodos existen antes de procesarlos
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => {
+                let formations = document.querySelectorAll(".automat, .formation");
+                console.log("Formations encontrados:", formations.length);
+                formations.forEach(node => {
+                    let averages = calculateAverages(node);
+                    let bar = createBar(averages.avgMajor, averages.avgOperational);
+                    node.appendChild(bar);
+                });
+            }, 1000);
+        });
+
+
+        // Agrega las barras después de construir el árbol
         function addBarsToTree() {
+            console.log("Ejecutando addBarsToTree...");
+
             document.querySelectorAll(".unit").forEach(unit => {
-                let majorState = parseInt(unit.dataset.majorState) || 1;
-                let operationalState = parseInt(unit.dataset.operationalState) || 1;
-                let bar = createBar(majorState, operationalState);
+                let states = extractUnitStates(unit);
+                let bar = createBar(states.majorState, states.operationalState);
                 unit.appendChild(bar);
             });
 
@@ -234,12 +290,9 @@
                 let bar = createBar(averages.avgMajor, averages.avgOperational);
                 node.appendChild(bar);
             });
+
+            console.log("Barras agregadas correctamente.");
         }
-
-        // Llamar la función al cargar
-        document.addEventListener("DOMContentLoaded", addBarsToTree);
-
-
 
 
 

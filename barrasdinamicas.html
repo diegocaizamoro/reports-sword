@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Barras Animado</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <svg width="600" height="300"></svg>
+    <script>
+        const data = [10, 30, 50, 80, 20];
+        const svg = d3.select("svg");
+        const bars = svg.selectAll("rect").data(data).enter().append("rect")
+            .attr("x", (d, i) => i * 50)
+            .attr("y", d => 300 - d)
+            .attr("width", 40)
+            .attr("height", d => d)
+            .attr("fill", "steelblue");
+
+        function updateData() {
+            data.forEach((d, i) => data[i] = Math.floor(Math.random() * 100));
+            bars.data(data)
+                .transition().duration(500)
+                .attr("y", d => 300 - d)
+                .attr("height", d => d);
+        }
+        
+        setInterval(updateData, 1000);
+    </script>
+</body>
+</html>
