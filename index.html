@@ -145,31 +145,31 @@
         }
 
         function extractUnits(automatNode, parentElement) {
-        const units = automatNode.children;
+            const units = automatNode.children;
 
-        Array.from(units).forEach(unit => {
-            if (unit.tagName === "unit") {
-                const unitId = unit.getAttribute("id");
-                const unitName = unit.getAttribute("name");
+            Array.from(units).forEach(unit => {
+                if (unit.tagName === "unit") {
+                    const unitId = unit.getAttribute("id");
+                    const unitName = unit.getAttribute("name");
 
-                // Extraer los valores de `major-operational-state` y `operational-state`
-                let equipments = unit.getElementsByTagName("equipments")[0];
-                let majorState = equipments ? equipments.getAttribute("major-operational-state") : "N/A";
-                let operationalState = equipments ? equipments.getAttribute("operational-state") : "N/A";
+                    // Extraer los valores de `major-operational-state` y `operational-state`
+                    let equipments = unit.getElementsByTagName("equipments")[0];
+                    let majorState = equipments ? equipments.getAttribute("major-operational-state") : "N/A";
+                    let operationalState = equipments ? equipments.getAttribute("operational-state") : "N/A";
 
-                // Crear el elemento de la unidad en la lista
-                let liUnit = document.createElement("li");
-                liUnit.className = "file";
+                    // Crear el elemento de la unidad en la lista
+                    let liUnit = document.createElement("li");
+                    liUnit.className = "file";
 
-                // Mostrar nombre de la unidad y sus estados operacionales
-                liUnit.innerHTML = `${unitName} 
+                    // Mostrar nombre de la unidad y sus estados operacionales
+                    liUnit.innerHTML = `${unitName} 
                     <span style="color:red;">[Major: ${majorState}]</span> 
                     <span style="color:green;">[Operational: ${operationalState}]</span>`;
 
-                parentElement.appendChild(liUnit);
-            }
-        });
-    }
+                    parentElement.appendChild(liUnit);
+                }
+            });
+        }
 
 
         function toggleChildren(event, element) {
