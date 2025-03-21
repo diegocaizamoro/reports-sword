@@ -255,27 +255,6 @@
             });
         });
 
-        function createBar(majorState, operationalState) {
-            let barContainer = document.createElement("div");
-            barContainer.style.display = "flex";
-            barContainer.style.gap = "5px";
-            barContainer.style.marginTop = "5px";
-
-            let majorBar = document.createElement("div");
-            majorBar.style.width = `${majorState * 20}%`;
-            majorBar.style.height = "8px";
-            majorBar.style.backgroundColor = "red";
-
-            let opBar = document.createElement("div");
-            opBar.style.width = `${operationalState * 20}%`;
-            opBar.style.height = "8px";
-            opBar.style.backgroundColor = "green";
-
-            barContainer.appendChild(majorBar);
-            barContainer.appendChild(opBar);
-
-            return barContainer;
-        }
 
         // Extrae los valores de operational-state de cada unit
         function extractUnitStates(unitElement) {
@@ -336,28 +315,6 @@
                 });
             }, 1000);
         });
-
-
-        // Agrega las barras después de construir el árbol
-        function addBarsToTree() {
-            console.log("Ejecutando addBarsToTree...");
-
-            document.querySelectorAll(".unit").forEach(unit => {
-                let states = extractUnitStates(unit);
-                let bar = createBar(states.majorState, states.operationalState);
-                unit.appendChild(bar);
-            });
-
-            document.querySelectorAll(".automat, .formation").forEach(node => {
-                let averages = calculateAverages(node);
-                let bar = createBar(averages.avgMajor, averages.avgOperational);
-                node.appendChild(bar);
-            });
-
-            console.log("Barras agregadas correctamente.");
-        }
-
-
 
     </script>
 
