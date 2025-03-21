@@ -303,18 +303,6 @@
             };
         }
 
-        // Revisar si los nodos existen antes de procesarlos
-        document.addEventListener("DOMContentLoaded", function () {
-            setTimeout(() => {
-                let formations = document.querySelectorAll(".automat, .formation");
-                console.log("Formations encontrados:", formations.length);
-                formations.forEach(node => {
-                    let averages = calculateAverages(node);
-                    let bar = createBar(averages.avgMajor, averages.avgOperational);
-                    node.appendChild(bar);
-                });
-            }, 1000);
-        });
 
     </script>
 
