@@ -120,48 +120,109 @@
         }
 
         function extractAutomats(formationNode, parentElement) {
-            // Buscar SOLO los hijos directos <automat>, evitando los de subniveles
             const automats = formationNode.children;
+            let totalMajor = 0, totalOperational = 0, count = 0;
 
             Array.from(automats).forEach(automat => {
-                if (automat.tagName === "automat") { // Solo nodos <automat>
-                    const automatId = automat.getAttribute("id");
-                    const automatName = automat.getAttribute("name");
-
+                if (automat.tagName === "automat") {
                     let liAutomat = document.createElement("li");
-                    liAutomat.textContent = automatName;
-                    liAutomat.className = "folder"; // Es una carpeta
-                    liAutomat.onclick = function (event) { toggleChildren(event, this); };
+                    liAutomat.className = "folder";
+
+                    // Crear un ícono de apertura/cierre
+                    let toggleSpan = document.createElement("span");
+                    toggleSpan.textContent = "▶ ";
+                    toggleSpan.style.cursor = "pointer";
+                    toggleSpan.classList.add("toggle-icon");
+
+                    let spanText = document.createElement("span");
+                    spanText.textContent = automat.getAttribute("name");
 
                     let ulUnits = document.createElement("ul");
-                    ulUnits.className = "tree hidden";
+                    ulUnits.className = "tree hidden"; // Ocultar inicialmente
 
-                    extractUnits(automat, ulUnits); // Extraer <unit> dentro del <automat>
+                    let avgStates = extractUnits(automat, ulUnits);
+                    totalMajor += avgStates.avgMajor;
+                    totalOperational += avgStates.avgOperational;
+                    count++;
 
+                    let spanMajor = document.createElement("span");
+                    spanMajor.style.color = "red";
+                    spanMajor.textContent = ` [Avg Major: ${avgStates.avgMajor.toFixed(2)}]`;
+
+                    let spanOperational = document.createElement("span");
+                    spanOperational.style.color = "green";
+                    spanOperational.textContent = ` [Avg Operational: ${avgStates.avgOperational.toFixed(2)}]`;
+
+                    // Asegurar que el `ul` es parte del nodo antes de asignar eventos
+                    liAutomat.appendChild(toggleSpan);
+                    liAutomat.appendChild(spanText);
+                    liAutomat.appendChild(spanMajor);
+                    liAutomat.appendChild(spanOperational);
                     liAutomat.appendChild(ulUnits);
+
+                    // Asignar el evento correctamente al nodo de lista
+                    liAutomat.addEventListener("click", function (event) { toggleChildren(event, this); });
+
                     parentElement.appendChild(liAutomat);
+
+                    console.log(`✅ Nodo automat agregado: ${automat.getAttribute("name")}`);
                 }
             });
+
+            return count > 0 ? { avgMajor: totalMajor / count, avgOperational: totalOperational / count } : { avgMajor: 1, avgOperational: 1 };
         }
+
+
+        // ✅ Función para abrir/cerrar nodos con depuración
+        function toggleChildren(event, element) {
+            event.stopPropagation(); // Evita que el clic afecte otros elementos
+
+            let childrenContainer = element.querySelector("ul");
+
+            if (!childrenContainer) {
+                console.log("❌ No se encontró un contenedor hijo para este nodo.");
+                return;
+            }
+
+            let isHidden = childrenContainer.classList.contains("hidden");
+
+            // Depuración: Ver si el nodo tiene hijos y su estado actual
+            console.log(`🔍 Estado actual antes del clic: ${isHidden ? "Cerrado" : "Abierto"}`);
+
+            childrenContainer.classList.toggle("hidden", !isHidden); // Alternar clase para mostrar/ocultar
+
+            // Cambiar el símbolo de expansión solo si es un nodo que tiene hijos
+            let toggleSpan = element.querySelector("span.toggle-icon");
+            if (toggleSpan) {
+                toggleSpan.textContent = isHidden ? "▼ " : "▶ ";
+            }
+
+            console.log(`🔄 Nodo ${isHidden ? "expandido" : "colapsado"}`);
+        }
+
+
+
+
+
 
         function extractUnits(automatNode, parentElement) {
             const units = automatNode.children;
+            let totalMajor = 0, totalOperational = 0, count = 0;
 
             Array.from(units).forEach(unit => {
                 if (unit.tagName === "unit") {
-                    const unitId = unit.getAttribute("id");
                     const unitName = unit.getAttribute("name");
-
-                    // Extraer los valores de `major-operational-state` y `operational-state`
                     let equipments = unit.getElementsByTagName("equipments")[0];
-                    let majorState = equipments ? equipments.getAttribute("major-operational-state") : "N/A";
-                    let operationalState = equipments ? equipments.getAttribute("operational-state") : "N/A";
 
-                    // Crear el elemento de la unidad en la lista
+                    let majorState = equipments ? parseInt(equipments.getAttribute("major-operational-state")) || 1 : 1;
+                    let operationalState = equipments ? parseInt(equipments.getAttribute("operational-state")) || 1 : 1;
+
+                    totalMajor += majorState;
+                    totalOperational += operationalState;
+                    count++;
+
                     let liUnit = document.createElement("li");
                     liUnit.className = "file";
-
-                    // Mostrar nombre de la unidad y sus estados operacionales
                     liUnit.innerHTML = `${unitName} 
                     <span style="color:red;">[Major: ${majorState}]</span> 
                     <span style="color:green;">[Operational: ${operationalState}]</span>`;
@@ -169,6 +230,8 @@
                     parentElement.appendChild(liUnit);
                 }
             });
+
+            return count > 0 ? { avgMajor: totalMajor / count, avgOperational: totalOperational / count } : { avgMajor: 1, avgOperational: 1 };
         }
 
 
