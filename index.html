@@ -96,6 +96,7 @@
 
         function extractFormations(parentNode, parentElement) {
             const formations = parentNode.children;
+            let totalMajor = 0, totalOperational = 0, count = 0;
 
             Array.from(formations).forEach(formation => {
                 if (formation.tagName === "formation") {
@@ -105,15 +106,42 @@
                     let liFormation = document.createElement("li");
                     liFormation.textContent = formationName;
                     liFormation.className = "folder";
+
+                    // Crear un ícono de apertura/cierre
+                    let toggleSpan = document.createElement("span");
+                    toggleSpan.textContent = "▶ ";
+                    toggleSpan.style.cursor = "pointer";
+                    toggleSpan.classList.add("toggle-icon");
+
                     liFormation.onclick = function (event) { toggleChildren(event, this); };
 
                     let ulSubFormations = document.createElement("ul");
                     ulSubFormations.className = "tree hidden";
 
-                    extractFormations(formation, ulSubFormations);
-                    extractAutomats(formation, ulSubFormations);
 
+                    extractFormations(formation, ulSubFormations);
+                    
+                    let avgStates = extractAutomats(formation, ulSubFormations);
+                    totalMajor += avgStates.avgMajor;
+                    totalOperational += avgStates.avgOperational;
+                    count++;
+
+                    let spanMajor = document.createElement("span");
+                    spanMajor.style.color = "red";
+                    spanMajor.textContent = ` [Avg Major: ${avgStates.avgMajor.toFixed(2)}]`;
+
+                    let spanOperational = document.createElement("span");
+                    spanOperational.style.color = "green";
+                    spanOperational.textContent = ` [Avg Operational: ${avgStates.avgOperational.toFixed(2)}]`;
+
+                    liFormation.appendChild(toggleSpan);
                     liFormation.appendChild(ulSubFormations);
+                    liFormation.appendChild(spanMajor);
+                    liFormation.appendChild(spanOperational);
+                    liFormation.appendChild(ulSubFormations);
+
+                    // Asignar el evento correctamente al nodo de lista
+                    //liFormation.addEventListener("click", function (event) { toggleChildren(event, this); });
                     parentElement.appendChild(liFormation);
                 }
             });
