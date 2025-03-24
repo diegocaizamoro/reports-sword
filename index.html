@@ -19,6 +19,7 @@
             margin: 5px 0;
             cursor: pointer;
             user-select: none;
+            position: relative;
         }
 
         .tree .folder::before {
@@ -35,6 +36,23 @@
 
         .hidden {
             display: none;
+        }
+
+        /* Estilos para las barras de progreso */
+        .progress-container {
+            width: 100px;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .progress-bar {
+            height: 100%;
+            transition: width 0.5s ease-in-out;
         }
     </style>
 </head>
@@ -70,7 +88,6 @@
             ul.className = "tree";
 
             Array.from(parties).forEach(party => {
-                const partyId = party.getAttribute("id");
                 const partyName = party.getAttribute("name");
 
                 let liParty = document.createElement("li");
@@ -93,55 +110,29 @@
             treeContainer.appendChild(ul);
         }
 
-
         function extractFormations(parentNode, parentElement) {
             const formations = parentNode.children;
-            let totalMajor = 0, totalOperational = 0, count = 0;
 
             Array.from(formations).forEach(formation => {
                 if (formation.tagName === "formation") {
-                    const formationId = formation.getAttribute("id");
                     const formationName = formation.getAttribute("name");
 
                     let liFormation = document.createElement("li");
                     liFormation.textContent = formationName;
                     liFormation.className = "folder";
-
-                    // Crear un ícono de apertura/cierre
-                    let toggleSpan = document.createElement("span");
-                    toggleSpan.textContent = "▶ ";
-                    toggleSpan.style.cursor = "pointer";
-                    toggleSpan.classList.add("toggle-icon");
-
                     liFormation.onclick = function (event) { toggleChildren(event, this); };
 
                     let ulSubFormations = document.createElement("ul");
                     ulSubFormations.className = "tree hidden";
 
-
                     extractFormations(formation, ulSubFormations);
 
                     let avgStates = extractAutomats(formation, ulSubFormations);
-                    totalMajor += avgStates.avgMajor;
-                    totalOperational += avgStates.avgOperational;
-                    count++;
 
-                    let spanMajor = document.createElement("span");
-                    spanMajor.style.color = "red";
-                    spanMajor.textContent = ` [Avg Major: ${avgStates.avgMajor.toFixed(2)}]`;
+                    let progressBar = createProgressBar(avgStates.avgOperational);
 
-                    let spanOperational = document.createElement("span");
-                    spanOperational.style.color = "green";
-                    spanOperational.textContent = ` [Avg Operational: ${avgStates.avgOperational.toFixed(2)}]`;
-
-                    liFormation.appendChild(toggleSpan);
+                    liFormation.appendChild(progressBar);
                     liFormation.appendChild(ulSubFormations);
-                    liFormation.appendChild(spanMajor);
-                    liFormation.appendChild(spanOperational);
-                    liFormation.appendChild(ulSubFormations);
-
-                    // Asignar el evento correctamente al nodo de lista
-                    //liFormation.addEventListener("click", function (event) { toggleChildren(event, this); });
                     parentElement.appendChild(liFormation);
                 }
             });
@@ -149,189 +140,88 @@
 
         function extractAutomats(formationNode, parentElement) {
             const automats = formationNode.children;
-            let totalMajor = 0, totalOperational = 0, count = 0;
+            let totalOperational = 0, count = 0;
 
             Array.from(automats).forEach(automat => {
                 if (automat.tagName === "automat") {
                     let liAutomat = document.createElement("li");
                     liAutomat.className = "folder";
-
-                    // Crear un ícono de apertura/cierre
-                    let toggleSpan = document.createElement("span");
-                    toggleSpan.textContent = "▶ ";
-                    toggleSpan.style.cursor = "pointer";
-                    toggleSpan.classList.add("toggle-icon");
-
-                    let spanText = document.createElement("span");
-                    spanText.textContent = automat.getAttribute("name");
+                    liAutomat.textContent = automat.getAttribute("name");
 
                     let ulUnits = document.createElement("ul");
-                    ulUnits.className = "tree hidden"; // Ocultar inicialmente
+                    ulUnits.className = "tree hidden";
 
                     let avgStates = extractUnits(automat, ulUnits);
-                    totalMajor += avgStates.avgMajor;
                     totalOperational += avgStates.avgOperational;
                     count++;
 
-                    let spanMajor = document.createElement("span");
-                    spanMajor.style.color = "red";
-                    spanMajor.textContent = ` [Avg Major: ${avgStates.avgMajor.toFixed(2)}]`;
+                    let progressBar = createProgressBar(avgStates.avgOperational);
 
-                    let spanOperational = document.createElement("span");
-                    spanOperational.style.color = "green";
-                    spanOperational.textContent = ` [Avg Operational: ${avgStates.avgOperational.toFixed(2)}]`;
-
-                    // Asegurar que el `ul` es parte del nodo antes de asignar eventos
-                    liAutomat.appendChild(toggleSpan);
-                    liAutomat.appendChild(spanText);
-                    liAutomat.appendChild(spanMajor);
-                    liAutomat.appendChild(spanOperational);
+                    liAutomat.appendChild(progressBar);
                     liAutomat.appendChild(ulUnits);
-
-                    // Asignar el evento correctamente al nodo de lista
-                    liAutomat.addEventListener("click", function (event) { toggleChildren(event, this); });
+                    liAutomat.onclick = function (event) { toggleChildren(event, this); };
 
                     parentElement.appendChild(liAutomat);
-
-                    console.log(`✅ Nodo automat agregado: ${automat.getAttribute("name")}`);
                 }
             });
 
-            return count > 0 ? { avgMajor: totalMajor / count, avgOperational: totalOperational / count } : { avgMajor: 1, avgOperational: 1 };
+            return count > 0 ? { avgOperational: totalOperational / count } : { avgOperational: 1 };
         }
-
-
-        // ✅ Función para abrir/cerrar nodos con depuración
-        function toggleChildren(event, element) {
-            event.stopPropagation(); // Evita que el clic afecte otros elementos
-
-            let childrenContainer = element.querySelector("ul");
-
-            if (!childrenContainer) {
-                console.log("❌ No se encontró un contenedor hijo para este nodo.");
-                return;
-            }
-
-            let isHidden = childrenContainer.classList.contains("hidden");
-
-            // Depuración: Ver si el nodo tiene hijos y su estado actual
-            console.log(`🔍 Estado actual antes del clic: ${isHidden ? "Cerrado" : "Abierto"}`);
-
-            childrenContainer.classList.toggle("hidden", !isHidden); // Alternar clase para mostrar/ocultar
-
-            // Cambiar el símbolo de expansión solo si es un nodo que tiene hijos
-            let toggleSpan = element.querySelector("span.toggle-icon");
-            if (toggleSpan) {
-                toggleSpan.textContent = isHidden ? "▼ " : "▶ ";
-            }
-
-            console.log(`🔄 Nodo ${isHidden ? "expandido" : "colapsado"}`);
-        }
-
-
-
-
-
 
         function extractUnits(automatNode, parentElement) {
             const units = automatNode.children;
-            let totalMajor = 0, totalOperational = 0, count = 0;
+            let totalOperational = 0, count = 0;
 
             Array.from(units).forEach(unit => {
                 if (unit.tagName === "unit") {
                     const unitName = unit.getAttribute("name");
                     let equipments = unit.getElementsByTagName("equipments")[0];
 
-                    let majorState = equipments ? (parseFloat(equipments.getAttribute("major-operational-state")) ?? 1) : 1;
-                    let operationalState = equipments ? (parseFloat(equipments.getAttribute("operational-state")) ?? 1) : 1;
+                    let operationalState = equipments ? parseFloat(equipments.getAttribute("operational-state")) ?? 1 : 1;
 
-                    totalMajor += majorState;
                     totalOperational += operationalState;
                     count++;
 
                     let liUnit = document.createElement("li");
                     liUnit.className = "file";
-                    liUnit.innerHTML = `${unitName} 
-                    <span style="color:red;">[Major: ${majorState}]</span> 
-                    <span style="color:green;">[Operational: ${operationalState}]</span>`;
+                    liUnit.textContent = unitName;
+
+                    let progressBar = createProgressBar(operationalState);
+                    liUnit.appendChild(progressBar);
 
                     parentElement.appendChild(liUnit);
                 }
             });
 
-            return count > 0 ? { avgMajor: totalMajor / count, avgOperational: totalOperational / count } : { avgMajor: 1, avgOperational: 1 };
+            return count > 0 ? { avgOperational: totalOperational / count } : { avgOperational: 1 };
         }
 
+        function createProgressBar(value) {
+            let percentage = Math.max(0, Math.min(value * 100, 100));
+
+            let color = percentage < 34 ? "red" : percentage < 67 ? "yellow" : "green";
+
+            let container = document.createElement("div");
+            container.className = "progress-container";
+
+            let bar = document.createElement("div");
+            bar.className = "progress-bar";
+            bar.style.width = percentage + "%";
+            bar.style.backgroundColor = color;
+
+            container.appendChild(bar);
+            return container;
+        }
 
         function toggleChildren(event, element) {
-            event.stopPropagation(); // Evita que el clic se propague a niveles superiores
-
+            event.stopPropagation();
             let children = element.querySelector("ul");
             if (children) {
                 let isHidden = children.classList.contains("hidden");
-                children.classList.toggle("hidden", !isHidden); // Mostrar u ocultar los hijos
-                element.classList.toggle("open", isHidden); // Cambia el estado del nodo
+                children.classList.toggle("hidden", !isHidden);
+                element.classList.toggle("open", isHidden);
             }
         }
-
-        // Asegurar que los nodos <unit> no afecten el árbol
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll(".file").forEach(file => {
-                file.addEventListener("click", function (event) {
-                    event.stopPropagation(); // Evita que el clic en <unit> cierre niveles superiores
-                });
-            });
-        });
-
-
-        // Extrae los valores de operational-state de cada unit
-        function extractUnitStates(unitElement) {
-            let equipments = unitElement.querySelectorAll("equipment");
-            let totalMajor = 0, totalOperational = 0, count = 0;
-
-            equipments.forEach(equipment => {
-                let majorState = parseInt(equipment.getAttribute("major-operational-state")) || 1;
-                let operationalState = parseInt(equipment.getAttribute("operational-state")) || 1;
-                totalMajor += majorState;
-                totalOperational += operationalState;
-                count++;
-            });
-
-            console.log(`Unit: ${unitElement.textContent.trim()} - Major: ${totalMajor}, Operational: ${totalOperational}, Count: ${count}`);
-
-            return {
-                majorState: count > 0 ? totalMajor / count : 1,
-                operationalState: count > 0 ? totalOperational / count : 1
-            };
-        }
-
-        function calculateAverages(node) {
-            console.log("Procesando nodo:", node); // Ver si node es null o undefined
-
-            if (!node) {
-                console.log("❌ El nodo es null o undefined");
-                return { avgMajor: 1, avgOperational: 1 };
-            }
-
-            let units = node.querySelectorAll(".unit");
-            let totalMajor = 0, totalOperational = 0, count = 0;
-
-            units.forEach(unit => {
-                let states = extractUnitStates(unit);
-                totalMajor += states.majorState;
-                totalOperational += states.operationalState;
-                count++;
-            });
-
-            console.log(`✔ Formation/Automata: ${node.textContent.trim()} - Avg Major: ${totalMajor}, Avg Operational: ${totalOperational}, Count: ${count}`);
-
-            return {
-                avgMajor: count > 0 ? totalMajor / count : 1,
-                avgOperational: count > 0 ? totalOperational / count : 1
-            };
-        }
-
-
     </script>
 
 </body>
