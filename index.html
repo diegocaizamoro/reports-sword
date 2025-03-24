@@ -120,7 +120,7 @@
 
 
                     extractFormations(formation, ulSubFormations);
-                    
+
                     let avgStates = extractAutomats(formation, ulSubFormations);
                     totalMajor += avgStates.avgMajor;
                     totalOperational += avgStates.avgOperational;
@@ -242,8 +242,8 @@
                     const unitName = unit.getAttribute("name");
                     let equipments = unit.getElementsByTagName("equipments")[0];
 
-                    let majorState = equipments ? parseInt(equipments.getAttribute("major-operational-state")) || 1 : 1;
-                    let operationalState = equipments ? parseInt(equipments.getAttribute("operational-state")) || 1 : 1;
+                    let majorState = equipments ? (parseFloat(equipments.getAttribute("major-operational-state")) ?? 1) : 1;
+                    let operationalState = equipments ? (parseFloat(equipments.getAttribute("operational-state")) ?? 1) : 1;
 
                     totalMajor += majorState;
                     totalOperational += operationalState;
