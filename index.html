@@ -116,6 +116,7 @@
             Array.from(formations).forEach(formation => {
                 if (formation.tagName === "formation") {
                     const formationName = formation.getAttribute("name");
+                      
                     let liFormation = document.createElement("li");
                     liFormation.textContent = formationName;
                     liFormation.className = "folder";
@@ -126,6 +127,10 @@
                     extractFormations(formation, ulSubFormations);
 
                     let avgStates = extractAutomats(formation, ulSubFormations);
+                    if (formationName === "ALA15") {
+                        console.log(avgStates);
+
+                    } 
 
                     let progressBar = createProgressBar(avgStates.avgOperational);
 
@@ -177,8 +182,9 @@
                     let equipments = unit.getElementsByTagName("equipments")[0];
 
                     let operationalState = equipments && equipments.getAttribute("operational-state") !== null
-                        ? parseFloat(equipments.getAttribute("operational-state"))
+                        ? Math.floor(parseFloat(equipments.getAttribute("operational-state")) * 100) / 100
                         : 1;
+
 
 
                     totalOperational += operationalState;
@@ -192,6 +198,8 @@
                     liUnit.appendChild(progressBar);
 
                     parentElement.appendChild(liUnit);
+                    /*console.log(unitName);
+                    console.log(totalOperational);*/
                 }
             });
 
@@ -200,6 +208,7 @@
 
         function createProgressBar(value) {
             let percentage = Math.max(0, Math.min(value * 100, 100));
+
             let color = percentage < 34 ? "red" : percentage < 67 ? "yellow" : "green";
 
             let container = document.createElement("div");
