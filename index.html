@@ -127,11 +127,6 @@
                     extractFormations(formation, ulSubFormations);
 
                     let avgStates = extractAutomats(formation, ulSubFormations);
-                    if (formationName === "ALA15") {
-                        console.log(avgStates);
-
-                    } 
-
                     let progressBar = createProgressBar(avgStates.avgOperational);
 
                     liFormation.appendChild(progressBar);
@@ -209,7 +204,8 @@
         function createProgressBar(value) {
             let percentage = Math.max(0, Math.min(value * 100, 100));
 
-            let color = percentage < 34 ? "red" : percentage < 67 ? "yellow" : "green";
+            let color = percentage < 34 ? "red" : percentage < 67 ? "yellow" : "#99e699"; 
+
 
             let container = document.createElement("div");
             container.className = "progress-container";
