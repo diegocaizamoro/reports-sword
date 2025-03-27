@@ -41,7 +41,7 @@
         /* Estilos para las barras de progreso */
         .progress-container {
             width: 100px;
-            height: 15px;
+            height: 20px;
             background-color: #ddd;
             border-radius: 5px;
             overflow: hidden;
@@ -215,7 +215,7 @@
         function createProgressBar(value) {
             let percentage = Math.max(0, Math.min(value * 100, 100));
 
-            let color = percentage < 34 ? "red" : percentage < 67 ? "yellow" : "#99e699";
+            let color = percentage < 34 ? "#f4a9a9" : percentage < 67 ? "yellow" : "#99e699";
 
 
             let container = document.createElement("div");
@@ -228,7 +228,7 @@
             bar.style.position = "relative";
             bar.style.textAlign = "center";
             bar.style.color = "black";
-            bar.style.fontSize = "12px";
+            bar.style.fontSize = "15px";
             bar.style.lineHeight = "15px"; // Centrar el texto verticalmente
             bar.textContent = Math.floor(percentage) + "%"; // Agregar el porcentaje dentro de la barra
 
