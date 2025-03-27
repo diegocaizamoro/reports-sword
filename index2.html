@@ -110,68 +110,43 @@
             treeContainer.appendChild(ul);
         }
 
-        function extractUnits(automatNode, parentElement) {
-            const units = automatNode.children;
-            let totalOperational = 0, count = 0;
+        function extractUnits(automatNode) {
+            const units = automatNode.getElementsByTagName("unit");
+            let totalOperational = 0, totalUnits = 0;
 
             Array.from(units).forEach(unit => {
-                if (unit.tagName === "unit") {
-                    const unitName = unit.getAttribute("name");
-                    let equipments = unit.getElementsByTagName("equipments")[0];
+                let unitName = unit.getAttribute("name");
+                let equipments = unit.getElementsByTagName("equipments")[0];
 
-                    let operationalState = equipments && equipments.getAttribute("operational-state")
-                        ? parseFloat(equipments.getAttribute("operational-state"))
-                        : 0;
+                let operationalState = equipments && equipments.getAttribute("operational-state")
+                    ? parseFloat(equipments.getAttribute("operational-state"))
+                    : 0;
 
-                    totalOperational += operationalState;
-                    count++;
-
-                    let liUnit = document.createElement("li");
-                    liUnit.className = "file";
-                    liUnit.textContent = unitName;
-
-                    let progressBar = createProgressBar(operationalState);
-                    liUnit.appendChild(progressBar);
-                    parentElement.appendChild(liUnit);
-                }
+                totalOperational += operationalState;
+                totalUnits++;
             });
 
-            return count > 0 ? { totalOperational, count } : { totalOperational: 0, count: 0 };
+            let avgOperational = totalUnits > 0 ? totalOperational / totalUnits : 0;
+            return { avgOperational, totalUnits };
         }
 
-        function extractAutomats(formationNode, parentElement) {
-            const automats = formationNode.children;
-            let totalOperational = 0, count = 0;
+        function extractAutomats(formationNode) {
+            const automats = formationNode.getElementsByTagName("automat");
+            let totalOperational = 0, totalUnits = 0;
 
             Array.from(automats).forEach(automat => {
-                if (automat.tagName === "automat") {
-                    let liAutomat = document.createElement("li");
-                    liAutomat.className = "folder";
-                    liAutomat.textContent = automat.getAttribute("name");
+                let unitData = extractUnits(automat);
 
-                    let ulUnits = document.createElement("ul");
-                    ulUnits.className = "tree hidden";
-
-                    let avgStates = extractUnits(automat, ulUnits);
-                    totalOperational += avgStates.totalOperational;
-                    count += avgStates.count;
-
-                    let progressBar = createProgressBar(avgStates.count > 0 ? avgStates.totalOperational / avgStates.count : 0);
-
-                    liAutomat.appendChild(progressBar);
-                    liAutomat.appendChild(ulUnits);
-                    liAutomat.onclick = function (event) { toggleChildren(event, this); };
-
-                    parentElement.appendChild(liAutomat);
-                }
+                totalOperational += unitData.avgOperational * unitData.totalUnits;
+                totalUnits += unitData.totalUnits;
             });
 
-            return count > 0 ? { totalOperational, count } : { totalOperational: 0, count: 0 };
+            let avgOperational = totalUnits > 0 ? totalOperational / totalUnits : 0;
+            return { avgOperational, totalUnits };
         }
-
         function extractFormations(parentNode, parentElement) {
             const formations = parentNode.children;
-            let totalOperational = 0, count = 0;
+            let totalOperational = 0, totalUnits = 0;
 
             Array.from(formations).forEach(formation => {
                 if (formation.tagName === "formation") {
@@ -185,27 +160,27 @@
                     let ulSubFormations = document.createElement("ul");
                     ulSubFormations.className = "tree hidden";
 
-                    // Obtener valores de formaciones hijas y autómatas
-                    let childData = extractFormations(formation, ulSubFormations);
+                    // Recursivamente obtener formaciones hijas
+                    let formationData = extractFormations(formation, ulSubFormations);
                     let automatData = extractAutomats(formation, ulSubFormations);
 
-                    // Calcular promedio de formaciones y autómatas
-                    let sumOperational = childData.totalOperational + automatData.totalOperational;
-                    let totalCount = childData.count + automatData.count;
-
-                    let avgOperational = totalCount > 0 ? sumOperational / totalCount : 0;
-
-                    totalOperational += avgOperational;
-                    count++;
+                    // Calcular promedio ponderado
+                    let totalOp = (formationData.avgOperational * formationData.totalUnits) +
+                        (automatData.avgOperational * automatData.totalUnits);
+                    let totalUn = formationData.totalUnits + automatData.totalUnits;
+                    let avgOperational = totalUn > 0 ? totalOp / totalUn : 0;
 
                     let progressBar = createProgressBar(avgOperational);
                     liFormation.appendChild(progressBar);
                     liFormation.appendChild(ulSubFormations);
                     parentElement.appendChild(liFormation);
+
+                    totalOperational += totalOp;
+                    totalUnits += totalUn;
                 }
             });
 
-            return count > 0 ? { totalOperational, count } : { totalOperational: 0, count: 0 };
+            return { avgOperational: totalUnits > 0 ? totalOperational / totalUnits : 0, totalUnits };
         }
 
 
