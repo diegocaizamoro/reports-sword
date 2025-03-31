@@ -62,54 +62,62 @@
     <h2>Árbol de ORBAT - Explorador de Unidades</h2>
     <input type="file" id="fileInput" accept=".xml">
     <div id="treeContainer"></div>
-
+    <script src="/node_modules/socket.io/client-dist/socket.io.js"></script>
     <script>
-        document.getElementById('fileInput').addEventListener('change', function (event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const xmlText = e.target.result;
-                    parseXML(xmlText);
-                };
-                reader.readAsText(file);
-            }
+        const socket = io(); // Inicializar Socket.io
+
+        socket.on('orbatUpdate', (data) => {
+            // Actualizar las barras de progreso en el DOM con los datos recibidos
+            console.log(data);
+            updateProgressBars(data); // Llamar a la función para actualizar las barras
         });
+
+        socket.on('orbatChange', () => {
+            socket.emit('requestUpdate'); // Solicitar datos actualizados cuando el archivo cambia
+        });
+
+        fetch('/orbat')
+            .then(response => response.text())
+            .then(xml => {
+                // Mostrar el árbol inicial en el DOM
+                console.log(xml);
+                parseXML(xml); // Llamar a la función para crear el árbol inicial
+            });
 
         function parseXML(xmlText) {
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, "text/xml");
 
-            // Buscar el nodo <parties> principal
             const partiesNode = xmlDoc.getElementsByTagName("parties")[0];
             if (!partiesNode) {
                 console.error("No se encontró el nodo <parties>");
                 return;
             }
 
-            // Obtener SOLO los <party> dentro de <parties>
             const parties = Array.from(partiesNode.getElementsByTagName("party"));
 
             const treeContainer = document.getElementById("treeContainer");
-            treeContainer.innerHTML = ""; // Limpiar contenido anterior
+            treeContainer.innerHTML = "";
 
             let ul = document.createElement("ul");
             ul.className = "tree";
 
             parties.forEach(party => {
                 const partyName = party.getAttribute("name");
+                let partyId = generateUniqueId(partyName);
 
                 let liParty = document.createElement("li");
                 liParty.textContent = partyName;
                 liParty.className = "folder";
                 liParty.onclick = function (event) { toggleChildren(event, this); };
+                liParty.dataset.partyId = partyId;
 
                 let ulTactical = document.createElement("ul");
                 ulTactical.className = "tree hidden";
 
                 const tactical = party.getElementsByTagName("tactical")[0];
                 if (tactical) {
-                    extractFormations(tactical, ulTactical);
+                    extractFormations(tactical, ulTactical, partyId);
                 }
 
                 liParty.appendChild(ulTactical);
@@ -119,25 +127,114 @@
             treeContainer.appendChild(ul);
         }
 
+        function extractFormations(parentNode, parentElement, parentId) {
+            const formations = parentNode.children;
+            let operationalValues = [];
 
-        function extractUnits(automatNode, parentElement) {
+            Array.from(formations).forEach(formation => {
+                if (formation.tagName === "formation") {
+                    const formationName = formation.getAttribute("name");
+                    let formationId = generateUniqueId(formationName);
+
+                    let liFormation = document.createElement("li");
+                    liFormation.textContent = formationName;
+                    liFormation.className = "folder";
+                    liFormation.onclick = function (event) { toggleChildren(event, this); };
+                    liFormation.dataset.formationId = formationId;
+                    liFormation.dataset.parentId = parentId;
+
+                    let ulSubFormations = document.createElement("ul");
+                    ulSubFormations.className = "tree hidden";
+
+                    let childFormationAvg = extractFormations(formation, ulSubFormations, formationId);
+                    let automatAvg = extractAutomats(formation, ulSubFormations, formationId);
+
+                    let avgOperational = (childFormationAvg + automatAvg) / (childFormationAvg && automatAvg ? 2 : 1);
+                    operationalValues.push(avgOperational);
+
+                    let progressBar = createProgressBar(avgOperational);
+                    liFormation.appendChild(progressBar);
+                    liFormation.appendChild(ulSubFormations);
+                    parentElement.appendChild(liFormation);
+                } else if (formation.tagName === "automat") {
+                    const automatName = formation.getAttribute("name");
+                    let automatId = generateUniqueId(automatName);
+
+                    let liAutomat = document.createElement("li");
+                    liAutomat.className = "folder";
+                    liAutomat.textContent = automatName;
+                    liAutomat.onclick = function (event) { toggleChildren(event, this); };
+                    liAutomat.dataset.automatId = automatId;
+                    liAutomat.dataset.parentId = parentId;
+
+                    let ulUnits = document.createElement("ul");
+                    ulUnits.className = "tree hidden";
+
+                    let avgOperational = extractUnits(formation, ulUnits, automatId);
+                    operationalValues.push(avgOperational);
+
+                    let progressBar = createProgressBar(avgOperational);
+                    liAutomat.appendChild(progressBar);
+                    liAutomat.appendChild(ulUnits);
+                    parentElement.appendChild(liAutomat);
+                }
+            });
+
+            let avgOperational = operationalValues.length > 0 ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length : 0;
+            return avgOperational;
+        }
+
+        function extractAutomats(automatNode, parentElement, parentId) {
+            const automats = automatNode.children;
+            let operationalValues = [];
+
+            Array.from(automats).forEach(automat => {
+                if (automat.tagName === "automat") {
+                    const automatName = automat.getAttribute("name");
+                    let automatId = generateUniqueId(automatName);
+
+                    let liAutomat = document.createElement("li");
+                    liAutomat.className = "folder";
+                    liAutomat.textContent = automatName;
+                    liAutomat.onclick = function (event) { toggleChildren(event, this); };
+                    liAutomat.dataset.automatId = automatId;
+                    liAutomat.dataset.parentId = parentId;
+
+                    let ulUnits = document.createElement("ul");
+                    ulUnits.className = "tree hidden";
+
+                    let avgOperational = extractUnits(automat, ulUnits, automatId);
+                    operationalValues.push(avgOperational);
+
+                    let progressBar = createProgressBar(avgOperational);
+                    liAutomat.appendChild(progressBar);
+                    liAutomat.appendChild(ulUnits);
+                    parentElement.appendChild(liAutomat);
+                }
+            });
+
+            let avgOperational = operationalValues.length > 0 ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length : 0;
+            return avgOperational;
+        }
+
+        function extractUnits(automatNode, parentElement, parentId) {
             const units = automatNode.children;
             let operationalValues = [];
 
             Array.from(units).forEach(unit => {
                 if (unit.tagName === "unit") {
                     const unitName = unit.getAttribute("name");
-                    let equipments = unit.getElementsByTagName("equipments")[0];
-
-                    let operationalState = equipments && equipments.getAttribute("operational-state")
-                        ? parseFloat(equipments.getAttribute("operational-state"))
-                        : 0;
-
-                    operationalValues.push(operationalState);
+                    let unitId = generateUniqueId(unitName);
 
                     let liUnit = document.createElement("li");
                     liUnit.className = "file";
                     liUnit.textContent = unitName;
+                    liUnit.dataset.unitId = unitId;
+                    liUnit.dataset.parentId = parentId;
+
+                    let equipments = unit.getElementsByTagName("equipments")[0];
+                    let operationalState = equipments && equipments.getAttribute("operational-state") ? parseFloat(equipments.getAttribute("operational-state")) : 0;
+                    operationalValues.push(operationalState);
 
                     let progressBar = createProgressBar(operationalState);
                     liUnit.appendChild(progressBar);
@@ -149,74 +246,21 @@
             return avgOperational;
         }
 
-        function extractAutomats(formationNode, parentElement) {
-            const automats = formationNode.children;
-            let operationalValues = [];
-
-            Array.from(automats).forEach(automat => {
-                if (automat.tagName === "automat") {
-                    let liAutomat = document.createElement("li");
-                    liAutomat.className = "folder";
-                    liAutomat.textContent = automat.getAttribute("name");
-
-                    let ulUnits = document.createElement("ul");
-                    ulUnits.className = "tree hidden";
-
-                    let avgOperational = extractUnits(automat, ulUnits);
-                    operationalValues.push(avgOperational);
-
-                    let progressBar = createProgressBar(avgOperational);
-                    liAutomat.appendChild(progressBar);
-                    liAutomat.appendChild(ulUnits);
-                    liAutomat.onclick = function (event) { toggleChildren(event, this); };
-
-                    parentElement.appendChild(liAutomat);
-                }
-            });
-
-            let avgOperational = operationalValues.length > 0 ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length : 0;
-            return avgOperational;
+        function generateUniqueId(name) {
+            return name.replace(/\s+/g, '-').toLowerCase() + '-' + Date.now();
         }
 
-        function extractFormations(parentNode, parentElement) {
-            const formations = parentNode.children;
-            let operationalValues = [];
-
-            Array.from(formations).forEach(formation => {
-                if (formation.tagName === "formation") {
-                    const formationName = formation.getAttribute("name");
-
-                    let liFormation = document.createElement("li");
-                    liFormation.textContent = formationName;
-                    liFormation.className = "folder";
-                    liFormation.onclick = function (event) { toggleChildren(event, this); };
-
-                    let ulSubFormations = document.createElement("ul");
-                    ulSubFormations.className = "tree hidden";
-
-                    // Obtener valores solo de hijos inmediatos
-                    let childFormationAvg = extractFormations(formation, ulSubFormations);
-                    let automatAvg = extractAutomats(formation, ulSubFormations);
-
-                    let avgOperational = (childFormationAvg + automatAvg) / (childFormationAvg && automatAvg ? 2 : 1);
-                    operationalValues.push(avgOperational);
-
-                    let progressBar = createProgressBar(avgOperational);
-                    liFormation.appendChild(progressBar);
-                    liFormation.appendChild(ulSubFormations);
-                    parentElement.appendChild(liFormation);
-                }
-            });
-
-            let avgOperational = operationalValues.length > 0 ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length : 0;
-            return avgOperational;
+        function updateProgressBars(data) {
+            // Implementa la lógica para actualizar las barras de progreso con los datos recibidos
+            // Este codigo se debe completar para actualizar las barras.
+            // data es el xml ya convertido a json.
+            console.log("updateProgressBars called", data);
         }
 
         function createProgressBar(value) {
             let percentage = Math.max(0, Math.min(value * 100, 100));
 
             let color = percentage < 34 ? "#f4a9a9" : percentage < 67 ? "yellow" : "#99e699";
-
 
             let container = document.createElement("div");
             container.className = "progress-container";

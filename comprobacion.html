@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualización de ORBAT</title>
+</head>
+
+<body>
+    <h1>Actualización de ORBAT</h1>
+    <div id="orbatData"></div>
+    <script src="/node_modules/socket.io/client-dist/socket.io.js"></script>
+
+    <script>
+        const socket = io();
+
+        socket.on('orbatUpdate', (data) => {
+            console.log('Datos actualizados:', data);
+            document.getElementById('orbatData').textContent = JSON.stringify(data, null, 2);
+        });
+
+        socket.on('orbatChange', () => {
+            console.log('El archivo orbat.xml ha cambiado. Solicitando actualización...');
+            socket.emit('requestUpdate');
+        });
+
+        fetch('/orbat.xml')
+            .then(response => response.text())
+            .then(xml => {
+                console.log('Datos iniciales:', xml);
+                // Aquí puedes procesar el XML inicial si es necesario
+            });
+
+        console.log('Esperando actualizaciones...');
+    </script>
+</body>
+
+</html>
