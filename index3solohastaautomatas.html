@@ -182,6 +182,7 @@
 
         function extractFormations(parentNode, parentElement) {
             const formations = parentNode.children;
+
             let totalOperationalValues = []; // Se usa solo para devolver el promedio al nivel superior
 
             Array.from(formations).forEach(formation => {
@@ -215,6 +216,13 @@
                     let avgOperational = operationalValues.length > 0
                         ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length
                         : 0;
+                    // 🔹 Ver qué datos tenemos
+                    if (formationName === "111BCB") {
+                        Array.from(formation.children).forEach(child => {
+                            console.log(`- ${child.tagName} (name: ${child.getAttribute("name")})`);
+                        });
+
+                    }
 
                     let progressBar = createProgressBar(avgOperational);
                     liFormation.appendChild(progressBar);
