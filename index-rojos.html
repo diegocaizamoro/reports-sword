@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árbol ORBAT - Explorador de Unidades (Enemy Only)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .tree {
+            margin-left: 20px;
+            list-style-type: none;
+        }
+
+        .tree li {
+            margin: 5px 0;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .tree .folder::before {
+            content: "📂 ";
+        }
+
+        .tree .folder.open::before {
+            content: "📁 ";
+        }
+
+        .tree .file::before {
+            content: "📄 ";
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .progress-container {
+            width: 100px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .progress-bar {
+            height: 100%;
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>ORBAT - Explorador de Unidades (Enemy Only)</h2>
+    <div id="treeContainer"></div>
+
+    <script>
+        window.onload = function () {
+            fetch("http://localhost:3000/orbat.xml")
+                .then(response => response.text())
+                .then(xmlText => parseXML(xmlText))
+                .catch(error => console.error("Error al cargar el ORBAT:", error));
+        };
+
+        function parseXML(xmlText) {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+            const enemyParty = Array.from(xmlDoc.getElementsByTagName("party"))
+                .find(p => p.getAttribute("type") === "enemy");
+
+            const treeContainer = document.getElementById("treeContainer");
+            treeContainer.innerHTML = "";
+
+            if (!enemyParty) return;
+
+            const ul = document.createElement("ul");
+            ul.className = "tree";
+
+            const partyName = enemyParty.getAttribute("name");
+            const liParty = document.createElement("li");
+            liParty.textContent = partyName;
+            liParty.className = "folder";
+            liParty.onclick = function (event) { toggleChildren(event, this); };
+
+            const ulTactical = document.createElement("ul");
+            ulTactical.className = "tree hidden";
+
+            const tactical = enemyParty.querySelector("tactical");
+            if (tactical) {
+                extractFormations(tactical, ulTactical);
+            }
+
+            liParty.appendChild(ulTactical);
+            ul.appendChild(liParty);
+            treeContainer.appendChild(ul);
+        }
+
+        function extractUnits(automatNode, parentElement) {
+            const units = Array.from(automatNode.children).filter(u => u.tagName === "unit");
+            let operationalValues = [];
+
+            units.forEach(unit => {
+                const unitName = unit.getAttribute("name");
+                const equipments = unit.querySelector("equipments");
+                const operationalState = equipments && equipments.getAttribute("operational-state")
+                    ? parseFloat(equipments.getAttribute("operational-state")) : 0;
+
+                operationalValues.push(operationalState);
+
+                const liUnit = document.createElement("li");
+                liUnit.className = "file";
+                liUnit.textContent = unitName;
+
+                const progressBar = createProgressBar(operationalState, unitName);
+                liUnit.appendChild(progressBar);
+                parentElement.appendChild(liUnit);
+            });
+
+            return operationalValues.length > 0
+                ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length
+                : 0;
+        }
+
+        function extractAutomats(formationNode, parentElement) {
+            const automats = Array.from(formationNode.children).filter(a => a.tagName === "automat");
+            let operationalValues = [];
+
+            automats.forEach(automat => {
+                const liAutomat = document.createElement("li");
+                liAutomat.className = "folder";
+                liAutomat.textContent = automat.getAttribute("name");
+
+                const ulUnits = document.createElement("ul");
+                ulUnits.className = "tree hidden";
+
+                const avgOperational = extractUnits(automat, ulUnits);
+                operationalValues.push(avgOperational);
+
+                const progressBar = createProgressBar(avgOperational, liAutomat.textContent);
+                liAutomat.appendChild(progressBar);
+                liAutomat.appendChild(ulUnits);
+                liAutomat.onclick = function (event) { toggleChildren(event, this); };
+
+                parentElement.appendChild(liAutomat);
+            });
+
+            return operationalValues.length > 0
+                ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length
+                : 0;
+        }
+
+        function extractFormations(parentNode, parentElement) {
+            const formations = Array.from(parentNode.children).filter(f => f.tagName === "formation");
+            let totalOperationalValues = [];
+
+            formations.forEach(formation => {
+                const formationName = formation.getAttribute("name");
+
+                const liFormation = document.createElement("li");
+                liFormation.textContent = formationName;
+                liFormation.className = "folder";
+                liFormation.onclick = function (event) { toggleChildren(event, this); };
+
+                const ulSubFormations = document.createElement("ul");
+                ulSubFormations.className = "tree hidden";
+
+                let operationalValues = [];
+                const automatAvg = extractAutomats(formation, ulSubFormations);
+                const childFormationAvg = extractFormations(formation, ulSubFormations);
+
+                if (!isNaN(automatAvg)) operationalValues.push(automatAvg);
+                if (!isNaN(childFormationAvg)) operationalValues.push(childFormationAvg);
+
+                const avgOperational = operationalValues.length > 0
+                    ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length
+                    : 0;
+
+                const progressBar = createProgressBar(avgOperational, formationName);
+                liFormation.appendChild(progressBar);
+                liFormation.appendChild(ulSubFormations);
+                parentElement.appendChild(liFormation);
+
+                totalOperationalValues.push(avgOperational);
+            });
+
+            return totalOperationalValues.length > 0
+                ? totalOperationalValues.reduce((a, b) => a + b, 0) / totalOperationalValues.length
+                : 0;
+        }
+
+        function createProgressBar(value, unitName) {
+            const percentage = Math.max(0, Math.min(value * 100, 100));
+            const color = percentage < 34 ? "#f4a9a9" : percentage < 67 ? "yellow" : "#99e699";
+
+            const container = document.createElement("div");
+            container.className = "progress-container";
+            container.setAttribute("name", unitName);
+
+            const bar = document.createElement("div");
+            bar.className = "progress-bar";
+            bar.style.width = percentage + "%";
+            bar.style.backgroundColor = color;
+            bar.textContent = Math.floor(percentage) + "%";
+
+            container.appendChild(bar);
+            return container;
+        }
+
+        function toggleChildren(event, element) {
+            event.stopPropagation();
+            const children = element.querySelector("ul");
+            if (children) {
+                const isHidden = children.classList.contains("hidden");
+                children.classList.toggle("hidden", !isHidden);
+                element.classList.toggle("open", isHidden);
+            }
+        }
+
+        function cssEscape(str) {
+            return str.replace(/([ !"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, '\\$1');
+        }
+
+        function updateProgressBar(container, value) {
+            const bar = container.querySelector(".progress-bar");
+            const percentage = Math.max(0, Math.min(value * 100, 100));
+            const color = percentage < 34 ? "#f4a9a9" : percentage < 67 ? "yellow" : "#99e699";
+
+            bar.style.width = percentage + "%";
+            bar.style.backgroundColor = color;
+            bar.textContent = Math.floor(percentage) + "%";
+        }
+
+        setInterval(() => {
+            fetch("http://localhost:3000/orbat.xml")
+                .then(response => response.text())
+                .then(xmlText => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                    const enemyParty = Array.from(xmlDoc.getElementsByTagName("party"))
+                        .find(p => p.getAttribute("type") === "enemy");
+                    if (enemyParty) updateOperationalValues(enemyParty);
+                })
+                .catch(err => console.error("Error actualizando valores ORBAT:", err));
+        }, 8000);
+
+        function updateOperationalValues(enemyParty) {
+            const unitMap = new Map();
+            const tactical = enemyParty.querySelector("tactical");
+            if (!tactical) return;
+
+            const automats = tactical.getElementsByTagName("automat");
+
+            Array.from(automats).forEach(automat => {
+                const units = Array.from(automat.getElementsByTagName("unit")).filter(u => u.parentNode === automat);
+                units.forEach(unit => {
+                    const unitName = unit.getAttribute("name");
+                    const equipments = unit.getElementsByTagName("equipments")[0];
+                    const operationalState = equipments && equipments.getAttribute("operational-state")
+                        ? parseFloat(equipments.getAttribute("operational-state")) : 0;
+
+                    unitMap.set(unitName, operationalState);
+                    const safeName = cssEscape(unitName);
+                    const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                    if (container) updateProgressBar(container, operationalState);
+                });
+            });
+
+            Array.from(automats).forEach(automat => {
+                const automatName = automat.getAttribute("name");
+                const unitNodes = Array.from(automat.getElementsByTagName("unit")).filter(u => u.parentNode === automat);
+                let total = 0, count = 0;
+                unitNodes.forEach(unit => {
+                    const name = unit.getAttribute("name");
+                    if (unitMap.has(name)) {
+                        total += unitMap.get(name);
+                        count++;
+                    }
+                });
+                const avg = count > 0 ? total / count : 0;
+                unitMap.set(automatName, avg);
+                const safeName = cssEscape(automatName);
+                const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                if (container) updateProgressBar(container, avg);
+            });
+
+            const formations = Array.from(tactical.getElementsByTagName("formation")).reverse();
+            formations.forEach(formation => {
+                const formationName = formation.getAttribute("name");
+                let total = 0, count = 0;
+
+                const automatNodes = Array.from(formation.getElementsByTagName("automat")).filter(a => a.parentNode === formation);
+                automatNodes.forEach(automat => {
+                    const name = automat.getAttribute("name");
+                    if (unitMap.has(name)) {
+                        total += unitMap.get(name);
+                        count++;
+                    }
+                });
+
+                const subFormations = Array.from(formation.getElementsByTagName("formation")).filter(f => f.parentNode === formation);
+                subFormations.forEach(sub => {
+                    const name = sub.getAttribute("name");
+                    if (unitMap.has(name)) {
+                        total += unitMap.get(name);
+                        count++;
+                    }
+                });
+
+                const avg = count > 0 ? total / count : 0;
+                unitMap.set(formationName, avg);
+                const safeName = cssEscape(formationName);
+                const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                if (container) updateProgressBar(container, avg);
+            });
+
+            const partyName = enemyParty.getAttribute("name");
+            let total = 0, count = 0;
+            const rootFormations = Array.from(tactical.getElementsByTagName("formation")).filter(f => f.parentNode === tactical);
+            rootFormations.forEach(formation => {
+                const name = formation.getAttribute("name");
+                if (unitMap.has(name)) {
+                    total += unitMap.get(name);
+                    count++;
+                }
+            });
+            const avg = count > 0 ? total / count : 0;
+            unitMap.set(partyName, avg);
+            const safeName = cssEscape(partyName);
+            const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+            if (container) updateProgressBar(container, avg);
+        }
+    </script>
+</body>
+
+</html>

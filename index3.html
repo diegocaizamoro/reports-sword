@@ -291,120 +291,39 @@
         }
 
         function updateOperationalValues(xmlDoc) {
-           // const unitMap = new Map();
+            const unitMap = new Map();
 
-            const parties = xmlDoc.getElementsByTagName("party");
+            // Primero actualizamos todas las unidades y guardamos sus valores
+            const units = xmlDoc.getElementsByTagName("unit");
 
-            Array.from(parties).forEach(party => {
-                const unitMap = new Map(); // 👈 MOVER AQUÍ
-                const tactical = party.querySelector("tactical");
+            Array.from(units).forEach(unit => {
+                const unitName = unit.getAttribute("name");
+                const equipments = unit.getElementsByTagName("equipments")[0];
+                const operationalState = equipments && equipments.getAttribute("operational-state")
+                    ? parseFloat(equipments.getAttribute("operational-state"))
+                    : 0;
 
-                if (!tactical) return;
+                unitMap.set(unitName, operationalState);
 
-                // ========== 1. UNITS ==========
-                const automats = tactical.getElementsByTagName("automat");
+                const safeName = cssEscape(unitName);
+                const container = document.querySelector(`.progress-container[name="${safeName}"]`);
 
-                Array.from(automats).forEach(automat => {
-                    const units = Array.from(automat.getElementsByTagName("unit")).filter(u => u.parentNode === automat);
+                if (container) {
+                    updateProgressBar(container, operationalState);
+                }
+            });
 
-                    units.forEach(unit => {
-                        const unitName = unit.getAttribute("name");
-                        const equipments = unit.getElementsByTagName("equipments")[0];
-                        const operationalState = equipments && equipments.getAttribute("operational-state")
-                            ? parseFloat(equipments.getAttribute("operational-state"))
-                            : 0;
-
-                        // Solo guardamos el valor si no ha sido registrado antes
-                        if (!unitMap.has(unitName)) {
-                            unitMap.set(unitName, operationalState);
-
-                            const safeName = cssEscape(unitName);
-                            const container = document.querySelector(`.progress-container[name="${safeName}"]`);
-                            if (container) updateProgressBar(container, operationalState);
-
-                            console.log("Unidad:", unitName, "→", operationalState);
-                        }
-                    });
-                });
-
-                // ========== 2. AUTOMATS ==========
-                Array.from(automats).forEach(automat => {
-                    const automatName = automat.getAttribute("name");
-                    const unitNodes = Array.from(automat.getElementsByTagName("unit")).filter(u => u.parentNode === automat);
-
-                    let total = 0;
-                    let count = 0;
-
-                    unitNodes.forEach(unit => {
-                        const name = unit.getAttribute("name");
-                        if (unitMap.has(name)) {
-                            total += unitMap.get(name);
-                            count++;
-                        }
-                    });
-
-                    const avg = count > 0 ? total / count : 0;
-                    unitMap.set(automatName, avg);
-
-                    const safeName = cssEscape(automatName);
-                    const container = document.querySelector(`.progress-container[name="${safeName}"]`);
-                    if (container) updateProgressBar(container, avg);
-
-                    console.log("Automat:", automatName, "→", avg);
-                });
-
-                // ========== 3. FORMATIONS (bottom-up) ==========
-                const formations = Array.from(tactical.getElementsByTagName("formation")).reverse();
-
-                formations.forEach(formation => {
-                    const formationName = formation.getAttribute("name");
-
-                    let total = 0;
-                    let count = 0;
-
-                    // Automats directos
-                    const automatNodes = Array.from(formation.getElementsByTagName("automat"))
-                        .filter(a => a.parentNode === formation);
-                    automatNodes.forEach(automat => {
-                        const name = automat.getAttribute("name");
-                        if (unitMap.has(name)) {
-                            total += unitMap.get(name);
-                            count++;
-                        }
-                    });
-
-                    // Subformaciones directas
-                    const subFormations = Array.from(formation.getElementsByTagName("formation"))
-                        .filter(f => f.parentNode === formation);
-                    subFormations.forEach(sub => {
-                        const name = sub.getAttribute("name");
-                        if (unitMap.has(name)) {
-                            total += unitMap.get(name);
-                            count++;
-                        }
-                    });
-
-                    const avg = count > 0 ? total / count : 0;
-                    unitMap.set(formationName, avg);
-
-                    const safeName = cssEscape(formationName);
-                    const container = document.querySelector(`.progress-container[name="${safeName}"]`);
-                    if (container) updateProgressBar(container, avg);
-
-                    console.log("Formación:", formationName, "→", avg);
-                });
-
-                // ========== 4. PARTY ==========
-                const partyName = party.getAttribute("name");
+            // Ahora actualizamos automats (promedio de unidades)
+            const automats = xmlDoc.getElementsByTagName("automat");
+            Array.from(automats).forEach(automat => {
+                const automatName = automat.getAttribute("name");
+                const unitNodes = automat.getElementsByTagName("unit");
 
                 let total = 0;
                 let count = 0;
 
-                // formaciones directas al party
-                const rootFormations = Array.from(tactical.getElementsByTagName("formation"))
-                    .filter(f => f.parentNode === tactical);
-                rootFormations.forEach(formation => {
-                    const name = formation.getAttribute("name");
+                Array.from(unitNodes).forEach(unit => {
+                    const name = unit.getAttribute("name");
                     if (unitMap.has(name)) {
                         total += unitMap.get(name);
                         count++;
@@ -412,16 +331,59 @@
                 });
 
                 const avg = count > 0 ? total / count : 0;
-                unitMap.set(partyName, avg);
+                unitMap.set(automatName, avg);
 
-                const safeName = cssEscape(partyName);
+                const safeName = cssEscape(automatName);
                 const container = document.querySelector(`.progress-container[name="${safeName}"]`);
-                if (container) updateProgressBar(container, avg);
+                if (container) {
+                    updateProgressBar(container, avg);
+                }
+            });
 
-                console.log("Party:", partyName, "→", avg);
+            // Ahora formaciones (promedio de automats y subformaciones)
+            const formations = xmlDoc.getElementsByTagName("formation");
+
+            // Recorremos de abajo hacia arriba (últimas formaciones primero)
+            Array.from(formations).reverse().forEach(formation => {
+                const formationName = formation.getAttribute("name");
+
+                // Automats directos
+                const automatNodes = formation.getElementsByTagName("automat");
+                let total = 0;
+                let count = 0;
+
+                Array.from(automatNodes).forEach(automat => {
+                    if (automat.parentNode === formation) {
+                        const name = automat.getAttribute("name");
+                        if (unitMap.has(name)) {
+                            total += unitMap.get(name);
+                            count++;
+                        }
+                    }
+                });
+
+                // Subformaciones directas
+                const subFormations = formation.getElementsByTagName("formation");
+                Array.from(subFormations).forEach(sub => {
+                    if (sub.parentNode === formation) {
+                        const name = sub.getAttribute("name");
+                        if (unitMap.has(name)) {
+                            total += unitMap.get(name);
+                            count++;
+                        }
+                    }
+                });
+
+                const avg = count > 0 ? total / count : 0;
+                unitMap.set(formationName, avg);
+
+                const safeName = cssEscape(formationName);
+                const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                if (container) {
+                    updateProgressBar(container, avg);
+                }
             });
         }
-
 
         function updateProgressBar(container, value) {
             const bar = container.querySelector(".progress-bar");
@@ -433,6 +395,11 @@
             bar.style.backgroundColor = color;
             bar.textContent = Math.floor(percentage) + "%";
         }
+
+        function cssEscape(str) {
+            return str.replace(/([ !"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, '\\$1');
+        }
+
 
     </script>
 

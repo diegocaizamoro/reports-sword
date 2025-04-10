@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualización de ORBAT</title>
+    <title>Socket.io Listener</title>
 </head>
-
 <body>
-    <h1>Actualización de ORBAT</h1>
-    <div id="orbatData"></div>
-    <script src="/node_modules/socket.io/client-dist/socket.io.js"></script>
+    <h2>Escuchando actualizaciones del servidor...</h2>
+    <p>Última actualización: <span id="fecha"></span></p>
 
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script>
-        const socket = io();
-
-        socket.on('orbatUpdate', (data) => {
-            console.log('Datos actualizados:', data);
-            document.getElementById('orbatData').textContent = JSON.stringify(data, null, 2);
+        const socket = io("http://localhost:3000", {
+            transports: ["websocket", "polling"], 
+            reconnectionAttempts: 5, 
+            timeout: 2000 
         });
 
-        socket.on('orbatChange', () => {
-            console.log('El archivo orbat.xml ha cambiado. Solicitando actualización...');
-            socket.emit('requestUpdate');
+        socket.on("connect", () => {
+            console.log("✅ Conectado al servidor Socket.io en el puerto 3000");
         });
 
-        fetch('/orbat.xml')
-            .then(response => response.text())
-            .then(xml => {
-                console.log('Datos iniciales:', xml);
-                // Aquí puedes procesar el XML inicial si es necesario
-            });
+        socket.on("connect_error", (err) => {
+            console.error("❌ Error de conexión:", err);
+        });
 
-        console.log('Esperando actualizaciones...');
+        socket.on("disconnect", (reason) => {
+            console.warn("⚠️ Desconectado del servidor:", reason);
+        });
+
+        // Escuchar eventos de fecha del servidor y actualizar solo el span
+        socket.on("actualizar_fecha", (nuevaFecha) => {
+            document.getElementById("fecha").textContent = nuevaFecha;
+        });
     </script>
 </body>
-
 </html>

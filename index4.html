@@ -291,12 +291,11 @@
         }
 
         function updateOperationalValues(xmlDoc) {
-           // const unitMap = new Map();
+            const unitMap = new Map();
 
             const parties = xmlDoc.getElementsByTagName("party");
 
             Array.from(parties).forEach(party => {
-                const unitMap = new Map(); // 👈 MOVER AQUÍ
                 const tactical = party.querySelector("tactical");
 
                 if (!tactical) return;
