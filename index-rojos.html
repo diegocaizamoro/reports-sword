@@ -233,11 +233,15 @@
 
             if (!isEnemy) return 0; // Ignora si no es enemigo
 
-            const formations = parentNode.children;
+            //const formations = parentNode.children;
+            const formations = Array.from(parentNode.children).filter(child => child.tagName === "formation");
             let totalOperationalValues = [];
-            /*if (parentNode.getAttribute("name") === "10BIM ") {
-                console.log(formations);
-            }*/
+            if (parentNode.getAttribute("name") === "10BIM ") {
+                formations.forEach(formation => {
+                    const name = formation.getAttribute("name");
+                    console.log("Hija de", parentNode.getAttribute("name"), "→", name);
+                });
+            }
 
             Array.from(formations).forEach(formation => {
                 if (formation.tagName === "formation") {
@@ -276,9 +280,9 @@
                         : 0;
 
 
-                    if (parentNode.getAttribute("name") === "14BCB ") {
+                    /*if (parentNode.getAttribute("name") === "14BCB ") {
                         console.log(automatAvg);
-                    }
+                    }*/
 
 
 
