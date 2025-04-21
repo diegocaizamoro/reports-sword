@@ -158,10 +158,6 @@
                     liUnit.appendChild(progressBar);
                     parentElement.appendChild(liUnit);
 
-                    /*if (unitName === "2/VC 2/4") {
-                        console.log(unitName, operationalState);
-                        console.log(unit.getElementsByTagName("equipments")[0]);
-                    }*/
                 }
             });
 
@@ -236,13 +232,7 @@
             //const formations = parentNode.children;
             const formations = Array.from(parentNode.children).filter(child => child.tagName === "formation");
             let totalOperationalValues = [];
-            if (parentNode.getAttribute("name") === "10BIM ") {
-                formations.forEach(formation => {
-                    const name = formation.getAttribute("name");
-                    console.log("Hija de", parentNode.getAttribute("name"), "→", name);
-                });
-            }
-
+          
             Array.from(formations).forEach(formation => {
                 if (formation.tagName === "formation") {
                     const formationName = formation.getAttribute("name");
@@ -278,12 +268,6 @@
                     let avgOperational = operationalValues.length > 0
                         ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length
                         : 0;
-
-
-                    /*if (parentNode.getAttribute("name") === "14BCB ") {
-                        console.log(automatAvg);
-                    }*/
-
 
 
                     let progressBar = createProgressBar(avgOperational, formationName);
