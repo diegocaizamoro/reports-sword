@@ -52,8 +52,9 @@
 
         .progress-bar {
             height: 100%;
-            transition: width 0.5s ease-in-out;
+            transition: width 3s ease-in-out, background-color 0.5s ease-in-out;
         }
+
     </style>
 </head>
 
@@ -214,8 +215,28 @@
         }
 
 
+        function calculateAvgOperationalFromUnits(node) {
+            let unitStates = [];
+
+            function recurse(currentNode) {
+                if (currentNode.tagName === "unit") {
+                    let equipments = currentNode.getElementsByTagName("equipments")[0];
+                    let opState = equipments?.getAttribute("operational-state");
+                    if (opState !== null && opState !== undefined) {
+                        unitStates.push(parseFloat(opState));
+                    }
+                }
+
+                Array.from(currentNode.children || []).forEach(child => recurse(child));
+            }
+
+            recurse(node);
+
+            if (unitStates.length === 0) return 0;
+            return unitStates.reduce((a, b) => a + b, 0) / unitStates.length;
+        }
+
         function extractFormations(parentNode, parentElement) {
-            // Verifica si forma parte de un party enemy
             let current = parentNode;
             let isEnemy = false;
 
@@ -227,62 +248,41 @@
                 current = current.parentElement;
             }
 
-            if (!isEnemy) return 0; // Ignora si no es enemigo
+            if (!isEnemy) return 0;
 
-            //const formations = parentNode.children;
             const formations = Array.from(parentNode.children).filter(child => child.tagName === "formation");
             let totalOperationalValues = [];
-          
-            Array.from(formations).forEach(formation => {
-                if (formation.tagName === "formation") {
-                    const formationName = formation.getAttribute("name");
 
-                    let liFormation = document.createElement("li");
-                    liFormation.textContent = formationName;
-                    liFormation.className = "folder";
-                    liFormation.onclick = function (event) { toggleChildren(event, this); };
+            formations.forEach(formation => {
+                const formationName = formation.getAttribute("name");
 
-                    let ulSubFormations = document.createElement("ul");
-                    ulSubFormations.className = "tree hidden";
+                let liFormation = document.createElement("li");
+                liFormation.textContent = formationName;
+                liFormation.className = "folder";
+                liFormation.onclick = function (event) { toggleChildren(event, this); };
 
-                    let operationalValues = [];
-                    let hasContent = false;
+                let ulSubFormations = document.createElement("ul");
+                ulSubFormations.className = "tree hidden";
 
-                    let automatAvg = extractAutomats(formation, ulSubFormations);
-                    if (!isNaN(automatAvg) && automatAvg > 0) {
-                        operationalValues.push(automatAvg);
-                        hasContent = true;
-                    }
+                extractFormations(formation, ulSubFormations); // construir el árbol
+                extractAutomats(formation, ulSubFormations);   // construir los automats
 
-                    let childFormationAvg = extractFormations(formation, ulSubFormations);
-                    if (!isNaN(childFormationAvg) && childFormationAvg > 0) {
-                        operationalValues.push(childFormationAvg);
-                        hasContent = true;
+                // Aquí es donde se aplica la nueva lógica
+                let avgOperational = calculateAvgOperationalFromUnits(formation);
 
-                    }
-                    if (!hasContent) {
-                        // Podrías asumir que si no tiene hijos, el progreso es 0.
-                        operationalValues.push(0);
-                    }
+                let progressBar = createProgressBar(avgOperational, formationName);
+                liFormation.appendChild(progressBar);
+                liFormation.appendChild(ulSubFormations);
+                parentElement.appendChild(liFormation);
 
-                    let avgOperational = operationalValues.length > 0
-                        ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length
-                        : 0;
-
-
-                    let progressBar = createProgressBar(avgOperational, formationName);
-                    liFormation.appendChild(progressBar);
-                    liFormation.appendChild(ulSubFormations);
-                    parentElement.appendChild(liFormation);
-
-                    totalOperationalValues.push(avgOperational);
-                }
+                totalOperationalValues.push(avgOperational);
             });
 
             return totalOperationalValues.length > 0
                 ? totalOperationalValues.reduce((a, b) => a + b, 0) / totalOperationalValues.length
                 : 0;
         }
+
 
 
         function createProgressBar(value, unitName) {
@@ -333,7 +333,7 @@
                     updateOperationalValues(xmlDoc);
                 })
                 .catch(err => console.error("Error actualizando valores ORBAT:", err));
-        }, 800000);
+        }, 8000);
 
         // Escapar nombre seguro
         function cssEscape(str) {
@@ -467,8 +467,6 @@
                 //console.log("Party:", partyName, "→", avg);
             });
         }
-
-
 
         function updateProgressBar(container, value) {
             const bar = container.querySelector(".progress-bar");
