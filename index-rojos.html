@@ -54,7 +54,6 @@
             height: 100%;
             transition: width 3s ease-in-out, background-color 0.5s ease-in-out;
         }
-
     </style>
 </head>
 
@@ -341,21 +340,27 @@
         }
 
         function updateOperationalValues(xmlDoc) {
-            // Obtener solo los <party> con type="enemy"
             const parties = Array.from(xmlDoc.getElementsByTagName("party"))
-                .filter(party => party.getAttribute("type") === "enemy");
+                .filter(party =>
+                    party.getAttribute("type") === "enemy" &&
+                    party.getAttribute("color") === "0xff0000"
+                );
 
             parties.forEach(party => {
-                const unitMap = new Map(); // 👈 Se mantiene aquí dentro para cada party
+                const unitMap = new Map();
                 const tactical = party.querySelector("tactical");
-
                 if (!tactical) return;
 
                 // ========== 1. UNITS ==========
-                const automats = tactical.getElementsByTagName("automat");
+                const automats = Array.from(tactical.querySelectorAll("automat[color='0xff0000']"));
 
-                Array.from(automats).forEach(automat => {
-                    const units = Array.from(automat.getElementsByTagName("unit")).filter(u => u.parentNode === automat);
+                automats.forEach(automat => {
+                    const units = Array.from(automat.getElementsByTagName("unit"))
+                        .filter(unit =>
+                            unit.getAttribute("color") === "0xff0000" &&
+                            unit.getElementsByTagName("unit").length === 0 &&
+                            party.contains(unit) // asegura que esté en este party
+                        );
 
                     units.forEach(unit => {
                         const unitName = unit.getAttribute("name");
@@ -370,21 +375,25 @@
                             const safeName = cssEscape(unitName);
                             const container = document.querySelector(`.progress-container[name="${safeName}"]`);
                             if (container) updateProgressBar(container, operationalState);
-
-                            //console.log("Unidad:", unitName, "→", operationalState);
                         }
                     });
                 });
 
                 // ========== 2. AUTOMATS ==========
-                Array.from(automats).forEach(automat => {
+                automats.forEach(automat => {
                     const automatName = automat.getAttribute("name");
-                    const unitNodes = Array.from(automat.getElementsByTagName("unit")).filter(u => u.parentNode === automat);
+
+                    const units = Array.from(automat.getElementsByTagName("unit"))
+                        .filter(unit =>
+                            unit.getAttribute("color") === "0xff0000" &&
+                            unit.getElementsByTagName("unit").length === 0 &&
+                            party.contains(unit)
+                        );
 
                     let total = 0;
                     let count = 0;
 
-                    unitNodes.forEach(unit => {
+                    units.forEach(unit => {
                         const name = unit.getAttribute("name");
                         if (unitMap.has(name)) {
                             total += unitMap.get(name);
@@ -392,27 +401,35 @@
                         }
                     });
 
+                    if(automatName==="VCI 1/4"){
+                        units.forEach(unit => {
+                        const name = unit.getAttribute("name");
+                        const id = unit.getAttribute("id");
+                        console.log(name,id)
+                    });
+
+                    }
+
                     const avg = count > 0 ? total / count : 0;
                     unitMap.set(automatName, avg);
 
                     const safeName = cssEscape(automatName);
                     const container = document.querySelector(`.progress-container[name="${safeName}"]`);
                     if (container) updateProgressBar(container, avg);
-
-                    //console.log("Automat:", automatName, "→", avg);
                 });
 
-                // ========== 3. FORMATIONS (bottom-up) ==========
-                const formations = Array.from(tactical.getElementsByTagName("formation")).reverse();
+                // ========== 3. FORMATIONS ==========
+                const formations = Array.from(tactical.querySelectorAll("formation[color='0xff0000']")).reverse();
 
                 formations.forEach(formation => {
                     const formationName = formation.getAttribute("name");
-
                     let total = 0;
                     let count = 0;
 
-                    const automatNodes = Array.from(formation.getElementsByTagName("automat"))
-                        .filter(a => a.parentNode === formation);
+                    const children = Array.from(formation.children);
+
+                    const automatNodes = children
+                        .filter(child => child.tagName === "automat" && child.getAttribute("color") === "0xff0000");
                     automatNodes.forEach(automat => {
                         const name = automat.getAttribute("name");
                         if (unitMap.has(name)) {
@@ -421,8 +438,8 @@
                         }
                     });
 
-                    const subFormations = Array.from(formation.getElementsByTagName("formation"))
-                        .filter(f => f.parentNode === formation);
+                    const subFormations = children
+                        .filter(child => child.tagName === "formation" && child.getAttribute("color") === "0xff0000");
                     subFormations.forEach(sub => {
                         const name = sub.getAttribute("name");
                         if (unitMap.has(name)) {
@@ -437,18 +454,16 @@
                     const safeName = cssEscape(formationName);
                     const container = document.querySelector(`.progress-container[name="${safeName}"]`);
                     if (container) updateProgressBar(container, avg);
-
-                    //console.log("Formación:", formationName, "→", avg);
                 });
 
                 // ========== 4. PARTY ==========
                 const partyName = party.getAttribute("name");
-
                 let total = 0;
                 let count = 0;
 
-                const rootFormations = Array.from(tactical.getElementsByTagName("formation"))
-                    .filter(f => f.parentNode === tactical);
+                const rootFormations = Array.from(tactical.children)
+                    .filter(f => f.tagName === "formation" && f.getAttribute("color") === "0xff0000");
+
                 rootFormations.forEach(formation => {
                     const name = formation.getAttribute("name");
                     if (unitMap.has(name)) {
@@ -463,10 +478,9 @@
                 const safeName = cssEscape(partyName);
                 const container = document.querySelector(`.progress-container[name="${safeName}"]`);
                 if (container) updateProgressBar(container, avg);
-
-                //console.log("Party:", partyName, "→", avg);
             });
         }
+
 
         function updateProgressBar(container, value) {
             const bar = container.querySelector(".progress-bar");
