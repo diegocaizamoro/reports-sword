@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@xmldom/xmldom": "^0.9.8",
     "chart.js": "^4.4.8",
     "chokidar": "^4.0.3",
     "cors": "^2.8.5",

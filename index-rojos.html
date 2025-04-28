@@ -329,10 +329,30 @@
                 .then(xmlText => {
                     const parser = new DOMParser();
                     const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+
+                    // Obtener todos los elementos con atributo "name"
+                    const elementsWithName = xmlDoc.querySelectorAll('[name]');
+                    const nameMap = new Map();
+
+                    elementsWithName.forEach(el => {
+                        let originalName = el.getAttribute("name");
+                        let count = nameMap.get(originalName) || 0;
+
+                        if (count > 0) {
+                            // Agregar puntos al nombre
+                            let newName = originalName + '.'.repeat(count);
+                            el.setAttribute("name", newName);
+                        }
+
+                        // Actualizar el contador
+                        nameMap.set(originalName, count + 1);
+                    });
+
                     updateOperationalValues(xmlDoc);
                 })
                 .catch(err => console.error("Error actualizando valores ORBAT:", err));
         }, 8000);
+
 
         // Escapar nombre seguro
         function cssEscape(str) {
@@ -401,12 +421,12 @@
                         }
                     });
 
-                    if(automatName==="VCI 1/4"){
+                    if (automatName === "VCI 1/4") {
                         units.forEach(unit => {
-                        const name = unit.getAttribute("name");
-                        const id = unit.getAttribute("id");
-                        console.log(name,id)
-                    });
+                            const name = unit.getAttribute("name");
+                            const id = unit.getAttribute("id");
+                            console.log(name, id)
+                        });
 
                     }
 
