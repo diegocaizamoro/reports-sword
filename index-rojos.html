@@ -631,10 +631,11 @@
                 labels.push(nombre);
                 data.push(50);
 
-                dynamicBarChart.data.labels = labels;
-                dynamicBarChart.data.datasets[0].data = data;
-                dynamicBarChart.update();
             });
+
+            dynamicBarChart.data.labels = labels;
+            dynamicBarChart.data.datasets[0].data = data;
+            dynamicBarChart.update();
         }
     </script>
     <script>
