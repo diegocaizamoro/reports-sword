@@ -7,6 +7,9 @@
     <title>Árbol ORBAT - Explorador de Unidades</title>
     <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.5.4/dist/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- para el gráfico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
     <style>
         body {
             display: flex;
@@ -601,22 +604,44 @@
                 datasets: [{
                     label: 'Muertos',
                     data: [],
-                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: [],  // se llena dinámicamente con un color por barra
+                    borderColor: [],
                     borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
                 indexAxis: 'y', // Barras horizontales
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 15,          // ← tamaño del label
+                                weight: 'bold'     // ← negrita
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#000',
+                        anchor: 'end',
+                        align: 'right',
+                        font: {
+                            weight: 'bold',
+                            size: 12
+                        },
+                        formatter: value => value // Muestra el número de muertos
+                    }
+                },
                 scales: {
                     x: {
                         beginAtZero: true,
-                        max: 100 // máximo 100% para porcentajes
+                        // Puedes quitar "max: 100" si deseas que se ajuste automáticamente
                     }
                 }
-            }
+            },
+            plugins: [ChartDataLabels] // <-- Activa el plugin
         });
+
 
         function actualizarGraficoDesdeNodo(padre, nodo) {
             if (!nodo) return;
@@ -624,6 +649,8 @@
             const liChildren = Array.from(nodo.children).filter(child => child.tagName === "LI");
             const labels = [];
             const data = [];
+            const backgroundColors = [];
+            const borderColors = [];
             let totalMuertos = 0;
             liChildren.forEach(child => {
                 const progress = child.querySelector(".progress-container");
@@ -632,13 +659,18 @@
                 labels.push(nombre);
                 const muertos = contarMuertosDesdeNombre(nombre);
                 data.push(muertos);
-                totalMuertos+=muertos;
+                const color = generarColorAleatorio();
+                backgroundColors.push(color);
+                borderColors.push(color.replace('0.7', '1'));
+                totalMuertos += muertos;
 
             });
             // Obtener el máximo de muertos para escalar el eje X dinámicamente
             const maxMuertos = Math.max(...data, 10); // Valor mínimo por defecto 10
             dynamicBarChart.options.scales.x.max = Math.ceil(maxMuertos * 1.1); // 10% más para margen visual
             dynamicBarChart.data.datasets[0].label = `${totalMuertos} Muertos en ${padre}`; // ← aquí se actualiza el label
+            dynamicBarChart.data.datasets[0].backgroundColor = backgroundColors;
+            dynamicBarChart.data.datasets[0].borderColor = borderColors;
             dynamicBarChart.data.labels = labels;
             dynamicBarChart.data.datasets[0].data = data;
             dynamicBarChart.update();
@@ -690,6 +722,13 @@
             });
 
             return muertos;
+        }
+
+        function generarColorAleatorio() {
+            const r = Math.floor(Math.random() * 156 + 100);
+            const g = Math.floor(Math.random() * 156 + 100);
+            const b = Math.floor(Math.random() * 156 + 100);
+            return `rgba(${r}, ${g}, ${b}, 0.7)`;
         }
 
     </script>
