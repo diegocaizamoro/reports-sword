@@ -629,7 +629,8 @@
                 // Buscar el nodo <unit>, <automat> o <formation> dentro de este <li>
                 const nombre = progress?.getAttribute("name") || progress?.textContent?.trim() || "[sin nombre]";
                 labels.push(nombre);
-                data.push(50);
+                const muertos = contarMuertosDesdeNombre(nombre);
+                data.push(muertos);
 
             });
 
@@ -637,6 +638,55 @@
             dynamicBarChart.data.datasets[0].data = data;
             dynamicBarChart.update();
         }
+
+        function contarMuertosDesdeNombre(nombreUnidad) {
+            if (!window.xmlDoc) {
+                console.warn("❌ xmlDoc no cargado");
+                return 0;
+            }
+
+            // Buscar nodo en el XML que tenga atributo name que comience con el nombre dado
+            const nodoRaiz = Array.from(window.xmlDoc.querySelectorAll("[name]"))
+                .find(n => n.getAttribute("name") === nombreUnidad || n.getAttribute("name")?.startsWith(nombreUnidad));
+
+            if (!nodoRaiz) {
+                console.warn(`⚠️ No se encontró nodo XML con name="${nombreUnidad}"`);
+                return 0;
+            }
+
+            // Recursivamente contar muertos a partir de ese nodo
+            return contarMuertosRecursivo(nodoRaiz);
+        }
+
+        function contarMuertosRecursivo(xmlNode) {
+            let muertos = 0;
+
+            // Si el nodo es unit y tiene equipments
+            if (xmlNode.tagName === "unit") {
+                const equipmentList = xmlNode.querySelectorAll("equipment");
+
+                equipmentList.forEach(eq => {
+                    const humans = eq.querySelectorAll("human");
+                    humans.forEach(h => {
+                        if (h.getAttribute("state") === "dead") {
+                            muertos++;
+                        }
+                    });
+                });
+            }
+
+            // Recorrer hijos recursively (formation, automat, unit)
+            const hijos = Array.from(xmlNode.children).filter(n =>
+                ["formation", "automat", "unit"].includes(n.tagName)
+            );
+
+            hijos.forEach(hijo => {
+                muertos += contarMuertosRecursivo(hijo);
+            });
+
+            return muertos;
+        }
+
     </script>
     <script>
 
