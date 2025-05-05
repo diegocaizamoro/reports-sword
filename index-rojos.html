@@ -370,13 +370,14 @@
             event.stopPropagation();
             let children = element.querySelector("ul");
             // Buscar el <ul> hijo inmediato (si existe)
+            const span = element.querySelector(".progress-container") || element.querySelector("span");
+            const padre = span?.getAttribute("name") || span?.textContent?.trim() || "[sin nombre]";
+
             if (children) {
                 let isHidden = children.classList.contains("hidden");
                 children.classList.toggle("hidden", !isHidden);
                 element.classList.toggle("open", isHidden);
-                // Llamar a función para imprimir hijos inmediatos
-                //printImmediateChildren(children);
-                actualizarGraficoDesdeNodo(children);
+                actualizarGraficoDesdeNodo(padre, children);
             }
         }
 
@@ -598,7 +599,7 @@
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Porcentaje de Unidades (Enemy)',
+                    label: 'Muertos',
                     data: [],
                     backgroundColor: 'rgba(255, 99, 132, 0.7)',
                     borderColor: 'rgba(255, 99, 132, 1)',
@@ -617,13 +618,13 @@
             }
         });
 
-        function actualizarGraficoDesdeNodo(nodo) {
+        function actualizarGraficoDesdeNodo(padre, nodo) {
             if (!nodo) return;
 
             const liChildren = Array.from(nodo.children).filter(child => child.tagName === "LI");
             const labels = [];
             const data = [];
-
+            let totalMuertos = 0;
             liChildren.forEach(child => {
                 const progress = child.querySelector(".progress-container");
                 // Buscar el nodo <unit>, <automat> o <formation> dentro de este <li>
@@ -631,9 +632,13 @@
                 labels.push(nombre);
                 const muertos = contarMuertosDesdeNombre(nombre);
                 data.push(muertos);
+                totalMuertos+=muertos;
 
             });
-
+            // Obtener el máximo de muertos para escalar el eje X dinámicamente
+            const maxMuertos = Math.max(...data, 10); // Valor mínimo por defecto 10
+            dynamicBarChart.options.scales.x.max = Math.ceil(maxMuertos * 1.1); // 10% más para margen visual
+            dynamicBarChart.data.datasets[0].label = `${totalMuertos} Muertos en ${padre}`; // ← aquí se actualiza el label
             dynamicBarChart.data.labels = labels;
             dynamicBarChart.data.datasets[0].data = data;
             dynamicBarChart.update();
