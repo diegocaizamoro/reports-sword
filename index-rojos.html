@@ -82,10 +82,11 @@
         }
 
         .dashboard-grid {
-            display: grid;
+            display: flex;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             margin-top: 20px;
+            flex-direction: column;
         }
 
         .card {
@@ -108,16 +109,18 @@
     </div>
 
     <div id="dashboardContainer">
-        <h2>Pérdidas de personal por unidad</h2>
+        
 
         <div class="dashboard-grid">
+            <h2>Pérdidas de personal por unidad</h2>
             <div class="card">
                 <canvas id="dynamicBarChart" width="600" height="200"></canvas>
             </div>
-            <!--- <div class="card">
-                <canvas id="barChart"></canvas>
-            </div>
+            <h2>Consumo de munición por unidades</h2>
             <div class="card">
+                <canvas id="consumoMunicion" width="600" height="200"></canvas>
+            </div>
+            <!---<div class="card">
                 <canvas id="doughnutChart"></canvas>
             </div>
             <div class="card">
@@ -128,6 +131,7 @@
 
     <script>
         let xmlDoc;
+        const resourceNamesLimpios = [];
         window.onload = function () {
             fetch("http://localhost:3000/orbat.xml")
                 .then(response => {
@@ -377,7 +381,7 @@
             // Buscar el <ul> hijo inmediato (si existe)
             const span = element.querySelector(".progress-container") || element.querySelector("span");
             const padre = span?.getAttribute("name") || span?.textContent?.trim() || "[sin nombre]";
-
+            resourceNamesLimpios.length = 0;
             if (children) {
                 let isHidden = children.classList.contains("hidden");
                 children.classList.toggle("hidden", !isHidden);
@@ -654,6 +658,62 @@
         });
 
 
+        // Crear la instancia de la barra
+        const dynamicMunicion = document.getElementById('consumoMunicion').getContext('2d');
+        const dynamicMunicionBarChart = new Chart(dynamicMunicion, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Muertos',
+                    data: [],
+                    backgroundColor: [],  // se llena dinámicamente con un color por barra
+                    borderColor: [],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 15,          // ← tamaño del label
+                                weight: 'bold'     // ← negrita
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                const label = context.label || '';
+                                const value = context.raw || 0;
+                                return `${label}: ${value} muertos`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#000',
+                        anchor: 'end',
+                        align: 'right',
+                        font: {
+                            weight: 'bold',
+                            size: 12
+                        },
+                        formatter: value => value // Muestra el número de muertos
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        // Puedes quitar "max: 100" si deseas que se ajuste automáticamente
+                    }
+                }
+            },
+            plugins: [ChartDataLabels] // <-- Activa el plugin
+        });
+
+
         function actualizarGraficoDesdeNodo(padre, nodo) {
             if (!nodo) return;
 
@@ -676,6 +736,24 @@
                 totalMuertos += muertos;
 
             });
+
+            // 2. Quitar duplicados con Set
+            const nombresUnicos = Array.from(new Set(resourceNamesLimpios));
+            console.log("📦 Recursos encontrados:", nombresUnicos);
+            const maxConsumo = Math.max(...data, 10); // Valor mínimo por defecto 10
+            dynamicMunicionBarChart.options.scales.x.max = Math.ceil(maxConsumo * 1.1); // 10% más para margen visual
+            dynamicMunicionBarChart.data.labels = nombresUnicos;        // Eje X
+            dynamicMunicionBarChart.data.datasets[0].data = nombresUnicos.map(() => 1); // Puedes ajustar el valor si tienes cantidades reales
+            // Opcional: asignar colores aleatorios
+            dynamicMunicionBarChart.data.datasets[0].backgroundColor = backgroundColors;
+            dynamicMunicionBarChart.data.datasets[0].borderColor = borderColors;
+            // Actualizar el gráfico
+            dynamicMunicionBarChart.update();
+
+
+
+
+
             // Obtener el máximo de muertos para escalar el eje X dinámicamente
             const maxMuertos = Math.max(...data, 10); // Valor mínimo por defecto 10
             dynamicBarChart.options.scales.x.max = Math.ceil(maxMuertos * 1.1); // 10% más para margen visual
@@ -721,6 +799,17 @@
                         }
                     });
                 });
+
+                const resourcetList = xmlNode.querySelectorAll("resource");
+                resourcetList.forEach(r => {
+                    const rawName = r.getAttribute("name");
+                    if (rawName) {
+                        // 1. Eliminar puntos al final con una expresión regular
+                        const nombreLimpio = rawName.replace(/\.*$/, "").trim();
+                        resourceNamesLimpios.push(nombreLimpio);
+                    }
+                });
+
             }
 
             // Recorrer hijos recursively (formation, automat, unit)
