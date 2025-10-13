@@ -1,48 +1,53 @@
 #!/bin/bash
 
-# Ruta de las carpetas donde se encuentran los directorios
-base_dir="C:/Users/Public/Documents/SWORD6.22/exercises/Ejer_Riobamba/sessions/20250324T084101/checkpoints"
+# Ruta base donde están las sesiones
+base_dir="C:/Users/Public/Documents/SWORD6.22/exercises/Ejer_Riobamba/sessions"
 
-# Ruta de destino donde se debe copiar el orbat.xml (directorio raíz)
+# Ruta de destino donde se debe copiar el orbat.xml
 destination_dir="/c/Users/ESPE/Documents/proyectos/reportes"
 
-# Este es el nombre del archivo orbat.xml
+# Nombre del archivo
 file_name="orbat.xml"
 
-# Función para encontrar la última carpeta creada
+# Función para obtener la última carpeta creada en un directorio
 get_last_created_folder() {
-  # Buscar las carpetas ordenadas por la fecha de creación y tomar la última
-  last_folder=$(ls -dt "$base_dir"/*/ | head -n 1)
+  parent_dir="$1"
+  last_folder=$(ls -dt "$parent_dir"/*/ 2>/dev/null | head -n 1)
   echo "$last_folder"
 }
 
-# Bucle infinito para verificar y copiar cada 10 segundos
+# Bucle infinito
 while true; do
-  # Encontrar la última carpeta creada
-  last_folder=$(get_last_created_folder)
-  last_folder=${last_folder%/}  # Eliminar la barra diagonal final si existe
-  
-  # Verificar la ruta del archivo
-  echo "Ruta completa del archivo: $last_folder/$file_name"
-  
-  # Verificar si el archivo orbat.xml existe en la última carpeta
-  if [ -f "$last_folder/$file_name" ]; then
-    echo "Se encontró orbat.xml en: $last_folder"
-    
-    # Verificar si el archivo ya existe en la carpeta de destino
+  # Paso 1: Buscar última carpeta en sessions
+  last_session=$(get_last_created_folder "$base_dir")
+  last_session=${last_session%/}
+
+  # Paso 2: Dentro de esa sesión, buscar checkpoints
+  checkpoints_dir="$last_session/checkpoints"
+
+  # Paso 3: Buscar la última carpeta creada en checkpoints
+  last_checkpoint=$(get_last_created_folder "$checkpoints_dir")
+  last_checkpoint=${last_checkpoint%/}
+
+  # Paso 4: Ruta completa del archivo
+  file_path="$last_checkpoint/$file_name"
+  echo "Ruta completa del archivo: $file_path"
+
+  # Verificar si existe
+  if [ -f "$file_path" ]; then
+    echo "Se encontró orbat.xml en: $last_checkpoint"
+
     if [ -f "$destination_dir/$file_name" ]; then
-      # Si el archivo ya existe, solo copiar el contenido
-      cat "$last_folder/$file_name" > "$destination_dir/$file_name"
+      cat "$file_path" > "$destination_dir/$file_name"
       echo "Contenido de orbat.xml actualizado en $destination_dir."
     else
-      # Si el archivo no existe, copiarlo directamente
-      cp "$last_folder/$file_name" "$destination_dir/"
+      cp "$file_path" "$destination_dir/"
       echo "Archivo copiado a la raíz de $destination_dir."
     fi
   else
-    echo "No se encontró orbat.xml en la última carpeta."
+    echo "No se encontró orbat.xml en $last_checkpoint"
   fi
 
-  # Esperar 10 segundos antes de verificar nuevamente
+  # Esperar 10 segundos
   sleep 10
 done

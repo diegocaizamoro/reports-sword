@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Árbol ORBAT - Explorador de Unidades</title>
     <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.5.4/dist/socket.io.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- para el gráfico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <!-- <script src="libs/socket.io.min.js"></script>
+    <script src="libs/chart.umd.js"></script>
+    <script src="libs/chartjs-plugin-datalabels.js"></script>
+    <script src="libs/chartjs-plugin-datalabels.min.js"></script>-->
 
     <style>
         body {
@@ -58,8 +62,8 @@
             vertical-align: middle;
         }
 
-        #treeContainer {
-            width: 50%;
+        #treeContent {
+            width: 90%;
             overflow-y: auto;
             padding: 20px;
             background: #f8f9fa;
@@ -85,7 +89,6 @@
             display: flex;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            margin-top: 20px;
             flex-direction: column;
         }
 
@@ -102,39 +105,75 @@
 </head>
 
 <body>
+    <!--<script>
+        // Verifica si el usuario está logueado
+        if (localStorage.getItem("usuarioLogueado") !== "true") {
+            // Si no, vuelve al login
+            window.location.href = "login-r.html";
+        }
+    </script>-->
+
 
     <div id="treeContainer">
-        <h2>Árbol de ORBAT - Explorador de Unidades</h2>
-        <!-- Aquí ya está tu árbol -->
+        <h2>Estado operacional por unidad</h2>
+        <div id="treeContent"></div>
     </div>
 
-    <div id="dashboardContainer">
+    <!--<div id="dashboardContainer">
 
+       <div style="display: flex; align-items: center; justify-content: flex-start; padding: 10px;">
+            <button onclick="logout()" style="
+              position: fixed;
+              top: 10px;
+              right: 0;
+              padding: 8px 14px;
+              font-weight: bold;
+              background-color: #f44336;
+              color: white;
+              border: none;
+              border-radius: 5px 0 0 5px;
+              cursor: pointer;
+              z-index: 9999;">
+                🔓 Cerrar sesión
+            </button>
 
-        <div class="dashboard-grid">
-            <h2>Pérdidas de personal por unidad</h2>
-            <div class="card">
-                <canvas id="dynamicBarChart" width="600" height="200"></canvas>
-            </div>
-            <h2>Consumo de munición por unidades</h2>
-            <div class="card">
-                <canvas id="consumoMunicion" width="600" height="200"></canvas>
-            </div>
-            <!---<div class="card">
-                <canvas id="doughnutChart"></canvas>
-            </div>
-            <div class="card">
-                <canvas id="pieChart"></canvas>
-            </div>-->
         </div>
+
+
+
+    </div>-->
+    <div class="dashboard-grid">
+        <h2>Pérdidas de personal por unidad</h2>
+        <div class="card">
+            <canvas id="dynamicBarChart" width="600" height="200"></canvas>
+        </div>
+        <h2>Consumo de munición por unidades</h2>
+        <div class="card">
+            <canvas id="consumoMunicion" width="600" height="200"></canvas>
+        </div>
+        <div class="card">
+            <canvas id="doughnutChart" style="width:300px; height:300px;"></canvas>
+        </div>
+
     </div>
+    <!--<script>
+        function logout() {
+            localStorage.removeItem("usuarioLogueado");
+            window.location.href = "login-r.html";
+        }
+    </script>-->
 
     <script>
+
+        let bando = "enemy"
+        let colorBando = "0xff0000"
+        let serverEscucha = "http://localhost:3000/orbat.xml"
+        let ultimoColor = null;
         let xmlDoc;
         const resourceNamesLimpios = [];
         const consumoPorRecurso = new Map();
         window.onload = function () {
-            fetch("http://localhost:3000/orbat.xml")
+            fetch(serverEscucha)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("No se pudo cargar el archivo orbat.xml");
@@ -162,9 +201,9 @@
 
             // Obtener SOLO los <party> dentro de <parties> que tengan type="enemy"
             const parties = Array.from(partiesNode.getElementsByTagName("party"))
-                .filter(party => party.getAttribute("type") === "enemy");
+                .filter(party => party.getAttribute("type") === bando);
 
-            const treeContainer = document.getElementById("treeContainer");
+            const treeContainer = document.getElementById("treeContent");
             treeContainer.innerHTML = ""; // Limpiar contenido anterior
 
             let ul = document.createElement("ul");
@@ -200,7 +239,7 @@
 
             while (currentNode) {
                 if (currentNode.tagName === "party") {
-                    isEnemy = currentNode.getAttribute("type") === "enemy";
+                    isEnemy = currentNode.getAttribute("type") === bando;
                     break;
                 }
                 currentNode = currentNode.parentElement;
@@ -248,7 +287,7 @@
 
             while (current) {
                 if (current.tagName === "party") {
-                    isEnemy = current.getAttribute("type") === "enemy";
+                    isEnemy = current.getAttribute("type") === bando;
                     break;
                 }
                 current = current.parentElement;
@@ -313,7 +352,7 @@
 
             while (current) {
                 if (current.tagName === "party") {
-                    isEnemy = current.getAttribute("type") === "enemy";
+                    isEnemy = current.getAttribute("type") === bando;
                     break;
                 }
                 current = current.parentElement;
@@ -415,7 +454,7 @@
         }
         // Refrescar valores de orbat.xml cada 8s sin reconstruir el árbol
         setInterval(() => {
-            fetch("http://localhost:3000/orbat.xml")
+            fetch(serverEscucha)
                 .then(response => response.text())
                 .then(xmlText => {
                     const parser = new DOMParser();
@@ -452,8 +491,8 @@
         function updateOperationalValues(xmlDoc) {
             const parties = Array.from(xmlDoc.getElementsByTagName("party"))
                 .filter(party =>
-                    party.getAttribute("type") === "enemy" &&
-                    party.getAttribute("color") === "0xff0000"
+                    party.getAttribute("type") === bando &&
+                    party.getAttribute("color") === colorBando
                 );
 
             parties.forEach(party => {
@@ -462,12 +501,15 @@
                 if (!tactical) return;
 
                 // ========== 1. UNITS ==========
-                const automats = Array.from(tactical.querySelectorAll("automat[color='0xff0000']"));
+                //const automats = Array.from(tactical.querySelectorAll("automat[color='0xff0000']"));
+                const automats = Array.from(
+                    tactical.querySelectorAll(`automat[color='${colorBando}']`)
+                );
 
                 automats.forEach(automat => {
                     const units = Array.from(automat.getElementsByTagName("unit"))
                         .filter(unit =>
-                            unit.getAttribute("color") === "0xff0000" &&
+                            unit.getAttribute("color") === colorBando &&
                             unit.getElementsByTagName("unit").length === 0 &&
                             party.contains(unit) // asegura que esté en este party
                         );
@@ -495,7 +537,7 @@
 
                     const units = Array.from(automat.getElementsByTagName("unit"))
                         .filter(unit =>
-                            unit.getAttribute("color") === "0xff0000" &&
+                            unit.getAttribute("color") === colorBando &&
                             unit.getElementsByTagName("unit").length === 0 &&
                             party.contains(unit)
                         );
@@ -529,7 +571,10 @@
                 });
 
                 // ========== 3. FORMATIONS ==========
-                const formations = Array.from(tactical.querySelectorAll("formation[color='0xff0000']")).reverse();
+                //const formations = Array.from(tactical.querySelectorAll("formation[color='0xff0000']")).reverse();
+                const formations = Array.from(
+                    tactical.querySelectorAll(`formation[color='${colorBando}']`)
+                ).reverse();
 
                 formations.forEach(formation => {
                     const formationName = formation.getAttribute("name");
@@ -539,7 +584,7 @@
                     const children = Array.from(formation.children);
 
                     const automatNodes = children
-                        .filter(child => child.tagName === "automat" && child.getAttribute("color") === "0xff0000");
+                        .filter(child => child.tagName === "automat" && child.getAttribute("color") === colorBando);
                     automatNodes.forEach(automat => {
                         const name = automat.getAttribute("name");
                         if (unitMap.has(name)) {
@@ -549,7 +594,7 @@
                     });
 
                     const subFormations = children
-                        .filter(child => child.tagName === "formation" && child.getAttribute("color") === "0xff0000");
+                        .filter(child => child.tagName === "formation" && child.getAttribute("color") === colorBando);
                     subFormations.forEach(sub => {
                         const name = sub.getAttribute("name");
                         if (unitMap.has(name)) {
@@ -572,7 +617,7 @@
                 let count = 0;
 
                 const rootFormations = Array.from(tactical.children)
-                    .filter(f => f.tagName === "formation" && f.getAttribute("color") === "0xff0000");
+                    .filter(f => f.tagName === "formation" && f.getAttribute("color") === colorBando);
 
                 rootFormations.forEach(formation => {
                     const name = formation.getAttribute("name");
@@ -603,14 +648,39 @@
             bar.textContent = Math.floor(percentage) + "%";
         }
 
+
+        // Doughnut Chart
+        const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+        const doughnutChart = new Chart(doughnutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [65, 25, 10],
+                    backgroundColor: []
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,  // permite que se adapte al div
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: { size: 8, weight: 'bold' }
+                        }
+                    }
+                }
+            }
+        });
+
         // Crear la instancia de la barra
         const dynamicCtx = document.getElementById('dynamicBarChart').getContext('2d');
         const dynamicBarChart = new Chart(dynamicCtx, {
             type: 'bar',
             data: {
-                labels: [],
+                //labels: ["fr","ddf"],
                 datasets: [{
-                    label: 'Muertos',
+                    label: [],
                     data: [],
                     backgroundColor: [],  // se llena dinámicamente con un color por barra
                     borderColor: [],
@@ -725,6 +795,7 @@
             const backgroundColors = [];
             const borderColors = [];
             let totalMuertos = 0;
+            const labelsDonuc = [];
             liChildren.forEach(child => {
                 const progress = child.querySelector(".progress-container");
                 // Buscar el nodo <unit>, <automat> o <formation> dentro de este <li>
@@ -732,9 +803,10 @@
                 labels.push(nombre);
                 const muertos = contarMuertosDesdeNombre(nombre);
                 data.push(muertos);
+
                 const color = generarColorAleatorio();
                 backgroundColors.push(color);
-                borderColors.push(color.replace('0.7', '1'));
+                borderColors.push('black');
                 totalMuertos += muertos;
 
             });
@@ -743,15 +815,15 @@
             const labelsMuni = Array.from(consumoPorRecurso.keys()); // Eje X
             const dataMuni = Array.from(consumoPorRecurso.values()); // Eje Y
             const nombresUnicos = Array.from(new Set(resourceNamesLimpios));
-            console.log("📦 Recursos encontrados:", nombresUnicos);
+            //console.log("📦 Recursos encontrados:", nombresUnicos);
             const maxConsumo = Math.max(...data, 10); // Valor mínimo por defecto 10
             dynamicMunicionBarChart.options.scales.x.max = Math.ceil(maxConsumo * 1.1); // 10% más para margen visual
             dynamicMunicionBarChart.data.labels = labelsMuni;        // Eje X
             dynamicMunicionBarChart.data.datasets[0].data = dataMuni; // Puedes ajustar el valor si tienes cantidades reales
             // Opcional: asignar colores aleatorios
-            dynamicMunicionBarChart.data.datasets[0].backgroundColor = backgroundColors;
+            const backgroundColorsMuertos = generarColoresUnicosMuertos(dataMuni.length);
+            dynamicMunicionBarChart.data.datasets[0].backgroundColor = backgroundColorsMuertos;
             dynamicMunicionBarChart.data.datasets[0].borderColor = borderColors;
-            // Actualizar el gráfico
             dynamicMunicionBarChart.update();
 
 
@@ -762,11 +834,38 @@
             const maxMuertos = Math.max(...data, 10); // Valor mínimo por defecto 10
             dynamicBarChart.options.scales.x.max = Math.ceil(maxMuertos * 1.1); // 10% más para margen visual
             dynamicBarChart.data.datasets[0].label = `${padre}: ${totalMuertos} muertos`; // ← aquí se actualiza el label
+            //dynamicBarChart.data.datasets[0].labels = ""; // ← aquí se actualiza el label
             dynamicBarChart.data.datasets[0].backgroundColor = backgroundColors;
             dynamicBarChart.data.datasets[0].borderColor = borderColors;
             dynamicBarChart.data.labels = labels;
             dynamicBarChart.data.datasets[0].data = data;
             dynamicBarChart.update();
+
+
+            //donuc
+            const filteredLabels = [];
+            const filteredData = [];
+
+            labelsMuni.forEach((label, i) => {
+                if (dataMuni[i] > 0) {
+                    filteredLabels.push(label);
+                    filteredData.push(dataMuni[i]);
+                }
+            });
+
+            // labels.forEach((labelM, i) => {
+            if (totalMuertos > 0) {
+                filteredLabels.push("muertos");
+                filteredData.push(totalMuertos);
+            }
+            //});
+
+            const backgroundColorsDona = generarColoresUnicos(filteredData.length);
+            doughnutChart.data.labels = filteredLabels;
+            doughnutChart.data.datasets[0].data = filteredData;
+            doughnutChart.data.datasets[0].backgroundColor = backgroundColorsDona;
+            doughnutChart.update();
+
         }
 
         function contarMuertosDesdeNombre(nombreUnidad) {
@@ -845,10 +944,37 @@
         }
 
         function generarColorAleatorio() {
-            const r = Math.floor(Math.random() * 156 + 100);
-            const g = Math.floor(Math.random() * 156 + 100);
-            const b = Math.floor(Math.random() * 156 + 100);
-            return `rgba(${r}, ${g}, ${b}, 0.7)`;
+            let nuevoColor;
+            do {
+                const r = Math.floor(Math.random() * 156 + 100);
+                const g = Math.floor(Math.random() * 156 + 100);
+                const b = Math.floor(Math.random() * 156 + 100);
+                nuevoColor = `rgba(${r}, ${g}, ${b}, 0.7)`;
+            } while (nuevoColor === ultimoColor); // repetir hasta que sea distinto
+
+            ultimoColor = nuevoColor;
+            return nuevoColor;
+        }
+
+        //funcion para muertos generar colres
+        function generarColoresUnicosMuertos(cantidad) {
+            const colores = [];
+            for (let i = 0; i < cantidad; i++) {
+                const hue = Math.floor((360 / cantidad) * i); // separa los tonos en el círculo cromático
+                colores.push(`hsl(${hue}, 70%, 50%)`);
+            }
+            return colores;
+        }
+
+
+        //funcion para dona generar colres
+        function generarColoresUnicos(cantidad) {
+            const colores = [];
+            for (let i = 0; i < cantidad; i++) {
+                const hue = Math.floor((360 / cantidad) * i); // separa los tonos en el círculo cromático
+                colores.push(`hsl(${hue}, 70%, 50%)`);
+            }
+            return colores;
         }
 
     </script>
