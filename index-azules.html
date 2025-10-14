@@ -647,6 +647,12 @@
             bar.textContent = Math.floor(percentage) + "%";
         }
 
+        function actualizarGraficoMultiple(labels, datasets,padre,muertosTotal=0, vivosTotal=0) {
+            dynamicBarChart.data.labels = labels;
+            dynamicBarChart.data.datasets = datasets;
+            dynamicBarChart.options.plugins.title.text = padre + " - Total efectivos: " + vivosTotal + " - Total bajas: " + muertosTotal;
+            dynamicBarChart.update();
+        }
 
         // Doughnut Chart
         const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
@@ -672,8 +678,32 @@
             }
         });
 
-        // Crear la instancia de la barra
         const dynamicCtx = document.getElementById('dynamicBarChart').getContext('2d');
+        const dynamicBarChart = new Chart(dynamicCtx, {
+            type: 'bar',
+            data: [],
+            options: {
+                indexAxis: 'y',
+                plugins: {
+                    title: {
+                        display: true,
+                        text: ''
+                    },
+                },
+                responsive: true,
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+
+        // Crear la instancia de la barra
+        /*const dynamicCtx = document.getElementById('dynamicBarChart').getContext('2d');
         const dynamicBarChart = new Chart(dynamicCtx, {
             type: 'bar',
             data: {
@@ -727,7 +757,7 @@
             },
             plugins: [ChartDataLabels] // <-- Activa el plugin
         });
-
+*/
 
         // Crear la instancia de la barra
         const dynamicMunicion = document.getElementById('consumoMunicion').getContext('2d');
@@ -791,22 +821,26 @@
             const liChildren = Array.from(nodo.children).filter(child => child.tagName === "LI");
             const labels = [];
             const data = [];
+            const vivosM = [];
+            const muertosM = [];
             const backgroundColors = [];
             const borderColors = [];
             let totalMuertos = 0;
+            let totalVivos = 0;
             const labelsDonuc = [];
             liChildren.forEach(child => {
                 const progress = child.querySelector(".progress-container");
                 // Buscar el nodo <unit>, <automat> o <formation> dentro de este <li>
                 const nombre = progress?.getAttribute("name") || progress?.textContent?.trim() || "[sin nombre]";
                 labels.push(nombre);
-                const muertos = contarMuertosDesdeNombre(nombre);
-                data.push(muertos);
-
+                const [vivos, muertos] = contarMuertosDesdeNombre(nombre);
+                vivosM.push(vivos);
+                muertosM.push(muertos);
                 const color = generarColorAleatorio();
                 backgroundColors.push(color);
                 borderColors.push('black');
                 totalMuertos += muertos;
+                totalVivos += vivos;
 
             });
 
@@ -829,16 +863,21 @@
 
 
 
-            // Obtener el máximo de muertos para escalar el eje X dinámicamente
-            const maxMuertos = Math.max(...data, 10); // Valor mínimo por defecto 10
-            dynamicBarChart.options.scales.x.max = Math.ceil(maxMuertos * 1.1); // 10% más para margen visual
-            dynamicBarChart.data.datasets[0].label = `${padre}: ${totalMuertos} muertos`; // ← aquí se actualiza el label
-            //dynamicBarChart.data.datasets[0].labels = ""; // ← aquí se actualiza el label
-            dynamicBarChart.data.datasets[0].backgroundColor = backgroundColors;
-            dynamicBarChart.data.datasets[0].borderColor = borderColors;
-            dynamicBarChart.data.labels = labels;
-            dynamicBarChart.data.datasets[0].data = data;
-            dynamicBarChart.update();
+            // Ejemplo:
+            const labelsMeses = labels;
+            const datasets = [
+                {
+                    label: 'Efectivos',
+                    data: vivosM,
+                    backgroundColor: 'rgb(82, 227, 0)'
+                },
+                {
+                    label: 'Bajas',
+                    data: muertosM,
+                    backgroundColor: 'rgb(39, 30, 0)'
+                }
+            ];
+            actualizarGraficoMultiple(labelsMeses, datasets,padre,totalMuertos,totalVivos);
 
 
             //donuc
@@ -888,6 +927,7 @@
 
         function contarMuertosRecursivo(xmlNode) {
             let muertos = 0;
+            let vivos = 0;
 
             // Si el nodo es unit y tiene equipments
             if (xmlNode.tagName === "unit") {
@@ -896,10 +936,17 @@
                 equipmentList.forEach(eq => {
                     const humans = eq.querySelectorAll("human");
                     humans.forEach(h => {
-                        if (h.getAttribute("state") === "dead") {
-                            muertos++;
+                        if (h.hasAttribute("state")) {
+                            const state = h.getAttribute("state");
+
+                            if (state === "dead") {
+                                muertos++;
+                            }
+                        } else {
+                            // NO tiene atributo state
+                            vivos++;
                         }
-                    });
+                    })
                 });
 
 
@@ -936,10 +983,16 @@
             );
 
             hijos.forEach(hijo => {
-                muertos += contarMuertosRecursivo(hijo);
+                //[vivos, muertos] += contarMuertosRecursivo(hijo);
+                //vivos += contarMuertosRecursivo(hijo);
+                const [v, m] = contarMuertosRecursivo(hijo);
+                vivos += v;
+                muertos += m;
             });
 
-            return muertos;
+
+
+            return [vivos, muertos];
         }
 
         function generarColorAleatorio() {
