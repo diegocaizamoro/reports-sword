@@ -9,99 +9,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    
     <!-- <script src="libs/socket.io.min.js"></script>
     <script src="libs/chart.umd.js"></script>
     <script src="libs/chartjs-plugin-datalabels.js"></script>
     <script src="libs/chartjs-plugin-datalabels.min.js"></script>-->
+    <link rel="stylesheet" href="styles/style.css">
 
-    <style>
-        body {
-            display: flex;
-            flex-direction: row;
-            height: 100vh;
-            margin: 0;
-        }
 
-        .tree {
-            margin-left: 20px;
-            list-style-type: none;
-        }
-
-        .tree li {
-            margin: 5px 0;
-            cursor: pointer;
-            user-select: none;
-            position: relative;
-        }
-
-        .tree .folder::before {
-            content: "📂 ";
-        }
-
-        .tree .folder.open::before {
-            content: "📁 ";
-        }
-
-        .tree .file::before {
-            content: "📄 ";
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Estilos para las barras de progreso */
-        .progress-container {
-            width: 100px;
-            height: 20px;
-            background-color: #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-            display: inline-block;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
-        #treeContent {
-            width: 90%;
-            overflow-y: auto;
-            padding: 20px;
-            background: #f8f9fa;
-        }
-
-        #dashboardContainer {
-            width: 50%;
-            padding: 20px;
-            background: #ffffff;
-        }
-
-        canvas {
-            width: 100% !important;
-            height: auto !important;
-        }
-
-        .progress-bar {
-            height: 100%;
-            transition: width 3s ease-in-out, background-color 0.5s ease-in-out;
-        }
-
-        .dashboard-grid {
-            display: flex;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            flex-direction: column;
-        }
-
-        .card {
-            background: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 700px;
-            height: 230px;
-        }
-    </style>
 </head>
 
 <body>
@@ -114,11 +30,49 @@
     </script>-->
 
 
-    <div id="treeContainer">
-        <h2>Estado operacional por unidad</h2>
-        <div id="treeContent"></div>
-    </div>
+    <div class="dashboard-grid">
+        <!-- 🟦 Panel izquierdo con pestañas -->
+        <div class="side-section">
+            <div class="tabs">
+                <button class="tab-button active" data-tab="tab1">Personal</button>
+                <button class="tab-button" data-tab="tab2">Munición</button>
+            </div>
 
+            <div class="tab-content active" id="tab1">
+                <h2>Pérdidas de personal por unidad</h2>
+                <div class="card">
+                    <canvas id="dynamicBarChart"></canvas>
+                </div>
+
+               
+            </div>
+
+            <div class="tab-content" id="tab2">
+                <h2>Consumo de recursos por munición</h2>
+                <div class="card">
+                    <canvas id="consumoMunicion"></canvas>
+                </div>
+                
+                <div class="card">
+                    <canvas id="doughnutChart" style="width:300px; height:300px;"></canvas>
+                </div>
+                 
+            </div>
+        </div>
+
+        <!-- 🟩 Gráfico principal con scroll a la derecha -->
+
+
+        <!--<div class="scroll-container">-->
+
+        <div id="treeContainer">
+            <h2>Estado operacional por unidad</h2>
+            <div id="treeContent"></div>
+        </div>
+        <!--</div>-->
+
+    </div>
+    
     <!--<div id="dashboardContainer">
 
        <div style="display: flex; align-items: center; justify-content: flex-start; padding: 10px;">
@@ -142,20 +96,7 @@
 
 
     </div>-->
-    <div class="dashboard-grid">
-        <h2>Pérdidas de personal por unidad</h2>
-        <div class="card">
-            <canvas id="dynamicBarChart" width="600" height="200"></canvas>
-        </div>
-        <h2>Consumo de munición por unidades</h2>
-        <div class="card">
-            <canvas id="consumoMunicion" width="600" height="200"></canvas>
-        </div>
-        <div class="card">
-            <canvas id="doughnutChart" style="width:300px; height:300px;"></canvas>
-        </div>
 
-    </div>
     <!--<script>
         function logout() {
             localStorage.removeItem("usuarioLogueado");
@@ -647,10 +588,10 @@
             bar.textContent = Math.floor(percentage) + "%";
         }
 
-        function actualizarGraficoMultiple(labels, datasets,padre,muertosTotal=0, vivosTotal=0) {
+        function actualizarGraficoMultiple(labels, datasets, padre, muertosTotal = 0, vivosTotal = 0) {
             dynamicBarChart.data.labels = labels;
             dynamicBarChart.data.datasets = datasets;
-            dynamicBarChart.options.plugins.title.text = padre + " - Total efectivos: " + vivosTotal + " - Total bajas: " + muertosTotal;
+            dynamicBarChart.options.plugins.title.text = padre + " - Total efectivos: " + parseInt(muertosTotal + vivosTotal) + " - Total vivos: " + vivosTotal + " - Total bajas: " + muertosTotal;
             dynamicBarChart.update();
         }
 
@@ -671,7 +612,7 @@
                 plugins: {
                     legend: {
                         labels: {
-                            font: { size: 8, weight: 'bold' }
+                            font: { size: 15, weight: 'bold' }
                         }
                     }
                 }
@@ -684,20 +625,47 @@
             data: [],
             options: {
                 indexAxis: 'y',
+                responsive: true,
                 plugins: {
                     title: {
                         display: true,
-                        text: ''
+                        text: '',
+                        font: { size: 14, weight: 'bold' },
+                        color: '#000'
                     },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderWidth: 1,
+                        borderColor: '#ccc',
+                        callbacks: {
+                            title: function (context) {
+                                // título superior del tooltip (ej. nombre de la unidad)
+                                return context[0].label;
+                            },
+                            label: function (context) {
+                                const label = context.dataset.label || '';
+                                const valor = context.parsed.x; // eje X, porque es horizontal
+
+                                // calcula el total sumando los datasets para esa barra
+                                const total = context.chart.data.datasets
+                                    .map(ds => ds.data[context.dataIndex])
+                                    .reduce((a, b) => a + b, 0);
+
+                                // calcula porcentaje
+                                const porcentaje = ((valor / total) * 100).toFixed(1);
+
+                                // texto mostrado en el tooltip
+                                return `${label}: ${valor} de ${total} (${porcentaje}%)`;
+                            }
+                        }
+                    },
+                    legend: { position: 'top' }
                 },
-                responsive: true,
                 scales: {
-                    x: {
-                        stacked: true,
-                    },
-                    y: {
-                        stacked: true
-                    }
+                    x: { stacked: true },
+                    y: { stacked: true }
                 }
             }
         });
@@ -845,14 +813,30 @@
             });
 
             // 2. Quitar duplicados con Set
-            const labelsMuni = Array.from(consumoPorRecurso.keys()); // Eje X
-            const dataMuni = Array.from(consumoPorRecurso.values()); // Eje Y
+            // Limpiar antes de usar
+            const limpio = limpiarConsumoPorRecurso(consumoPorRecurso);
+
+            // Luego extraes los datos
+            const labelsMuni = Array.from(limpio.keys());
+            const dataMuni = Array.from(limpio.values());
+            //const labelsMuni = Array.from(consumoPorRecurso.keys()); // Eje X
+            //const dataMuni = Array.from(consumoPorRecurso.values()); // Eje Y
             const nombresUnicos = Array.from(new Set(resourceNamesLimpios));
             //console.log("📦 Recursos encontrados:", nombresUnicos);
             const maxConsumo = Math.max(...data, 10); // Valor mínimo por defecto 10
             dynamicMunicionBarChart.options.scales.x.max = Math.ceil(maxConsumo * 1.1); // 10% más para margen visual
-            dynamicMunicionBarChart.data.labels = labelsMuni;        // Eje X
-            dynamicMunicionBarChart.data.datasets[0].data = dataMuni; // Puedes ajustar el valor si tienes cantidades reales
+
+            const labelsConValor = [];
+            const dataConValor = [];
+            labelsMuni.forEach((label, i) => {
+                if (dataMuni[i] > 0) {
+                    labelsConValor.push(label);
+                    dataConValor.push(dataMuni[i]);
+                }
+            });
+
+            dynamicMunicionBarChart.data.labels = labelsConValor;        // Eje X
+            dynamicMunicionBarChart.data.datasets[0].data = dataConValor; // Puedes ajustar el valor si tienes cantidades reales
             // Opcional: asignar colores aleatorios
             const backgroundColorsMuertos = generarColoresUnicosMuertos(dataMuni.length);
             dynamicMunicionBarChart.data.datasets[0].backgroundColor = backgroundColorsMuertos;
@@ -867,7 +851,7 @@
             const labelsMeses = labels;
             const datasets = [
                 {
-                    label: 'Efectivos',
+                    label: 'Vivos',
                     data: vivosM,
                     backgroundColor: 'rgb(82, 227, 0)'
                 },
@@ -877,7 +861,7 @@
                     backgroundColor: 'rgb(39, 30, 0)'
                 }
             ];
-            actualizarGraficoMultiple(labelsMeses, datasets,padre,totalMuertos,totalVivos);
+            actualizarGraficoMultiple(labelsMeses, datasets, padre, totalMuertos, totalVivos);
 
 
             //donuc
@@ -892,10 +876,10 @@
             });
 
             // labels.forEach((labelM, i) => {
-            if (totalMuertos > 0) {
+            /*if (totalMuertos > 0) { comentado antes mandaba los muertos aqui
                 filteredLabels.push("muertos");
                 filteredData.push(totalMuertos);
-            }
+            }*/
             //});
 
             const backgroundColorsDona = generarColoresUnicos(filteredData.length);
@@ -905,6 +889,23 @@
             doughnutChart.update();
 
         }
+
+        function limpiarConsumoPorRecurso(consumoPorRecurso) {
+            const palabrasProhibidas = ["Food", "Water", "Diesel", "Kerosene"];
+
+            const nuevoMap = new Map();
+
+            for (const [clave, valor] of consumoPorRecurso.entries()) {
+                const contieneProhibida = palabrasProhibidas.some(p => clave.includes(p));
+
+                if (!contieneProhibida) {
+                    nuevoMap.set(clave, valor);
+                }
+            }
+
+            return nuevoMap;
+        }
+
 
         function contarMuertosDesdeNombre(nombreUnidad) {
             if (!window.xmlDoc) {
@@ -1086,6 +1087,7 @@
         */
 
     </script>
+    <script src="scripts/pestanias.js"></script>
 </body>
 
 </html>
