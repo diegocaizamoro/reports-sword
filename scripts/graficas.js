@@ -1,5 +1,5 @@
 // Doughnut Chart
-const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+/*const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
 const doughnutChart = new Chart(doughnutCtx, {
     type: 'doughnut',
     data: {
@@ -20,7 +20,7 @@ const doughnutChart = new Chart(doughnutCtx, {
             }
         }
     }
-});
+});*/
 
 
 // personal
@@ -131,6 +131,27 @@ const dynamicMunicionBarChart = new Chart(dynamicMunicion, {
     plugins: [ChartDataLabels] // <-- Activa el plugin
 });
 
+//lineas
+const lineMunicion = document.getElementById('lineMunicionHtml').getContext('2d');
+const lineMunicionChart = new Chart(lineMunicion, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: []
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,  // permite que se adapte al div
+        plugins: {
+            legend: {
+                labels: {
+                    font: { size: 15, weight: 'bold' }
+                }
+            }
+        }
+    }
+});
+
 
 function actualizarGraficoDesdeNodo(padre, nodo) {
     if (!nodo) return;
@@ -164,10 +185,14 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     // 2. Quitar duplicados con Set
     // Limpiar antes de usar
     const limpio = limpiarConsumoPorRecurso(consumoPorRecurso);
-
+    const limpioAsignado = limpiarConsumoPorRecurso(asignadoPorRecurso);
     // Luego extraes los datos
     const labelsMuni = Array.from(limpio.keys());
     const dataMuni = Array.from(limpio.values());
+
+    //const labelsMuniAsignado = Array.from(limpioAsignado.keys());
+    const dataMuniAsignado = Array.from(limpioAsignado.values());
+
     //const labelsMuni = Array.from(consumoPorRecurso.keys()); // Eje X
     //const dataMuni = Array.from(consumoPorRecurso.values()); // Eje Y
     const nombresUnicos = Array.from(new Set(resourceNamesLimpios));
@@ -175,12 +200,15 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     const maxConsumo = Math.max(...data, 10); // Valor mínimo por defecto 10
     dynamicMunicionBarChart.options.scales.x.max = Math.ceil(maxConsumo * 1.1); // 10% más para margen visual
 
+    //solo mayores a cero
     const labelsConValor = [];
     const dataConValor = [];
+    const dataAsignadoConValor = [];
     labelsMuni.forEach((label, i) => {
         if (dataMuni[i] > 0) {
             labelsConValor.push(label);
             dataConValor.push(dataMuni[i]);
+            dataAsignadoConValor.push(dataMuniAsignado[i]);
         }
     });
 
@@ -231,10 +259,37 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     }*/
     //});
 
-    const backgroundColorsDona = generarColoresUnicos(filteredData.length);
+    /*const backgroundColorsDona = generarColoresUnicos(filteredData.length);
     doughnutChart.data.labels = filteredLabels;
     doughnutChart.data.datasets[0].data = filteredData;
     doughnutChart.data.datasets[0].backgroundColor = backgroundColorsDona;
-    doughnutChart.update();
+    doughnutChart.update();*/
+
+
+    //lines
+    const datasetsLine = [
+        {
+            label: 'Asignado',
+            data: dataAsignadoConValor,
+            backgroundColor: 'rgb(82, 227, 0)'
+        },
+        {
+            label: 'Consumido',
+            data: filteredData,
+            backgroundColor: 'rgba(244, 7, 66, 1)'
+        }
+    ];
+
+
+    lineMunicionChart.data.labels = labelsConValor;//eje x labels
+    lineMunicionChart.data.datasets = datasetsLine;
+    lineMunicionChart.update();
 
 } 
+
+function actualizarGraficoMultiple(labels, datasets, padre, muertosTotal = 0, vivosTotal = 0) {
+    dynamicBarChart.data.labels = labels;
+    dynamicBarChart.data.datasets = datasets;
+    dynamicBarChart.options.plugins.title.text = padre + " - Total efectivos: " + parseInt(muertosTotal + vivosTotal) + " - Total vivos: " + vivosTotal + " - Total bajas: " + muertosTotal;
+    dynamicBarChart.update();
+}

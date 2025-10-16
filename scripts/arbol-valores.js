@@ -1,11 +1,12 @@
 
 let bando = "friend"
 let colorBando = "0x0055ff"
-let serverEscucha = "http://localhost:3000/orbat.xml"
+let serverEscucha = "http://192.168.34.97:3000/orbat.xml"
 let ultimoColor = null;
 let xmlDoc;
 const resourceNamesLimpios = [];
 const consumoPorRecurso = new Map();
+const asignadoPorRecurso = new Map();
 window.onload = function () {
     fetch(serverEscucha)
         .then(response => {
@@ -257,6 +258,7 @@ function toggleChildren(event, element) {
     const padre = span?.getAttribute("name") || span?.textContent?.trim() || "[sin nombre]";
     resourceNamesLimpios.length = 0;
     consumoPorRecurso.clear();
+    asignadoPorRecurso.clear();
     if (children) {
         let isHidden = children.classList.contains("hidden");
         children.classList.toggle("hidden", !isHidden);
@@ -480,69 +482,8 @@ function updateProgressBar(container, value) {
     bar.textContent = Math.floor(percentage) + "%";
 }
 
-function actualizarGraficoMultiple(labels, datasets, padre, muertosTotal = 0, vivosTotal = 0) {
-    dynamicBarChart.data.labels = labels;
-    dynamicBarChart.data.datasets = datasets;
-    dynamicBarChart.options.plugins.title.text = padre + " - Total efectivos: " + parseInt(muertosTotal + vivosTotal) + " - Total vivos: " + vivosTotal + " - Total bajas: " + muertosTotal;
-    dynamicBarChart.update();
-}
 
-// Crear la instancia de la barra
-/*const dynamicCtx = document.getElementById('dynamicBarChart').getContext('2d');
-const dynamicBarChart = new Chart(dynamicCtx, {
-    type: 'bar',
-    data: {
-        //labels: ["fr","ddf"],
-        datasets: [{
-            label: [],
-            data: [],
-            backgroundColor: [],  // se llena dinámicamente con un color por barra
-            borderColor: [],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        indexAxis: 'y', // Barras horizontales
-        plugins: {
-            legend: {
-                labels: {
-                    font: {
-                        size: 15,          // ← tamaño del label
-                        weight: 'bold'     // ← negrita
-                    }
-                }
-            },
-            tooltip: {
-                callbacks: {
-                    label: function (context) {
-                        const label = context.label || '';
-                        const value = context.raw || 0;
-                        return `${label}: ${value} muertos`;
-                    }
-                }
-            },
-            datalabels: {
-                color: '#000',
-                anchor: 'end',
-                align: 'right',
-                font: {
-                    weight: 'bold',
-                    size: 12
-                },
-                formatter: value => value // Muestra el número de muertos
-            }
-        },
-        scales: {
-            x: {
-                beginAtZero: true,
-                // Puedes quitar "max: 100" si deseas que se ajuste automáticamente
-            }
-        }
-    },
-    plugins: [ChartDataLabels] // <-- Activa el plugin
-});
-*/
+
 
 function contarMuertosDesdeNombre(nombreUnidad) {
     if (!window.xmlDoc) {
@@ -593,21 +534,26 @@ function contarMuertosRecursivo(xmlNode) {
         resourcetList.forEach(r => {
             const rawName = r.getAttribute("name");
             const consumoStr = r.getAttribute("total-consumption");
+            const asignadoStr = r.getAttribute("quantity");
 
-            if (rawName && consumoStr) {
+            if (rawName && consumoStr && asignadoStr) {
                 const nombreLimpio = rawName.replace(/\.*$/, "").trim();
-                //const consumo = parseFloat(consumoStr) || 0;
-                //const consumo = Math.floor(parseFloat(consumoStr)) || 0;
+
                 const consumoNum = parseFloat(consumoStr) || 0;
+                const asignadoNum = parseFloat(asignadoStr) || 0;
+
                 const consumo = (consumoNum % 1 >= 0.6) ? Math.ceil(consumoNum) : Math.floor(consumoNum);
-
-
-
+                const asignado = (asignadoNum % 1 >= 0.6) ? Math.ceil(asignadoNum) : Math.floor(asignadoNum);
                 // Sumar al total acumulado
                 if (consumoPorRecurso.has(nombreLimpio)) {
                     consumoPorRecurso.set(nombreLimpio, consumoPorRecurso.get(nombreLimpio) + consumo);
+                    asignadoPorRecurso.set(nombreLimpio, asignadoPorRecurso.get(nombreLimpio) + asignado);
+
                 } else {
                     consumoPorRecurso.set(nombreLimpio, consumo);
+                    asignadoPorRecurso.set(nombreLimpio, asignado);
+                    console.log("➕ Recurso consumido:",consumoPorRecurso.keys(), consumoPorRecurso.values());
+                    console.log("➕ Recurso asignado:", asignadoPorRecurso.keys(), asignadoPorRecurso.values());
                 }
             }
         });
