@@ -507,12 +507,13 @@ function contarMuertosDesdeNombre(nombreUnidad) {
 function contarMuertosRecursivo(xmlNode) {
     let muertos = 0;
     let vivos = 0;
+    let heridos = 0;
 
     // Si el nodo es unit y tiene equipments
     if (xmlNode.tagName === "unit") {
         const equipmentList = xmlNode.querySelectorAll("equipment");
 
-        equipmentList.forEach(eq => {
+        /*equipmentList.forEach(eq => {
             const humans = eq.querySelectorAll("human");
             humans.forEach(h => {
                 if (h.hasAttribute("state")) {
@@ -526,11 +527,36 @@ function contarMuertosRecursivo(xmlNode) {
                     vivos++;
                 }
             });
+        });*/
+        //se aregla la funcion para que calcule vivos, muertos y heridos
+        equipmentList.forEach(eq => {
+            const humans = eq.querySelectorAll("human");
+            humans.forEach(h => {
+                if (h.hasAttribute("state")) {
+                    const state = h.getAttribute("state");
+
+                    if (state === "dead") {
+                        muertos++;
+                    }
+                    /* if (state === "ue") {
+                                           
+                     }*/
+
+                } else {
+                    // NO tiene atributo state
+                    vivos++;
+                }
+                if (h.hasAttribute("injury")) {
+                    heridos++;
+                    //console.log("herido encontrado", heridos)
+                }
+
+            });
         });
 
         // Verifica también los humanos fuera de <equipment> si es necesario:
         const allHumans = document.querySelectorAll("human");
-        console.log("Total de humanos en todo el documento:", allHumans.length);
+        //console.log("Total de humanos en todo el documento:", allHumans.length);
 
 
 
@@ -573,12 +599,13 @@ function contarMuertosRecursivo(xmlNode) {
     hijos.forEach(hijo => {
         //[vivos, muertos] += contarMuertosRecursivo(hijo);
         //vivos += contarMuertosRecursivo(hijo);
-        const [v, m] = contarMuertosRecursivo(hijo);
+        const [v, m, h] = contarMuertosRecursivo(hijo);
         vivos += v;
         muertos += m;
+        heridos += h;
     });
 
 
 
-    return [vivos, muertos];
+    return [vivos, muertos, heridos];
 }

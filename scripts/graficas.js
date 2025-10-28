@@ -182,24 +182,29 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     const data = [];
     const vivosM = [];
     const muertosM = [];
+    const heridosM = [];
     const backgroundColors = [];
     const borderColors = [];
     let totalMuertos = 0;
     let totalVivos = 0;
+    let totalHeridos = 0;
     const labelsDonuc = [];
     liChildren.forEach(child => {
         const progress = child.querySelector(".progress-container");
         // Buscar el nodo <unit>, <automat> o <formation> dentro de este <li>
         const nombre = progress?.getAttribute("name") || progress?.textContent?.trim() || "[sin nombre]";
         labels.push(nombre);
-        const [vivos, muertos] = contarMuertosDesdeNombre(nombre);
+        const [vivos, muertos, heridos] = contarMuertosDesdeNombre(nombre);
         vivosM.push(vivos);
         muertosM.push(muertos);
+        heridosM.push(heridos);
         const color = generarColorAleatorio();
         backgroundColors.push(color);
         borderColors.push('black');
         totalMuertos += muertos;
         totalVivos += vivos;
+        totalHeridos += heridos;
+
 
     });
 
@@ -257,9 +262,14 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
             label: 'Bajas',
             data: muertosM,
             backgroundColor: 'rgb(39, 30, 0)'
+        },
+        {
+            label: 'Heridos',
+            data: heridosM,
+            backgroundColor: 'rgba(189, 42, 140, 1)'
         }
     ];
-    actualizarGraficoMultiple(labelsMeses, datasets, padre, totalMuertos, totalVivos);
+    actualizarGraficoMultiple(labelsMeses, datasets, padre, totalMuertos, totalVivos, totalHeridos);
 
 
     //donuc
@@ -307,14 +317,22 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     lineMunicionChart.update();
 
 
-    actualizarGraficoLinePersonal(vivosM, muertosM, labelsMeses);
+    actualizarGraficoLinePersonal(vivosM, muertosM, heridosM, labelsMeses);
+    // Crear el gráfico con los datos simulados
+    // 🚀 Ejemplo de datos dinámicos (podrían venir de un API, archivo JSON o base de datos)
+    const datosDinamicos = [
+        { name: 'Vivos', y: totalVivos },
+        { name: 'Muertos', y: totalMuertos },
+        { name: 'Heridos', y: totalHeridos }
+    ];
+    crearGraficoDonutPersonal(datosDinamicos, parseInt(totalVivos + totalMuertos + totalHeridos), padre);
 
 }
 
-function actualizarGraficoMultiple(labels, datasets, padre, muertosTotal = 0, vivosTotal = 0) {
+function actualizarGraficoMultiple(labels, datasets, padre, muertosTotal = 0, vivosTotal = 0, heridosTotal = 0) {
     dynamicBarChart.data.labels = labels;
     dynamicBarChart.data.datasets = datasets;
-    dynamicBarChart.options.plugins.title.text = padre + " - Total efectivos: " + parseInt(muertosTotal + vivosTotal) + " - Total vivos: " + vivosTotal + " - Total bajas: " + muertosTotal;
+    dynamicBarChart.options.plugins.title.text = padre + " - Total efectivos: " + parseInt(muertosTotal + vivosTotal + heridosTotal) + " - Total vivos: " + vivosTotal + " - Total bajas: " + muertosTotal + " - Total heridos: " + heridosTotal;
     dynamicBarChart.update();
 }
 
@@ -385,7 +403,7 @@ function actualizarGraficoMultiple(labels, datasets, padre, muertosTotal = 0, vi
     linePersonalChart.update();
 }*/
 
-function actualizarGraficoLinePersonal(vivos, muertos, labelsConValor) {
+function actualizarGraficoLinePersonal(vivos, muertos, heridos, labelsConValor) {
     // Validar que los arrays tengan la misma longitud
     if (vivos.length !== muertos.length) {
         console.error("Error: los arrays vivos y muertos no tienen la misma longitud.");
@@ -394,7 +412,7 @@ function actualizarGraficoLinePersonal(vivos, muertos, labelsConValor) {
 
     // Calcular eficiencia y deficiencia
     const eficiencia = muertos.map((m, i) => {
-        const total = m + vivos[i];
+        const total = m + vivos[i] + heridos[i];
         return total;
     });
 
@@ -439,3 +457,64 @@ function actualizarGraficoLinePersonal(vivos, muertos, labelsConValor) {
     // Actualizar el gráfico
     linePersonalChart.update();
 }
+
+// 🎯 Función para crear el gráfico con datos dinámicos
+function crearGraficoDonutPersonal(data, total, padre) {
+    Highcharts.setOptions({
+        lang: {
+            decimalPoint: ',',
+            thousandsSep: '' // ❌ elimina la coma en los miles
+        }
+    });
+    Highcharts.chart('container-donuc', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: padre
+        },
+        exporting: {
+            csv: {
+                itemDelimiter: ';', // útil para Excel en español
+                decimalPoint: ',',  // formato numérico correcto
+                columnHeaderFormatter: function (item, key) {
+                    if (!item || item instanceof Highcharts.Axis) {
+                        return 'Categoría';
+                    }
+                    return key === 'y' ? 'Personal' : 'Estado';
+                }
+            }
+        },
+        tooltip: {
+            useHTML: true,
+            formatter: function () {
+                // this.y = valor absoluto de cada categoría
+                // this.percentage = porcentaje que calcula Highcharts automáticamente
+                return `
+        <b>${this.point.name}</b><br>
+        ${this.y} de ${total} (${this.percentage.toFixed(1)}%)
+      `;
+            }
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: { enabled: false, format: '{point.name}: {point.percentage:.1f}%' },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Personal',
+            colorByPoint: true,
+            data: data // 👈 Aquí se insertan los datos dinámicos
+        }]
+    });
+}
+
+

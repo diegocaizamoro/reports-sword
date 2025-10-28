@@ -9,6 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/themes/adaptive.js"></script>
     <!-- <script src="libs/socket.io.min.js"></script>
     <script src="libs/chart.umd.js"></script>
     <script src="libs/chartjs-plugin-datalabels.js"></script>
@@ -32,16 +38,26 @@
                 <button class="tab-button" data-tab="tab2">Munición</button>
             </div>
             <div class="tab-content active" id="tab1">
+                
                 <h2>Pérdidas de personal por unidad</h2>
                 <div class="card">
                     <canvas id="dynamicBarChart"></canvas>
                 </div>
-                 <h2>Eficiencia en Personal</h2>
+                <h2>Eficiencia en Personal</h2>
                 <div class="card">
                     <canvas id="dynamicLineChartPersonal"></canvas>
                 </div>
+                <h2>Resumen total de personal</h2>
+                <div class="card">
+                    <figure class="highcharts-figure">
+                        <div id="container-donuc"></div>
+                        <!--<p class="highcharts-description">
+                            Este gráfico de forma de dona representa el resumen total del personal en vivos, muertos y heridos.
+                        </p>-->
+                    </figure>
+                </div>
             </div>
-          
+
             <div class="tab-content" id="tab2">
                 <h2>Consumo de recursos por munición</h2>
                 <div class="card">
