@@ -1,7 +1,7 @@
 
 let bando = "friend"
 let colorBando = "0x0055ff"
-let serverEscucha = "http://192.168.34.97:3000/orbat.xml"
+let serverEscucha = "http://localhost:3000/orbat.xml"
 let ultimoColor = null;
 let xmlDoc;
 const resourceNamesLimpios = [];
@@ -518,15 +518,20 @@ function contarMuertosRecursivo(xmlNode) {
                 if (h.hasAttribute("state")) {
                     const state = h.getAttribute("state");
 
-                    if (state === "dead") {
+                    if (state === "dead" || state === "u3") {
                         muertos++;
                     }
                 } else {
                     // NO tiene atributo state
                     vivos++;
                 }
-            })
+            });
         });
+
+        // Verifica también los humanos fuera de <equipment> si es necesario:
+        const allHumans = document.querySelectorAll("human");
+        console.log("Total de humanos en todo el documento:", allHumans.length);
+
 
 
 
@@ -552,8 +557,7 @@ function contarMuertosRecursivo(xmlNode) {
                 } else {
                     consumoPorRecurso.set(nombreLimpio, consumo);
                     asignadoPorRecurso.set(nombreLimpio, asignado);
-                    console.log("➕ Recurso consumido:",consumoPorRecurso.keys(), consumoPorRecurso.values());
-                    console.log("➕ Recurso asignado:", asignadoPorRecurso.keys(), asignadoPorRecurso.values());
+
                 }
             }
         });

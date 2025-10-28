@@ -132,6 +132,27 @@ const dynamicMunicionBarChart = new Chart(dynamicMunicion, {
 });
 
 //lineas
+const linePersonal = document.getElementById('dynamicLineChartPersonal').getContext('2d');
+const linePersonalChart = new Chart(linePersonal, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: []
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,  // permite que se adapte al div
+        plugins: {
+            legend: {
+                labels: {
+                    font: { size: 15, weight: 'bold' }
+                }
+            }
+        }
+    }
+});
+
+//lineas personal
 const lineMunicion = document.getElementById('lineMunicionHtml').getContext('2d');
 const lineMunicionChart = new Chart(lineMunicion, {
     type: 'line',
@@ -224,7 +245,7 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
 
 
 
-    // Ejemplo:
+    // barras personal:
     const labelsMeses = labels;
     const datasets = [
         {
@@ -266,7 +287,7 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     doughnutChart.update();*/
 
 
-    //lines
+    //lines municion
     const datasetsLine = [
         {
             label: 'Asignado',
@@ -285,11 +306,136 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     lineMunicionChart.data.datasets = datasetsLine;
     lineMunicionChart.update();
 
-} 
+
+    actualizarGraficoLinePersonal(vivosM, muertosM, labelsMeses);
+
+}
 
 function actualizarGraficoMultiple(labels, datasets, padre, muertosTotal = 0, vivosTotal = 0) {
     dynamicBarChart.data.labels = labels;
     dynamicBarChart.data.datasets = datasets;
     dynamicBarChart.options.plugins.title.text = padre + " - Total efectivos: " + parseInt(muertosTotal + vivosTotal) + " - Total vivos: " + vivosTotal + " - Total bajas: " + muertosTotal;
     dynamicBarChart.update();
+}
+
+/*function actualizarGraficoLinePersonal(vivos, muertos, labelsConValor) {
+    const datasetsLine = [
+        {
+            label: 'Vivos',
+            data: vivos,
+            backgroundColor: 'rgb(82, 227, 0)'
+        },
+        {
+            label: 'Muertos',
+            data: muertos,
+            backgroundColor: 'rgba(244, 7, 66, 1)'
+        }
+    ];
+
+
+    linePersonalChart.data.labels = labelsConValor;//eje x labels
+    linePersonalChart.data.datasets = datasetsLine;
+    linePersonalChart.update();
+}*/
+
+/*function actualizarGraficoLinePersonal(vivos, muertos, labelsConValor) {
+    // Validar que los arrays tengan la misma longitud
+    if (vivos.length !== muertos.length) {
+        console.error("Error: los arrays vivos y muertos no tienen la misma longitud.");
+        return;
+    }
+
+    // Calcular eficiencia y deficiencia
+    const eficiencia = muertos.map((m, i) => {
+        const total = m + vivos[i];
+        return total > 0 ? (m / total) * 100 : 0;
+    });
+
+    const deficiencia = eficiencia.map(e => 100 - e);
+
+    // Crear datasets con los porcentajes
+    const datasetsLine = [
+        {
+            label: 'Deficiencia (%)',
+            data: eficiencia,
+            borderColor: 'rgba(244, 7, 66, 1)',
+            backgroundColor: 'rgba(244, 7, 66, 0.3)',
+            fill: false,
+            tension: 0.3, // suaviza la línea
+            borderWidth: 2,
+            pointRadius: 4,
+        },
+        {
+            label: 'Eficiencia (%)',
+            data: deficiencia,
+            borderColor: 'rgba(82, 227, 0, 1)',
+            backgroundColor: 'rgba(82, 227, 0, 0.3)',
+            fill: false,
+            tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 4,
+        }
+    ];
+
+    // Asignar los nuevos datos
+    linePersonalChart.data.labels = labelsConValor; // Eje X
+    linePersonalChart.data.datasets = datasetsLine;
+
+    // Actualizar el gráfico
+    linePersonalChart.update();
+}*/
+
+function actualizarGraficoLinePersonal(vivos, muertos, labelsConValor) {
+    // Validar que los arrays tengan la misma longitud
+    if (vivos.length !== muertos.length) {
+        console.error("Error: los arrays vivos y muertos no tienen la misma longitud.");
+        return;
+    }
+
+    // Calcular eficiencia y deficiencia
+    const eficiencia = muertos.map((m, i) => {
+        const total = m + vivos[i];
+        return total;
+    });
+
+    const deficiencia = muertos.map((m, i) => {
+        const total = (vivos[i] + m) - m;
+        if (total < 0) {
+            return 0;
+        } else {
+            return total;
+        }
+
+    });
+
+    // Crear datasets con los porcentajes
+    const datasetsLine = [
+        {
+            label: 'Actual',
+            data: deficiencia,
+            borderColor: 'rgba(244, 7, 66, 1)',
+            backgroundColor: 'rgba(244, 7, 66, 0.3)',
+            fill: false,
+            //tension: 0.3, // suaviza la línea
+            borderWidth: 2,
+            pointRadius: 4,
+        },
+        {
+            label: 'Inicial',
+            data: eficiencia,
+            borderColor: 'rgba(82, 227, 0, 1)',
+            backgroundColor: 'rgba(82, 227, 0, 0.3)',
+            fill: false,
+            //tension: 0.3,
+            borderWidth: 2,
+            pointRadius: 4,
+        }
+    ];
+
+    // Asignar los nuevos datos
+    linePersonalChart.data.labels = labelsConValor; // Eje X
+    linePersonalChart.data.datasets = datasetsLine;
+
+    // Actualizar el gráfico
+    linePersonalChart.update();
 }
