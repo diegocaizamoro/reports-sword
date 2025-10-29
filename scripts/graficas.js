@@ -24,7 +24,7 @@ const doughnutChart = new Chart(doughnutCtx, {
 
 
 // personal
-const dynamicCtx = document.getElementById('dynamicBarChart').getContext('2d');
+/*const dynamicCtx = document.getElementById('dynamicBarChart').getContext('2d');
 const dynamicBarChart = new Chart(dynamicCtx, {
     type: 'bar',
     data: [],
@@ -74,7 +74,7 @@ const dynamicBarChart = new Chart(dynamicCtx, {
         }
     }
 });
-
+*/
 
 // municion
 const dynamicMunicion = document.getElementById('consumoMunicion').getContext('2d');
@@ -269,7 +269,7 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
             backgroundColor: 'rgba(189, 42, 140, 1)'
         }
     ];
-    actualizarGraficoMultiple(labelsMeses, datasets, padre, totalMuertos, totalVivos, totalHeridos);
+    //actualizarGraficoMultiple(labelsMeses, datasets, padre, totalMuertos, totalVivos, totalHeridos);
 
 
     //donuc
@@ -327,14 +327,31 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     ];
     crearGraficoDonutPersonal(datosDinamicos, parseInt(totalVivos + totalMuertos + totalHeridos), padre);
 
+    // Datos dinámicos
+    const seriesData = [
+        {
+            name: 'Vivos',
+            data: vivosM
+        },
+        {
+            name: 'Muertos',
+            data: muertosM
+        },
+        {
+            name: 'Heridos',
+            data: heridosM
+        }
+    ];
+    crearGraficoBarraPersonal(seriesData, labelsMeses, padre)
+
 }
 
-function actualizarGraficoMultiple(labels, datasets, padre, muertosTotal = 0, vivosTotal = 0, heridosTotal = 0) {
+/*function actualizarGraficoMultiple(labels, datasets, padre, muertosTotal = 0, vivosTotal = 0, heridosTotal = 0) {
     dynamicBarChart.data.labels = labels;
     dynamicBarChart.data.datasets = datasets;
     dynamicBarChart.options.plugins.title.text = padre + " - Total efectivos: " + parseInt(muertosTotal + vivosTotal + heridosTotal) + " - Total vivos: " + vivosTotal + " - Total bajas: " + muertosTotal + " - Total heridos: " + heridosTotal;
     dynamicBarChart.update();
-}
+}*/
 
 /*function actualizarGraficoLinePersonal(vivos, muertos, labelsConValor) {
     const datasetsLine = [
@@ -505,7 +522,7 @@ function crearGraficoDonutPersonal(data, total, padre) {
             pie: {
                 allowPointSelect: true,
                 cursor: 'pointer',
-                dataLabels: { enabled: false, format: '{point.name}: {point.percentage:.1f}%' },
+                dataLabels: { enabled: true, format: '{point.name}: {point.percentage:.1f}%' },
                 showInLegend: true
             }
         },
@@ -514,6 +531,65 @@ function crearGraficoDonutPersonal(data, total, padre) {
             colorByPoint: true,
             data: data // 👈 Aquí se insertan los datos dinámicos
         }]
+    });
+}
+function crearGraficoBarraPersonal(data, categorias, padre) {
+    Highcharts.setOptions({
+        lang: {
+            decimalPoint: ',',
+            thousandsSep: '' // ❌ elimina la coma en los miles
+        }
+    });
+    Highcharts.chart('container-barras-personal', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: padre
+        },
+        exporting: {
+            csv: {
+                itemDelimiter: ';', // útil para Excel en español
+                decimalPoint: ',',  // formato numérico correcto
+
+            }
+        },
+        xAxis: {
+            categories: categorias
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Cantidad de trofeos'
+            },
+            stackLabels: {
+                enabled: true
+            }
+        },
+        legend: {
+            align: 'left',
+            x: 70,
+            verticalAlign: 'top',
+            y: 70,
+            floating: false,
+            backgroundColor: 'var(--highcharts-background-color, #ffffff)',
+            borderColor: 'var(--highcharts-neutral-color-20, #cccccc)',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.category}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        series: data
     });
 }
 
