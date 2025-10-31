@@ -8,7 +8,7 @@ const resourceNamesLimpios = [];
 const consumoPorRecurso = new Map();
 const asignadoPorRecurso = new Map();
 window.onload = function () {
-    fetch('https://github.com/diegocaizamoro/reports-sword/blob/main/orbat.xml') // para produccion
+    fetch('https://raw.githubusercontent.com/diegocaizamoro/reports-sword/refs/heads/main/scripts/arbol-valores.js') // para produccion
     //fetch(serverEscucha) para pruebas
         .then(response => {
             if (!response.ok) {
