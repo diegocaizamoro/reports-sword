@@ -77,7 +77,7 @@ const dynamicBarChart = new Chart(dynamicCtx, {
 */
 
 // municion
-const dynamicMunicion = document.getElementById('consumoMunicion').getContext('2d');
+/*const dynamicMunicion = document.getElementById('consumoMunicion').getContext('2d');
 const dynamicMunicionBarChart = new Chart(dynamicMunicion, {
     type: 'bar',
     data: {
@@ -129,7 +129,7 @@ const dynamicMunicionBarChart = new Chart(dynamicMunicion, {
         }
     },
     plugins: [ChartDataLabels] // <-- Activa el plugin
-});
+});*/
 
 //lineas
 const linePersonal = document.getElementById('dynamicLineChartPersonal').getContext('2d');
@@ -224,7 +224,7 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     const nombresUnicos = Array.from(new Set(resourceNamesLimpios));
     //console.log("📦 Recursos encontrados:", nombresUnicos);
     const maxConsumo = Math.max(...data, 10); // Valor mínimo por defecto 10
-    dynamicMunicionBarChart.options.scales.x.max = Math.ceil(maxConsumo * 1.1); // 10% más para margen visual
+    //dynamicMunicionBarChart.options.scales.x.max = Math.ceil(maxConsumo * 1.1); // 10% más para margen visual
 
     //solo mayores a cero
     const labelsConValor = [];
@@ -238,13 +238,13 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
         }
     });
 
-    dynamicMunicionBarChart.data.labels = labelsConValor;        // Eje X
-    dynamicMunicionBarChart.data.datasets[0].data = dataConValor; // Puedes ajustar el valor si tienes cantidades reales
+    //dynamicMunicionBarChart.data.labels = labelsConValor;        // Eje X
+    //dynamicMunicionBarChart.data.datasets[0].data = dataConValor; // Puedes ajustar el valor si tienes cantidades reales
     // Opcional: asignar colores aleatorios
     const backgroundColorsMuertos = generarColoresUnicosMuertos(dataMuni.length);
-    dynamicMunicionBarChart.data.datasets[0].backgroundColor = backgroundColorsMuertos;
-    dynamicMunicionBarChart.data.datasets[0].borderColor = borderColors;
-    dynamicMunicionBarChart.update();
+    //dynamicMunicionBarChart.data.datasets[0].backgroundColor = backgroundColorsMuertos;
+    //dynamicMunicionBarChart.data.datasets[0].borderColor = borderColors;
+    //dynamicMunicionBarChart.update();
 
 
 
@@ -343,6 +343,15 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
         }
     ];
     crearGraficoBarraPersonal(seriesData, labelsMeses, padre)
+
+
+    // Series dinámicas
+    const dataMunicion = [
+        { name: 'Asignado', data: dataAsignadoConValor },
+        { name: 'Consumo', data: filteredData}
+        
+    ];
+    crearGraficoBarraMunicion(dataMunicion, labelsConValor, padre);
 
 }
 
@@ -589,6 +598,60 @@ function crearGraficoBarraPersonal(data, categorias, padre) {
                 }
             }
         },
+        series: data
+    });
+}
+
+function crearGraficoBarraMunicion(data, categorias, padre) {
+    Highcharts.chart('consumoMunicion', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: padre
+        },
+       
+        xAxis: {
+            categories: categorias,
+            title: { text: null },
+            gridLineWidth: 1,
+            lineWidth: 0
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Unidades',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify'
+            },
+            gridLineWidth: 0
+        },
+        tooltip: {
+            valueSuffix: ' unidades'
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: '50%',
+                dataLabels: {
+                    enabled: true
+                },
+                groupPadding: 0.1
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -20,
+            y: 20,
+            floating: false, // evita que tape el gráfico
+            borderWidth: 1,
+            backgroundColor: 'var(--highcharts-background-color, #ffffff)',
+            shadow: false
+        },
+        credits: { enabled: false },
         series: data
     });
 }
