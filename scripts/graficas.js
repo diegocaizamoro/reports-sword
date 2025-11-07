@@ -132,7 +132,7 @@ const dynamicMunicionBarChart = new Chart(dynamicMunicion, {
 });*/
 
 //lineas
-const linePersonal = document.getElementById('dynamicLineChartPersonal').getContext('2d');
+/*const linePersonal = document.getElementById('dynamicLineChartPersonal').getContext('2d');
 const linePersonalChart = new Chart(linePersonal, {
     type: 'line',
     data: {
@@ -150,7 +150,7 @@ const linePersonalChart = new Chart(linePersonal, {
             }
         }
     }
-});
+});*/
 
 //lineas personal
 const lineMunicion = document.getElementById('lineMunicionHtml').getContext('2d');
@@ -348,10 +348,22 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     // Series dinámicas
     const dataMunicion = [
         { name: 'Asignado', data: dataAsignadoConValor },
-        { name: 'Consumo', data: filteredData}
-        
+        { name: 'Consumo', data: filteredData }
+
     ];
     crearGraficoBarraMunicion(dataMunicion, labelsConValor, padre);
+
+
+    const eficienciaM = vivosM.map((v, i) => {
+        const h = heridosM[i] || 0;
+        const m = muertosM[i] || 0;
+        const total = v + h + m;
+        return total > 0 ? parseFloat(((v / total) * 100).toFixed(2)) : 0;
+    });
+    const dataSeries = {
+        eficiencia: eficienciaM
+    };
+    crearGraficoLineasPersonal(dataSeries, labelsMeses, padre);
 
 }
 
@@ -453,7 +465,7 @@ function actualizarGraficoLinePersonal(vivos, muertos, heridos, labelsConValor) 
     });
 
     // Crear datasets con los porcentajes
-    const datasetsLine = [
+    /*const datasetsLine = [
         {
             label: 'Actual',
             data: deficiencia,
@@ -481,7 +493,7 @@ function actualizarGraficoLinePersonal(vivos, muertos, heridos, labelsConValor) 
     linePersonalChart.data.datasets = datasetsLine;
 
     // Actualizar el gráfico
-    linePersonalChart.update();
+    linePersonalChart.update();*/
 }
 
 // 🎯 Función para crear el gráfico con datos dinámicos
@@ -610,7 +622,7 @@ function crearGraficoBarraMunicion(data, categorias, padre) {
         title: {
             text: padre
         },
-       
+
         xAxis: {
             categories: categorias,
             title: { text: null },
@@ -656,4 +668,35 @@ function crearGraficoBarraMunicion(data, categorias, padre) {
     });
 }
 
+function crearGraficoLineasPersonal(dataSeries, categorias, padre) {
+    Highcharts.chart('container-line-personal', {
+
+        title: {
+            text: padre,
+            align: 'center'
+        },
+
+        yAxis: { title: { text: 'Personal' } },
+        xAxis: { categories: categorias }, // eje X dinámico
+        legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle' },
+        plotOptions: { series: { label: { connectorAllowed: false } } },
+        tooltip: {
+            pointFormat: '<b>{point.y:.2f}%</b>'
+            // {point.y:.2f} = muestra el valor con 2 decimales
+        },
+        series: [
+            { name: 'Eficiencia', data: dataSeries.eficiencia }
+
+        ],
+        responsive: {
+            rules: [{
+                condition: { maxWidth: 500 },
+                chartOptions: { legend: { layout: 'horizontal', align: 'center', verticalAlign: 'bottom' } }
+            }]
+        }
+    });
+
+
+
+}
 
