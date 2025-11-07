@@ -153,7 +153,7 @@ const linePersonalChart = new Chart(linePersonal, {
 });*/
 
 //lineas personal
-const lineMunicion = document.getElementById('lineMunicionHtml').getContext('2d');
+/*const lineMunicion = document.getElementById('lineMunicionHtml').getContext('2d');
 const lineMunicionChart = new Chart(lineMunicion, {
     type: 'line',
     data: {
@@ -171,7 +171,7 @@ const lineMunicionChart = new Chart(lineMunicion, {
             }
         }
     }
-});
+});*/
 
 
 function actualizarGraficoDesdeNodo(padre, nodo) {
@@ -298,7 +298,7 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
 
 
     //lines municion
-    const datasetsLine = [
+    /*const datasetsLine = [
         {
             label: 'Asignado',
             data: dataAsignadoConValor,
@@ -314,7 +314,7 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
 
     lineMunicionChart.data.labels = labelsConValor;//eje x labels
     lineMunicionChart.data.datasets = datasetsLine;
-    lineMunicionChart.update();
+    lineMunicionChart.update();*/
 
 
     actualizarGraficoLinePersonal(vivosM, muertosM, heridosM, labelsMeses);
@@ -358,12 +358,23 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
         const h = heridosM[i] || 0;
         const m = muertosM[i] || 0;
         const total = v + h + m;
-        return total > 0 ? parseFloat(((v / total) * 100).toFixed(2)) : 0;
+        return total > 0 ? 100-(parseFloat((((total-v) / total) * 100).toFixed(2))) : 0;
     });
     const dataSeries = {
         eficiencia: eficienciaM
     };
     crearGraficoLineasPersonal(dataSeries, labelsMeses, padre);
+
+
+
+    const eficienciaMuni = dataAsignadoConValor.map((asigna, i) => {
+        const consumidoMuni = filteredData[i] || 0;
+        return asigna > 0 ? 100-(((consumidoMuni) / asigna) * 100) : 0;
+    });
+    const dataSeriesMuni = {
+        eficiencia: eficienciaMuni
+    };
+    crearGraficoLineasMunicion(dataSeriesMuni, labelsConValor, padre);
 
 }
 
@@ -670,33 +681,218 @@ function crearGraficoBarraMunicion(data, categorias, padre) {
 
 function crearGraficoLineasPersonal(dataSeries, categorias, padre) {
     Highcharts.chart('container-line-personal', {
+        chart: {
+            type: 'line',
+            backgroundColor: '#f9fafb', // fondo suave
+            style: { fontFamily: 'Segoe UI, sans-serif' },
+            animation: true
+        },
 
         title: {
             text: padre,
-            align: 'center'
+            align: 'center',
+            style: {
+                color: '#333',
+                fontWeight: 'bold',
+                fontSize: '18px'
+            }
         },
 
-        yAxis: { title: { text: 'Personal' } },
-        xAxis: { categories: categorias }, // eje X dinámico
-        legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle' },
-        plotOptions: { series: { label: { connectorAllowed: false } } },
+        xAxis: {
+            categories: categorias,
+            labels: {
+                style: { color: '#555', fontSize: '12px' }
+            },
+            lineColor: '#ccc'
+        },
+
+        yAxis: {
+            title: { text: 'Eficiencia (%)' },
+            labels: {
+                format: '{value}%',
+                style: { color: '#555', fontSize: '12px' }
+            },
+            gridLineColor: '#e0e0e0'
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            itemStyle: { fontSize: '13px' }
+        },
+
         tooltip: {
-            pointFormat: '<b>{point.y:.2f}%</b>'
-            // {point.y:.2f} = muestra el valor con 2 decimales
+            shared: true,
+            backgroundColor: 'rgba(255,255,255,0.95)',
+            borderColor: '#ccc',
+            borderRadius: 8,
+            shadow: true,
+            style: { fontSize: '13px' },
+            headerFormat: '<b>{point.key}</b><br/>',
+            pointFormat: '{series.name}: <b>{point.y:.2f}%</b>'
         },
-        series: [
-            { name: 'Eficiencia', data: dataSeries.eficiencia }
 
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: true,
+                    radius: 5, // tamaño del punto
+                    symbol: 'circle',
+                    fillColor: '#ffffff',
+                    lineWidth: 2,
+                    lineColor: '#007bff' // borde del punto
+                },
+                lineWidth: 4, // grosor de la línea
+                states: {
+                    hover: {
+                        lineWidth: 5
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    format: '{y:.1f}%',
+                    style: {
+                        color: '#333',
+                        textOutline: 'none',
+                        fontWeight: 'bold'
+                    }
+                },
+                color: '#007bff', // color de la línea
+                animation: {
+                    duration: 1200
+                }
+            }
+        },
+
+        series: [
+            {
+                name: 'Eficiencia',
+                data: dataSeries.eficiencia
+            }
         ],
+
         responsive: {
             rules: [{
                 condition: { maxWidth: 500 },
-                chartOptions: { legend: { layout: 'horizontal', align: 'center', verticalAlign: 'bottom' } }
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
             }]
         }
     });
-
-
-
 }
+
+function crearGraficoLineasMunicion(dataSeries, categorias, padre) {
+    Highcharts.chart('container-line-municion', {
+        chart: {
+            type: 'line',
+            backgroundColor: '#f9fafb', // fondo suave
+            style: { fontFamily: 'Segoe UI, sans-serif' },
+            animation: true
+        },
+
+        title: {
+            text: padre,
+            align: 'center',
+            style: {
+                color: '#333',
+                fontWeight: 'bold',
+                fontSize: '18px'
+            }
+        },
+
+        xAxis: {
+            categories: categorias,
+            labels: {
+                style: { color: '#555', fontSize: '12px' }
+            },
+            lineColor: '#ccc'
+        },
+
+        yAxis: {
+            title: { text: 'Eficiencia (%)' },
+            labels: {
+                format: '{value}%',
+                style: { color: '#555', fontSize: '12px' }
+            },
+            gridLineColor: '#e0e0e0'
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            itemStyle: { fontSize: '13px' }
+        },
+
+        tooltip: {
+            shared: true,
+            backgroundColor: 'rgba(255,255,255,0.95)',
+            borderColor: '#ccc',
+            borderRadius: 8,
+            shadow: true,
+            style: { fontSize: '13px' },
+            headerFormat: '<b>{point.key}</b><br/>',
+            pointFormat: '{series.name}: <b>{point.y:.2f}%</b>'
+        },
+
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: true,
+                    radius: 5, // tamaño del punto
+                    symbol: 'circle',
+                    fillColor: '#ffffff',
+                    lineWidth: 2,
+                    lineColor: '#007bff' // borde del punto
+                },
+                lineWidth: 4, // grosor de la línea
+                states: {
+                    hover: {
+                        lineWidth: 5
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    format: '{y:.1f}%',
+                    style: {
+                        color: '#333',
+                        textOutline: 'none',
+                        fontWeight: 'bold'
+                    }
+                },
+                color: '#007bff', // color de la línea
+                animation: {
+                    duration: 1200
+                }
+            }
+        },
+
+        series: [
+            {
+                name: 'Eficiencia',
+                data: dataSeries.eficiencia
+            }
+        ],
+
+        responsive: {
+            rules: [{
+                condition: { maxWidth: 500 },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+}
+
 
