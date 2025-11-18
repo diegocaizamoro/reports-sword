@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Quiz visual</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+  .sequence { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; }
+  .thumb { width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; }
+  .questionBox { width: 70px; height: 70px; border: 2px dashed gray; display: flex; align-items: center; justify-content: center; }
+  .options { display: grid; grid-template-columns: repeat(2, 150px); gap: 15px; justify-content: center; margin-bottom: 20px; }
+  .option { border: 2px solid transparent; padding: 8px; cursor: pointer; }
+  .option.selected { border: 2px solid blue; }
+  button { padding: 10px 20px; font-weight: bold; border-radius: 20px; background: #2b9af3; color: white; border: none; cursor: pointer; }
+  #smsBox { margin-top: 20px; padding: 12px; border-radius: 10px; width: fit-content; margin-left: auto; margin-right: auto; display: none; }
+  .ok { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+  .bad { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+</style>
+</head>
+<body>
+
+<h2>What's the next step of the pattern?</h2>
+
+<!-- Secuencia -->
+<div class="sequence">
+  <div class="thumb">⬜</div>
+  <div class="thumb">⬜⬜</div>
+  <div class="thumb">⬜⬜⬜</div>
+  <div class="questionBox" id="question">?</div>
+</div>
+
+<!-- Opciones -->
+<div class="options" id="options">
+  <div class="option" data-id="1">⬜⬜⬜⬜</div>
+  <div class="option" data-id="2">⬜⬜⬜</div>
+  <div class="option" data-id="3">⬜⬜</div>
+  <div class="option" data-id="4">⬜⬜⬜⬜⬜</div>
+</div>
+
+<button id="checkBtn">Check</button>
+
+<!-- Caja estilo SMS -->
+<div id="smsBox"></div>
+
+<script>
+let selected = null;
+const correctAnswer = "4"; // la respuesta correcta
+
+document.querySelectorAll(".option").forEach(opt => {
+  opt.addEventListener("click", () => {
+    document.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+    opt.classList.add("selected");
+    selected = opt.getAttribute("data-id");
+
+    // Copiar selección al recuadro de interrogación
+    document.getElementById("question").textContent = opt.textContent;
+  });
+});
+
+document.getElementById("checkBtn").addEventListener("click", () => {
+  const smsBox = document.getElementById("smsBox");
+  smsBox.style.display = "block";
+
+  if (!selected) {
+    smsBox.textContent = "⚠️ Selecciona una opción primero.";
+    smsBox.className = "bad";
+    return;
+  }
+
+  if (selected === correctAnswer) {
+    smsBox.textContent = "✅ Correcto, ¡bien hecho!";
+    smsBox.className = "ok";
+  } else {
+    smsBox.textContent = "❌ Incorrecto, inténtalo de nuevo.";
+    smsBox.className = "bad";
+  }
+});
+</script>
+
+</body>
+</html>

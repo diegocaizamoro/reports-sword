@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árbol ORBAT - Explorador de Unidades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .tree {
+            margin-left: 20px;
+            list-style-type: none;
+        }
+
+        .tree li {
+            margin: 5px 0;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .tree .folder::before {
+            content: "📂 ";
+        }
+
+        .tree .folder.open::before {
+            content: "📁 ";
+        }
+
+        .tree .file::before {
+            content: "📄 ";
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Estilos para las barras de progreso */
+        .progress-container {
+            width: 100px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .progress-bar {
+            height: 100%;
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Árbol de ORBAT - Explorador de Unidades</h2>
+    <div id="treeContainer"></div>
+
+    <script>
+        window.onload = function () {
+            fetch("http://localhost:3000/orbat.xml")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("No se pudo cargar el archivo orbat.xml");
+                    }
+                    return response.text();
+                })
+                .then(xmlText => {
+                    parseXML(xmlText);
+                })
+                .catch(error => console.error("Error al cargar el ORBAT:", error));
+        };
+
+        function parseXML(xmlText) {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+
+            // Buscar el nodo <parties> principal
+            const partiesNode = xmlDoc.getElementsByTagName("parties")[0];
+            if (!partiesNode) {
+                console.error("No se encontró el nodo <parties>");
+                return;
+            }
+
+            // Obtener SOLO los <party> dentro de <parties>
+            const parties = Array.from(partiesNode.getElementsByTagName("party"));
+
+            const treeContainer = document.getElementById("treeContainer");
+            treeContainer.innerHTML = ""; // Limpiar contenido anterior
+
+            let ul = document.createElement("ul");
+            ul.className = "tree";
+
+            parties.forEach(party => {
+                const partyName = party.getAttribute("name");
+
+                let liParty = document.createElement("li");
+                liParty.textContent = partyName;
+                liParty.className = "folder";
+                liParty.onclick = function (event) { toggleChildren(event, this); };
+
+                let ulTactical = document.createElement("ul");
+                ulTactical.className = "tree hidden";
+
+                const tactical = party.getElementsByTagName("tactical")[0];
+                if (tactical) {
+                    extractFormations(tactical, ulTactical);
+                }
+
+                liParty.appendChild(ulTactical);
+                ul.appendChild(liParty);
+            });
+
+            treeContainer.appendChild(ul);
+        }
+
+
+
+        function extractUnits(automatNode, parentElement) {
+            const units = automatNode.children;
+            let operationalValues = [];
+
+            Array.from(units).forEach(unit => {
+                if (unit.tagName === "unit") {
+                    const unitName = unit.getAttribute("name");
+                    let equipments = unit.getElementsByTagName("equipments")[0];
+
+                    let operationalState = equipments && equipments.getAttribute("operational-state")
+                        ? parseFloat(equipments.getAttribute("operational-state"))
+                        : 0;
+
+                    operationalValues.push(operationalState);
+
+                    let liUnit = document.createElement("li");
+                    liUnit.className = "file";
+                    liUnit.textContent = unitName;
+
+                    let progressBar = createProgressBar(operationalState, unitName);
+                    liUnit.appendChild(progressBar);
+                    parentElement.appendChild(liUnit);
+                }
+            });
+
+            let avgOperational = operationalValues.length > 0 ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length : 0;
+            return avgOperational;
+        }
+
+        function extractAutomats(formationNode, parentElement) {
+            const automats = formationNode.children;
+            let operationalValues = [];
+
+            Array.from(automats).forEach(automat => {
+                if (automat.tagName === "automat") {
+                    let liAutomat = document.createElement("li");
+                    liAutomat.className = "folder";
+                    liAutomat.textContent = automat.getAttribute("name");
+
+                    let ulUnits = document.createElement("ul");
+                    ulUnits.className = "tree hidden";
+
+                    // Obtener promedio de unidades dentro del automat
+                    let avgOperational = extractUnits(automat, ulUnits);
+                    operationalValues.push(avgOperational);
+
+                    let progressBar = createProgressBar(avgOperational, liAutomat.textContent);
+                    liAutomat.appendChild(progressBar);
+                    liAutomat.appendChild(ulUnits);
+                    liAutomat.onclick = function (event) { toggleChildren(event, this); };
+
+                    parentElement.appendChild(liAutomat);
+                }
+            });
+
+            // Devolver el promedio de los automats, si existen
+            return operationalValues.length > 0 ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length : 0;
+        }
+
+        function extractFormations(parentNode, parentElement) {
+            const formations = parentNode.children;
+            let totalOperationalValues = []; // Se usa solo para devolver el promedio al nivel superior
+
+            Array.from(formations).forEach(formation => {
+                if (formation.tagName === "formation") {
+                    const formationName = formation.getAttribute("name");
+
+                    let liFormation = document.createElement("li");
+                    liFormation.textContent = formationName;
+                    liFormation.className = "folder";
+                    liFormation.onclick = function (event) { toggleChildren(event, this); };
+
+                    let ulSubFormations = document.createElement("ul");
+                    ulSubFormations.className = "tree hidden";
+
+                    let operationalValues = [];
+
+                    // 🔹 Obtener el promedio de automats inmediatos
+                    let automatAvg = extractAutomats(formation, ulSubFormations);
+                    if (!isNaN(automatAvg) && automatAvg > 0) {
+                        operationalValues.push(automatAvg);
+                    }
+
+                    // 🔹 Obtener el promedio de formaciones hijas inmediatas
+                    let childFormationAvg = extractFormations(formation, ulSubFormations);
+                    if (!isNaN(childFormationAvg) && childFormationAvg > 0) {
+                        operationalValues.push(childFormationAvg);
+                    }
+
+
+                    // 🔹 Calcular el promedio solo con los hijos inmediatos reales
+                    let avgOperational = operationalValues.length > 0
+                        ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length
+                        : 0;
+
+                    let progressBar = createProgressBar(avgOperational, formationName);
+                    liFormation.appendChild(progressBar);
+                    liFormation.appendChild(ulSubFormations);
+                    parentElement.appendChild(liFormation);
+
+                    totalOperationalValues.push(avgOperational);
+                }
+            });
+
+            // 🔹 Retornar el promedio de este nivel al padre
+            return totalOperationalValues.length > 0
+                ? totalOperationalValues.reduce((a, b) => a + b, 0) / totalOperationalValues.length
+                : 0;
+        }
+
+
+
+
+        function createProgressBar(value, unitName) {
+            let percentage = Math.max(0, Math.min(value * 100, 100));
+
+            let color = percentage < 34 ? "#f4a9a9" : percentage < 67 ? "yellow" : "#99e699";
+
+
+            let container = document.createElement("div");
+            container.className = "progress-container";
+            container.setAttribute("name", unitName);  // Asigna el nombre de la unidad al contenedor
+
+            let bar = document.createElement("div");
+            bar.className = "progress-bar";
+            bar.style.width = percentage + "%";
+            bar.style.backgroundColor = color;
+            bar.style.position = "relative";
+            bar.style.textAlign = "center";
+            bar.style.color = "black";
+            bar.style.fontSize = "15px";
+            bar.style.lineHeight = "15px"; // Centrar el texto verticalmente
+            bar.textContent = Math.floor(percentage) + "%"; // Agregar el porcentaje dentro de la barra
+
+            container.appendChild(bar);
+            return container;
+        }
+
+        function toggleChildren(event, element) {
+            event.stopPropagation();
+            let children = element.querySelector("ul");
+            if (children) {
+                let isHidden = children.classList.contains("hidden");
+                children.classList.toggle("hidden", !isHidden);
+                element.classList.toggle("open", isHidden);
+            }
+        }
+
+
+
+
+        // Refrescar valores de orbat.xml cada 8s sin reconstruir el árbol
+        setInterval(() => {
+            fetch("http://localhost:3000/orbat.xml")
+                .then(response => response.text())
+                .then(xmlText => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                    updateOperationalValues(xmlDoc);
+                })
+                .catch(err => console.error("Error actualizando valores ORBAT:", err));
+        }, 8000);
+
+        // Escapar nombre seguro
+        function cssEscape(str) {
+            return str.replace(/([ !"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, '\\$1');
+        }
+
+        function updateOperationalValues(xmlDoc) {
+            const unitMap = new Map();
+
+            // Primero actualizamos todas las unidades y guardamos sus valores
+            const units = xmlDoc.getElementsByTagName("unit");
+
+            Array.from(units).forEach(unit => {
+                const unitName = unit.getAttribute("name");
+                const equipments = unit.getElementsByTagName("equipments")[0];
+                const operationalState = equipments && equipments.getAttribute("operational-state")
+                    ? parseFloat(equipments.getAttribute("operational-state"))
+                    : 0;
+
+                unitMap.set(unitName, operationalState);
+
+                const safeName = cssEscape(unitName);
+                const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+
+                if (container) {
+                    updateProgressBar(container, operationalState);
+                }
+            });
+
+            // Ahora actualizamos automats (promedio de unidades)
+            const automats = xmlDoc.getElementsByTagName("automat");
+            Array.from(automats).forEach(automat => {
+                const automatName = automat.getAttribute("name");
+                const unitNodes = automat.getElementsByTagName("unit");
+
+                let total = 0;
+                let count = 0;
+
+                Array.from(unitNodes).forEach(unit => {
+                    const name = unit.getAttribute("name");
+                    if (unitMap.has(name)) {
+                        total += unitMap.get(name);
+                        count++;
+                    }
+                });
+
+                const avg = count > 0 ? total / count : 0;
+                unitMap.set(automatName, avg);
+
+                const safeName = cssEscape(automatName);
+                const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                if (container) {
+                    updateProgressBar(container, avg);
+                }
+            });
+
+            // Ahora formaciones (promedio de automats y subformaciones)
+            const formations = xmlDoc.getElementsByTagName("formation");
+
+            // Recorremos de abajo hacia arriba (últimas formaciones primero)
+            Array.from(formations).reverse().forEach(formation => {
+                const formationName = formation.getAttribute("name");
+
+                // Automats directos
+                const automatNodes = formation.getElementsByTagName("automat");
+                let total = 0;
+                let count = 0;
+
+                Array.from(automatNodes).forEach(automat => {
+                    if (automat.parentNode === formation) {
+                        const name = automat.getAttribute("name");
+                        if (unitMap.has(name)) {
+                            total += unitMap.get(name);
+                            count++;
+                        }
+                    }
+                });
+
+                // Subformaciones directas
+                const subFormations = formation.getElementsByTagName("formation");
+                Array.from(subFormations).forEach(sub => {
+                    if (sub.parentNode === formation) {
+                        const name = sub.getAttribute("name");
+                        if (unitMap.has(name)) {
+                            total += unitMap.get(name);
+                            count++;
+                        }
+                    }
+                });
+
+                const avg = count > 0 ? total / count : 0;
+                unitMap.set(formationName, avg);
+
+                const safeName = cssEscape(formationName);
+                const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                if (container) {
+                    updateProgressBar(container, avg);
+                }
+            });
+        }
+
+        function updateProgressBar(container, value) {
+            const bar = container.querySelector(".progress-bar");
+
+            const percentage = Math.max(0, Math.min(value * 100, 100));
+            const color = percentage < 34 ? "#f4a9a9" : percentage < 67 ? "yellow" : "#99e699";
+
+            bar.style.width = percentage + "%";
+            bar.style.backgroundColor = color;
+            bar.textContent = Math.floor(percentage) + "%";
+        }
+
+        function cssEscape(str) {
+            return str.replace(/([ !"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, '\\$1');
+        }
+
+
+    </script>
+
+</body>
+
+</html>

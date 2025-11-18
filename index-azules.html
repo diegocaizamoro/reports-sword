@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árbol ORBAT - Explorador de Unidades</title>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.5.4/dist/socket.io.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>-->
+    <!-- Highcharts y sus módulos -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/annotations.js"></script>
+
+    <!-- Tema opcional -->
+    <script src="https://code.highcharts.com/themes/adaptive.js"></script>
+    <!-- <script src="libs/socket.io.min.js"></script>
+    <script src="libs/chart.umd.js"></script>
+    <script src="libs/chartjs-plugin-datalabels.js"></script>
+    <script src="libs/chartjs-plugin-datalabels.min.js"></script>-->
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="node_modules/ol/ol.css">
+</head>
+
+<body>
+    
+    <!--<script>
+        // Verifica si el usuario está logueado
+        if (localStorage.getItem("usuarioLogueado") !== "true") {
+            // Si no, vuelve al login
+            window.location.href = "login-r.html";
+        }
+    </script>-->
+    <div class="dashboard-grid">
+        <!-- 🟦 Panel izquierdo con pestañas -->
+        <div class="side-section">
+            <div class="tabs">
+                <button class="tab-button active" data-tab="tab1">Personal</button>
+                <button class="tab-button" data-tab="tab2">Munición</button>
+                <button class="tab-button" data-tab="tab3">Equipamiento</button>
+                <button class="tab-button" data-tab="tab4">Mapa</button>
+            </div>
+            <div class="tab-content active" id="tab1">
+
+                <h2>Pérdidas de personal por unidad</h2>
+                <!--<div class="card">
+                    <canvas id="dynamicBarChart"></canvas>
+                </div>-->
+                <div class="card">
+                    <figure class="highcharts-figure">
+                        <div id="container-barras-personal"></div>
+                    </figure>
+                </div>
+                <h2>Eficiencia en Personal</h2>
+                <div class="card">
+                    <!--<canvas id="dynamicLineChartPersonal"></canvas>-->
+                    <figure class="highcharts-figure">
+                        <div id="container-line-personal"></div>
+                    </figure>
+                </div>
+                <h2>Resumen consolidado por unidad</h2>
+                <div class="card">
+                    <figure class="highcharts-figure">
+                        <div id="container-donuc"></div>
+                        <!--<p class="highcharts-description">
+                            Este gráfico de forma de dona representa el resumen total del personal en vivos, muertos y heridos.
+                        </p>-->
+                    </figure>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab2">
+                <h2>Consumo de recursos por munición</h2>
+                <div class="card">
+                    <figure class="highcharts-figure">
+                        <div id="consumoMunicion"></div>
+                    </figure>
+                </div>
+                <!--<div class="card">
+                    <canvas id="consumoMunicion"></canvas>
+                </div>-->
+                <!--<div class="card">
+                    <canvas id="doughnutChart" style="width:300px; height:300px;"></canvas>
+                </div>-->
+                <div class="card">
+                    <!--<canvas id="lineMunicionHtml" style="width:300px; height:300px;"></canvas>-->
+                    <figure class="highcharts-figure">
+                        <div id="container-line-municion"></div>
+                    </figure>
+                </div>
+            </div>
+
+            <div class="tab-content active" id="tab3">
+                <h2>Línea de tiempo de perdidas de personal por unidad </h2>
+                <div class="card">
+                    <figure class="highcharts-figure">
+                        <div id="parent-container">
+                            <div id="play-controls">
+                                <button id="play-pause-button" class="fa fa-play" title="play"></button>
+                                <input id="play-range" type="range" value="0" min="0" max="21" />
+                            </div>
+                            <div id="container-line-time"></div>
+                        </div>
+                    </figure>
+                    <pre id="csv">
+<pre id="csv">
+round	Batallón de Infantería	Grupo de Caballería Blindada	Grupo de Caballería 105	Grupo de Caballería Mecanizada	Compañía Contramobilidad
+0	0	0	0	0	0
+1	18	10	6	15	45
+2	18	35	16	30	12
+3	28	37	16	45	56
+4	53	43	34	49	57
+5	61	61	49	53	60
+6	73	76	51	63	65
+7	85	86	55	88	66
+8	85	111	73	88	69
+9	85	129	83	92	78
+10	85	154	98	92	80
+11	85	164	116	92	90
+12	85	164	131	92	100
+13	85	164	141	92	120
+14	85	164	149	92	130
+15	85	164	157	92	140
+16	85	164	167	92	150
+17	240	164	173	92	160
+18	255	164	198	92	170
+19	273	260	206	92	180
+20	281	278	207	92	190
+</pre>
+                </div>
+            </div>
+            <div class="tab-content" id="tab4">
+                <h2>Mapa</h2>
+                <div id="map" class="map" tabindex="0"></div>
+            </div>
+        </div>
+        <!-- 🟩 Gráfico principal con scroll a la derecha -->
+        <!--<div class="scroll-container">-->
+        <div id="treeContainer">
+            <h2>Estado operacional por unidad</h2>
+            <div id="treeContent"></div>
+        </div>
+        <!--</div>-->
+    </div>
+    <!--<div id="dashboardContainer">
+       <div style="display: flex; align-items: center; justify-content: flex-start; padding: 10px;">
+            <button onclick="logout()" style="
+              position: fixed;
+              top: 10px;
+              right: 0;
+              padding: 8px 14px;
+              font-weight: bold;
+              background-color: #f44336;
+              color: white;
+              border: none;
+              border-radius: 5px 0 0 5px;
+              cursor: pointer;
+              z-index: 9999;">
+                🔓 Cerrar sesión
+            </button>
+        </div>
+    </div>-->
+    <!--<script>
+        function logout() {
+            localStorage.removeItem("usuarioLogueado");
+            window.location.href = "login-r.html";
+        }
+    </script>-->
+
+
+    <script src="scripts/pestanias.js"></script>
+    <script src="scripts/graficas.js"></script>
+    <script src="scripts/funciones.js"></script>
+    <script src="scripts/arbol-valores.js"></script>
+    <script type="module" src="scripts/maps/main.js"></script>
+</body>
+
+</html>

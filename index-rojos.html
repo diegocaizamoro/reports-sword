@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árbol ORBAT - Explorador de Unidades</title>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.5.4/dist/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <!-- <script src="libs/socket.io.min.js"></script>
+    <script src="libs/chart.umd.js"></script>
+    <script src="libs/chartjs-plugin-datalabels.js"></script>
+    <script src="libs/chartjs-plugin-datalabels.min.js"></script>-->
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .tree {
+            margin-left: 20px;
+            list-style-type: none;
+        }
+
+        .tree li {
+            margin: 5px 0;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .tree .folder::before {
+            content: "📂 ";
+        }
+
+        .tree .folder.open::before {
+            content: "📁 ";
+        }
+
+        .tree .file::before {
+            content: "📄 ";
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Estilos para las barras de progreso */
+        .progress-container {
+            width: 100px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        #treeContent {
+            width: 90%;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        #dashboardContainer {
+            width: 50%;
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+
+        .progress-bar {
+            height: 100%;
+            transition: width 3s ease-in-out, background-color 0.5s ease-in-out;
+        }
+
+        .dashboard-grid {
+            display: flex;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            flex-direction: column;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 700px;
+            height: 230px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--<script>
+        // Verifica si el usuario está logueado
+        if (localStorage.getItem("usuarioLogueado") !== "true") {
+            // Si no, vuelve al login
+            window.location.href = "login-r.html";
+        }
+    </script>-->
+
+
+    <div id="treeContainer">
+        <h2>Estado operacional por unidad</h2>
+        <div id="treeContent"></div>
+    </div>
+
+    <!--<div id="dashboardContainer">
+
+       <div style="display: flex; align-items: center; justify-content: flex-start; padding: 10px;">
+            <button onclick="logout()" style="
+              position: fixed;
+              top: 10px;
+              right: 0;
+              padding: 8px 14px;
+              font-weight: bold;
+              background-color: #f44336;
+              color: white;
+              border: none;
+              border-radius: 5px 0 0 5px;
+              cursor: pointer;
+              z-index: 9999;">
+                🔓 Cerrar sesión
+            </button>
+
+        </div>
+
+
+
+    </div>-->
+    <div class="dashboard-grid">
+        <h2>Pérdidas de personal por unidad</h2>
+        <div class="card">
+            <canvas id="dynamicBarChart" width="600" height="200"></canvas>
+        </div>
+        <h2>Consumo de munición por unidades</h2>
+        <div class="card">
+            <canvas id="consumoMunicion" width="600" height="200"></canvas>
+        </div>
+        <div class="card">
+            <canvas id="doughnutChart" style="width:300px; height:300px;"></canvas>
+        </div>
+
+    </div>
+    <!--<script>
+        function logout() {
+            localStorage.removeItem("usuarioLogueado");
+            window.location.href = "login-r.html";
+        }
+    </script>-->
+
+    <script>
+
+        let bando = "enemy"
+        let colorBando = "0xff0000"
+        let serverEscucha = "http://localhost:3000/orbat.xml"
+        let ultimoColor = null;
+        let xmlDoc;
+        const resourceNamesLimpios = [];
+        const consumoPorRecurso = new Map();
+        window.onload = function () {
+            fetch(serverEscucha)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("No se pudo cargar el archivo orbat.xml");
+                    }
+                    return response.text();
+                })
+                .then(xmlText => {
+                    parseXML(xmlText);
+                })
+                .catch(error => console.error("Error al cargar el ORBAT:", error));
+        };
+
+        function parseXML(xmlText) {
+            const parser = new DOMParser();
+            xmlDoc = parser.parseFromString(xmlText, "text/xml");
+            window.xmlDoc = parser.parseFromString(xmlText, "application/xml");
+
+
+            // Buscar el nodo <parties> principal
+            const partiesNode = xmlDoc.getElementsByTagName("parties")[0];
+            if (!partiesNode) {
+                console.error("No se encontró el nodo <parties>");
+                return;
+            }
+
+            // Obtener SOLO los <party> dentro de <parties> que tengan type="enemy"
+            const parties = Array.from(partiesNode.getElementsByTagName("party"))
+                .filter(party => party.getAttribute("type") === bando);
+
+            const treeContainer = document.getElementById("treeContent");
+            treeContainer.innerHTML = ""; // Limpiar contenido anterior
+
+            let ul = document.createElement("ul");
+            ul.className = "tree";
+
+            parties.forEach(party => {
+                const partyName = party.getAttribute("name");
+
+                let liParty = document.createElement("li");
+                liParty.textContent = partyName;
+                liParty.className = "folder";
+                liParty.onclick = function (event) { toggleChildren(event, this); };
+
+                let ulTactical = document.createElement("ul");
+                ulTactical.className = "tree hidden";
+
+                const tactical = party.getElementsByTagName("tactical")[0];
+                if (tactical) {
+                    extractFormations(tactical, ulTactical);
+                }
+
+                liParty.appendChild(ulTactical);
+                ul.appendChild(liParty);
+            });
+
+            treeContainer.appendChild(ul);
+        }
+
+        function extractUnits(automatNode, parentElement) {
+            // Verificar si el automat pertenece a un <party type="enemy">
+            let currentNode = automatNode;
+            let isEnemy = false;
+
+            while (currentNode) {
+                if (currentNode.tagName === "party") {
+                    isEnemy = currentNode.getAttribute("type") === bando;
+                    break;
+                }
+                currentNode = currentNode.parentElement;
+            }
+
+            if (!isEnemy) return 0; // Salir si no pertenece a un party enemigo
+
+            const units = automatNode.children;
+            let operationalValues = [];
+
+            Array.from(units).forEach(unit => {
+                if (unit.tagName === "unit") {
+                    const unitName = unit.getAttribute("name");
+                    let equipments = unit.getElementsByTagName("equipments")[0];
+
+                    let operationalState = equipments && equipments.getAttribute("operational-state")
+                        ? parseFloat(equipments.getAttribute("operational-state"))
+                        : 0;
+
+                    operationalValues.push(operationalState);
+
+                    let liUnit = document.createElement("li");
+                    liUnit.className = "file";
+                    liUnit.textContent = unitName;
+
+                    let progressBar = createProgressBar(operationalState, unitName);
+                    liUnit.appendChild(progressBar);
+                    parentElement.appendChild(liUnit);
+
+                }
+            });
+
+            let avgOperational = operationalValues.length > 0
+                ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length
+                : 0;
+
+            return avgOperational;
+        }
+
+
+        function extractAutomats(formationNode, parentElement) {
+            // Verifica si forma parte de un party enemy
+            let current = formationNode;
+            let isEnemy = false;
+
+            while (current) {
+                if (current.tagName === "party") {
+                    isEnemy = current.getAttribute("type") === bando;
+                    break;
+                }
+                current = current.parentElement;
+            }
+
+            if (!isEnemy) return 0; // Ignora si no es enemigo
+
+            const automats = formationNode.children;
+            let operationalValues = [];
+
+            Array.from(automats).forEach(automat => {
+                if (automat.tagName === "automat") {
+                    let liAutomat = document.createElement("li");
+                    liAutomat.className = "folder";
+                    liAutomat.textContent = automat.getAttribute("name");
+
+                    let ulUnits = document.createElement("ul");
+                    ulUnits.className = "tree hidden";
+
+                    let avgOperational = extractUnits(automat, ulUnits);
+                    operationalValues.push(avgOperational);
+
+                    let progressBar = createProgressBar(avgOperational, liAutomat.textContent);
+                    liAutomat.appendChild(progressBar);
+                    liAutomat.appendChild(ulUnits);
+                    liAutomat.onclick = function (event) { toggleChildren(event, this); };
+
+                    parentElement.appendChild(liAutomat);
+                }
+            });
+
+            return operationalValues.length > 0
+                ? operationalValues.reduce((a, b) => a + b, 0) / operationalValues.length
+                : 0;
+        }
+
+
+        function calculateAvgOperationalFromUnits(node) {
+            let unitStates = [];
+
+            function recurse(currentNode) {
+                if (currentNode.tagName === "unit") {
+                    let equipments = currentNode.getElementsByTagName("equipments")[0];
+                    let opState = equipments?.getAttribute("operational-state");
+                    if (opState !== null && opState !== undefined) {
+                        unitStates.push(parseFloat(opState));
+                    }
+                }
+
+                Array.from(currentNode.children || []).forEach(child => recurse(child));
+            }
+
+            recurse(node);
+
+            if (unitStates.length === 0) return 0;
+            return unitStates.reduce((a, b) => a + b, 0) / unitStates.length;
+        }
+
+        function extractFormations(parentNode, parentElement) {
+            let current = parentNode;
+            let isEnemy = false;
+
+            while (current) {
+                if (current.tagName === "party") {
+                    isEnemy = current.getAttribute("type") === bando;
+                    break;
+                }
+                current = current.parentElement;
+            }
+
+            if (!isEnemy) return 0;
+
+            const formations = Array.from(parentNode.children).filter(child => child.tagName === "formation");
+            let totalOperationalValues = [];
+
+            formations.forEach(formation => {
+                const formationName = formation.getAttribute("name");
+
+                let liFormation = document.createElement("li");
+                liFormation.textContent = formationName;
+                liFormation.className = "folder";
+                liFormation.onclick = function (event) { toggleChildren(event, this); };
+
+                let ulSubFormations = document.createElement("ul");
+                ulSubFormations.className = "tree hidden";
+
+                extractFormations(formation, ulSubFormations); // construir el árbol
+                extractAutomats(formation, ulSubFormations);   // construir los automats
+
+                // Aquí es donde se aplica la nueva lógica
+                let avgOperational = calculateAvgOperationalFromUnits(formation);
+
+                let progressBar = createProgressBar(avgOperational, formationName);
+                liFormation.appendChild(progressBar);
+                liFormation.appendChild(ulSubFormations);
+                parentElement.appendChild(liFormation);
+
+                totalOperationalValues.push(avgOperational);
+            });
+
+            return totalOperationalValues.length > 0
+                ? totalOperationalValues.reduce((a, b) => a + b, 0) / totalOperationalValues.length
+                : 0;
+        }
+
+        function createProgressBar(value, unitName) {
+            let percentage = Math.max(0, Math.min(value * 100, 100));
+            let color = percentage < 34 ? "#f4a9a9" : percentage < 67 ? "yellow" : "#99e699";
+
+            let container = document.createElement("div");
+            container.className = "progress-container";
+            container.setAttribute("name", unitName);  // Asigna el nombre de la unidad al contenedor
+
+            let bar = document.createElement("div");
+            bar.className = "progress-bar";
+            bar.style.width = percentage + "%";
+            bar.style.backgroundColor = color;
+            bar.style.position = "relative";
+            bar.style.textAlign = "center";
+            bar.style.color = "black";
+            bar.style.fontSize = "15px";
+            bar.style.lineHeight = "15px"; // Centrar el texto verticalmente
+            bar.textContent = Math.floor(percentage) + "%"; // Agregar el porcentaje dentro de la barra
+            container.appendChild(bar);
+            return container;
+        }
+
+        function toggleChildren(event, element) {
+            event.stopPropagation();
+            let children = element.querySelector("ul");
+            // Buscar el <ul> hijo inmediato (si existe)
+            const span = element.querySelector(".progress-container") || element.querySelector("span");
+            const padre = span?.getAttribute("name") || span?.textContent?.trim() || "[sin nombre]";
+            resourceNamesLimpios.length = 0;
+            consumoPorRecurso.clear();
+            if (children) {
+                let isHidden = children.classList.contains("hidden");
+                children.classList.toggle("hidden", !isHidden);
+                element.classList.toggle("open", isHidden);
+                actualizarGraficoDesdeNodo(padre, children);
+            }
+        }
+
+        //funcion donde imprime los hijos inmediatos
+        function printImmediateChildren(ulElement) {
+            const liChildren = Array.from(ulElement.children).filter(child => child.tagName === "LI");
+
+            console.log("📂 Hijos inmediatos:");
+            liChildren.forEach(child => {
+                let nameSpan = Array.from(child.children).find(el => el.tagName === "SPAN");
+
+                if (nameSpan) {
+                    console.log("- " + nameSpan.textContent.trim());
+                } else {
+                    // Captura el texto directo del <li> (ignorando el <ul>)
+                    const directText = child.firstChild?.textContent?.trim();
+                    if (directText) {
+                        console.log("- " + directText);
+                    } else {
+                        console.log("⚠️ Nodo hijo sin nombre visible");
+                    }
+                }
+            });
+        }
+        // Refrescar valores de orbat.xml cada 8s sin reconstruir el árbol
+        setInterval(() => {
+            fetch(serverEscucha)
+                .then(response => response.text())
+                .then(xmlText => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+
+                    // Obtener todos los elementos con atributo "name"
+                    const elementsWithName = xmlDoc.querySelectorAll('[name]');
+                    const nameMap = new Map();
+
+                    elementsWithName.forEach(el => {
+                        let originalName = el.getAttribute("name");
+                        let count = nameMap.get(originalName) || 0;
+
+                        if (count > 0) {
+                            // Agregar puntos al nombre
+                            let newName = originalName + '.'.repeat(count);
+                            el.setAttribute("name", newName);
+                        }
+
+                        // Actualizar el contador
+                        nameMap.set(originalName, count + 1);
+                    });
+
+                    updateOperationalValues(xmlDoc);
+                })
+                .catch(err => console.error("Error actualizando valores ORBAT:", err));
+        }, 8000);
+
+        // Escapar nombre seguro
+        function cssEscape(str) {
+            return str.replace(/([ !"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, '\\$1');
+        }
+
+        function updateOperationalValues(xmlDoc) {
+            const parties = Array.from(xmlDoc.getElementsByTagName("party"))
+                .filter(party =>
+                    party.getAttribute("type") === bando &&
+                    party.getAttribute("color") === colorBando
+                );
+
+            parties.forEach(party => {
+                const unitMap = new Map();
+                const tactical = party.querySelector("tactical");
+                if (!tactical) return;
+
+                // ========== 1. UNITS ==========
+                //const automats = Array.from(tactical.querySelectorAll("automat[color='0xff0000']"));
+                const automats = Array.from(
+                    tactical.querySelectorAll(`automat[color='${colorBando}']`)
+                );
+
+                automats.forEach(automat => {
+                    const units = Array.from(automat.getElementsByTagName("unit"))
+                        .filter(unit =>
+                            unit.getAttribute("color") === colorBando &&
+                            unit.getElementsByTagName("unit").length === 0 &&
+                            party.contains(unit) // asegura que esté en este party
+                        );
+
+                    units.forEach(unit => {
+                        const unitName = unit.getAttribute("name");
+                        const equipments = unit.getElementsByTagName("equipments")[0];
+                        const operationalState = equipments && equipments.getAttribute("operational-state")
+                            ? parseFloat(equipments.getAttribute("operational-state"))
+                            : 0;
+
+                        if (!unitMap.has(unitName)) {
+                            unitMap.set(unitName, operationalState);
+
+                            const safeName = cssEscape(unitName);
+                            const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                            if (container) updateProgressBar(container, operationalState);
+                        }
+                    });
+                });
+
+                // ========== 2. AUTOMATS ==========
+                automats.forEach(automat => {
+                    const automatName = automat.getAttribute("name");
+
+                    const units = Array.from(automat.getElementsByTagName("unit"))
+                        .filter(unit =>
+                            unit.getAttribute("color") === colorBando &&
+                            unit.getElementsByTagName("unit").length === 0 &&
+                            party.contains(unit)
+                        );
+
+                    let total = 0;
+                    let count = 0;
+
+                    units.forEach(unit => {
+                        const name = unit.getAttribute("name");
+                        if (unitMap.has(name)) {
+                            total += unitMap.get(name);
+                            count++;
+                        }
+                    });
+
+                    if (automatName === "VCI 1/4") {
+                        units.forEach(unit => {
+                            const name = unit.getAttribute("name");
+                            const id = unit.getAttribute("id");
+                            console.log(name, id)
+                        });
+
+                    }
+
+                    const avg = count > 0 ? total / count : 0;
+                    unitMap.set(automatName, avg);
+
+                    const safeName = cssEscape(automatName);
+                    const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                    if (container) updateProgressBar(container, avg);
+                });
+
+                // ========== 3. FORMATIONS ==========
+                //const formations = Array.from(tactical.querySelectorAll("formation[color='0xff0000']")).reverse();
+                const formations = Array.from(
+                    tactical.querySelectorAll(`formation[color='${colorBando}']`)
+                ).reverse();
+
+                formations.forEach(formation => {
+                    const formationName = formation.getAttribute("name");
+                    let total = 0;
+                    let count = 0;
+
+                    const children = Array.from(formation.children);
+
+                    const automatNodes = children
+                        .filter(child => child.tagName === "automat" && child.getAttribute("color") === colorBando);
+                    automatNodes.forEach(automat => {
+                        const name = automat.getAttribute("name");
+                        if (unitMap.has(name)) {
+                            total += unitMap.get(name);
+                            count++;
+                        }
+                    });
+
+                    const subFormations = children
+                        .filter(child => child.tagName === "formation" && child.getAttribute("color") === colorBando);
+                    subFormations.forEach(sub => {
+                        const name = sub.getAttribute("name");
+                        if (unitMap.has(name)) {
+                            total += unitMap.get(name);
+                            count++;
+                        }
+                    });
+
+                    const avg = count > 0 ? total / count : 0;
+                    unitMap.set(formationName, avg);
+
+                    const safeName = cssEscape(formationName);
+                    const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                    if (container) updateProgressBar(container, avg);
+                });
+
+                // ========== 4. PARTY ==========
+                const partyName = party.getAttribute("name");
+                let total = 0;
+                let count = 0;
+
+                const rootFormations = Array.from(tactical.children)
+                    .filter(f => f.tagName === "formation" && f.getAttribute("color") === colorBando);
+
+                rootFormations.forEach(formation => {
+                    const name = formation.getAttribute("name");
+                    if (unitMap.has(name)) {
+                        total += unitMap.get(name);
+                        count++;
+                    }
+                });
+
+                const avg = count > 0 ? total / count : 0;
+                unitMap.set(partyName, avg);
+
+                const safeName = cssEscape(partyName);
+                const container = document.querySelector(`.progress-container[name="${safeName}"]`);
+                if (container) updateProgressBar(container, avg);
+            });
+        }
+
+
+        function updateProgressBar(container, value) {
+            const bar = container.querySelector(".progress-bar");
+
+            const percentage = Math.max(0, Math.min(value * 100, 100));
+            const color = percentage < 34 ? "#f4a9a9" : percentage < 67 ? "yellow" : "#99e699";
+
+            bar.style.width = percentage + "%";
+            bar.style.backgroundColor = color;
+            bar.textContent = Math.floor(percentage) + "%";
+        }
+
+
+        // Doughnut Chart
+        const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+        const doughnutChart = new Chart(doughnutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [65, 25, 10],
+                    backgroundColor: []
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,  // permite que se adapte al div
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: { size: 8, weight: 'bold' }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Crear la instancia de la barra
+        const dynamicCtx = document.getElementById('dynamicBarChart').getContext('2d');
+        const dynamicBarChart = new Chart(dynamicCtx, {
+            type: 'bar',
+            data: {
+                //labels: ["fr","ddf"],
+                datasets: [{
+                    label: [],
+                    data: [],
+                    backgroundColor: [],  // se llena dinámicamente con un color por barra
+                    borderColor: [],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y', // Barras horizontales
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 15,          // ← tamaño del label
+                                weight: 'bold'     // ← negrita
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                const label = context.label || '';
+                                const value = context.raw || 0;
+                                return `${label}: ${value} muertos`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#000',
+                        anchor: 'end',
+                        align: 'right',
+                        font: {
+                            weight: 'bold',
+                            size: 12
+                        },
+                        formatter: value => value // Muestra el número de muertos
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        // Puedes quitar "max: 100" si deseas que se ajuste automáticamente
+                    }
+                }
+            },
+            plugins: [ChartDataLabels] // <-- Activa el plugin
+        });
+
+
+        // Crear la instancia de la barra
+        const dynamicMunicion = document.getElementById('consumoMunicion').getContext('2d');
+        const dynamicMunicionBarChart = new Chart(dynamicMunicion, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Munición',
+                    data: [],
+                    backgroundColor: [],  // se llena dinámicamente con un color por barra
+                    borderColor: [],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 15,          // ← tamaño del label
+                                weight: 'bold'     // ← negrita
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                const label = context.label || '';
+                                const value = context.raw || 0;
+                                return `${label}: ${value}`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#000',
+                        anchor: 'end',
+                        align: 'right',
+                        font: {
+                            weight: 'bold',
+                            size: 12
+                        },
+                        formatter: value => value // Muestra el número de muertos
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        // Puedes quitar "max: 100" si deseas que se ajuste automáticamente
+                    }
+                }
+            },
+            plugins: [ChartDataLabels] // <-- Activa el plugin
+        });
+
+
+        function actualizarGraficoDesdeNodo(padre, nodo) {
+            if (!nodo) return;
+
+            const liChildren = Array.from(nodo.children).filter(child => child.tagName === "LI");
+            const labels = [];
+            const data = [];
+            const backgroundColors = [];
+            const borderColors = [];
+            let totalMuertos = 0;
+            const labelsDonuc = [];
+            liChildren.forEach(child => {
+                const progress = child.querySelector(".progress-container");
+                // Buscar el nodo <unit>, <automat> o <formation> dentro de este <li>
+                const nombre = progress?.getAttribute("name") || progress?.textContent?.trim() || "[sin nombre]";
+                labels.push(nombre);
+                const muertos = contarMuertosDesdeNombre(nombre);
+                data.push(muertos);
+
+                const color = generarColorAleatorio();
+                backgroundColors.push(color);
+                borderColors.push('black');
+                totalMuertos += muertos;
+
+            });
+
+            // 2. Quitar duplicados con Set
+            const labelsMuni = Array.from(consumoPorRecurso.keys()); // Eje X
+            const dataMuni = Array.from(consumoPorRecurso.values()); // Eje Y
+            const nombresUnicos = Array.from(new Set(resourceNamesLimpios));
+            //console.log("📦 Recursos encontrados:", nombresUnicos);
+            const maxConsumo = Math.max(...data, 10); // Valor mínimo por defecto 10
+            dynamicMunicionBarChart.options.scales.x.max = Math.ceil(maxConsumo * 1.1); // 10% más para margen visual
+            dynamicMunicionBarChart.data.labels = labelsMuni;        // Eje X
+            dynamicMunicionBarChart.data.datasets[0].data = dataMuni; // Puedes ajustar el valor si tienes cantidades reales
+            // Opcional: asignar colores aleatorios
+            const backgroundColorsMuertos = generarColoresUnicosMuertos(dataMuni.length);
+            dynamicMunicionBarChart.data.datasets[0].backgroundColor = backgroundColorsMuertos;
+            dynamicMunicionBarChart.data.datasets[0].borderColor = borderColors;
+            dynamicMunicionBarChart.update();
+
+
+
+
+
+            // Obtener el máximo de muertos para escalar el eje X dinámicamente
+            const maxMuertos = Math.max(...data, 10); // Valor mínimo por defecto 10
+            dynamicBarChart.options.scales.x.max = Math.ceil(maxMuertos * 1.1); // 10% más para margen visual
+            dynamicBarChart.data.datasets[0].label = `${padre}: ${totalMuertos} muertos`; // ← aquí se actualiza el label
+            //dynamicBarChart.data.datasets[0].labels = ""; // ← aquí se actualiza el label
+            dynamicBarChart.data.datasets[0].backgroundColor = backgroundColors;
+            dynamicBarChart.data.datasets[0].borderColor = borderColors;
+            dynamicBarChart.data.labels = labels;
+            dynamicBarChart.data.datasets[0].data = data;
+            dynamicBarChart.update();
+
+
+            //donuc
+            const filteredLabels = [];
+            const filteredData = [];
+
+            labelsMuni.forEach((label, i) => {
+                if (dataMuni[i] > 0) {
+                    filteredLabels.push(label);
+                    filteredData.push(dataMuni[i]);
+                }
+            });
+
+            // labels.forEach((labelM, i) => {
+            if (totalMuertos > 0) {
+                filteredLabels.push("muertos");
+                filteredData.push(totalMuertos);
+            }
+            //});
+
+            const backgroundColorsDona = generarColoresUnicos(filteredData.length);
+            doughnutChart.data.labels = filteredLabels;
+            doughnutChart.data.datasets[0].data = filteredData;
+            doughnutChart.data.datasets[0].backgroundColor = backgroundColorsDona;
+            doughnutChart.update();
+
+        }
+
+        function contarMuertosDesdeNombre(nombreUnidad) {
+            if (!window.xmlDoc) {
+                console.warn("❌ xmlDoc no cargado");
+                return 0;
+            }
+
+            // Buscar nodo en el XML que tenga atributo name que comience con el nombre dado
+            const nodoRaiz = Array.from(window.xmlDoc.querySelectorAll("[name]"))
+                .find(n => n.getAttribute("name") === nombreUnidad || n.getAttribute("name")?.startsWith(nombreUnidad));
+
+            if (!nodoRaiz) {
+                console.warn(`⚠️ No se encontró nodo XML con name="${nombreUnidad}"`);
+                return 0;
+            }
+
+            // Recursivamente contar muertos a partir de ese nodo
+            return contarMuertosRecursivo(nodoRaiz);
+        }
+
+        function contarMuertosRecursivo(xmlNode) {
+            let muertos = 0;
+
+            // Si el nodo es unit y tiene equipments
+            if (xmlNode.tagName === "unit") {
+                const equipmentList = xmlNode.querySelectorAll("equipment");
+
+                equipmentList.forEach(eq => {
+                    const humans = eq.querySelectorAll("human");
+                    humans.forEach(h => {
+                        if (h.getAttribute("state") === "dead") {
+                            muertos++;
+                        }
+                    });
+                });
+
+
+
+                const resourcetList = xmlNode.querySelectorAll("resource");
+                resourcetList.forEach(r => {
+                    const rawName = r.getAttribute("name");
+                    const consumoStr = r.getAttribute("total-consumption");
+
+                    if (rawName && consumoStr) {
+                        const nombreLimpio = rawName.replace(/\.*$/, "").trim();
+                        //const consumo = parseFloat(consumoStr) || 0;
+                        //const consumo = Math.floor(parseFloat(consumoStr)) || 0;
+                        const consumoNum = parseFloat(consumoStr) || 0;
+                        const consumo = (consumoNum % 1 >= 0.6) ? Math.ceil(consumoNum) : Math.floor(consumoNum);
+
+
+
+                        // Sumar al total acumulado
+                        if (consumoPorRecurso.has(nombreLimpio)) {
+                            consumoPorRecurso.set(nombreLimpio, consumoPorRecurso.get(nombreLimpio) + consumo);
+                        } else {
+                            consumoPorRecurso.set(nombreLimpio, consumo);
+                        }
+                    }
+                });
+
+
+            }
+
+            // Recorrer hijos recursively (formation, automat, unit)
+            const hijos = Array.from(xmlNode.children).filter(n =>
+                ["formation", "automat", "unit"].includes(n.tagName)
+            );
+
+            hijos.forEach(hijo => {
+                muertos += contarMuertosRecursivo(hijo);
+            });
+
+            return muertos;
+        }
+
+        function generarColorAleatorio() {
+            let nuevoColor;
+            do {
+                const r = Math.floor(Math.random() * 156 + 100);
+                const g = Math.floor(Math.random() * 156 + 100);
+                const b = Math.floor(Math.random() * 156 + 100);
+                nuevoColor = `rgba(${r}, ${g}, ${b}, 0.7)`;
+            } while (nuevoColor === ultimoColor); // repetir hasta que sea distinto
+
+            ultimoColor = nuevoColor;
+            return nuevoColor;
+        }
+
+        //funcion para muertos generar colres
+        function generarColoresUnicosMuertos(cantidad) {
+            const colores = [];
+            for (let i = 0; i < cantidad; i++) {
+                const hue = Math.floor((360 / cantidad) * i); // separa los tonos en el círculo cromático
+                colores.push(`hsl(${hue}, 70%, 50%)`);
+            }
+            return colores;
+        }
+
+
+        //funcion para dona generar colres
+        function generarColoresUnicos(cantidad) {
+            const colores = [];
+            for (let i = 0; i < cantidad; i++) {
+                const hue = Math.floor((360 / cantidad) * i); // separa los tonos en el círculo cromático
+                colores.push(`hsl(${hue}, 70%, 50%)`);
+            }
+            return colores;
+        }
+
+    </script>
+    <script>
+
+        /*
+                // Bar Chart
+                const barCtx = document.getElementById('barChart').getContext('2d');
+                const barChart = new Chart(barCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Bajas Operativas',
+                            data: [30, 50, 40, 60, 80, 70],
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)'
+                        }]
+                    },
+                    options: { responsive: true }
+                });
+        
+                // Doughnut Chart
+                const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+                const doughnutChart = new Chart(doughnutCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Activos', 'Inactivos', 'Mantenimiento'],
+                        datasets: [{
+                            data: [65, 25, 10],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(255, 206, 86, 0.7)'
+                            ]
+                        }]
+                    },
+                    options: { responsive: true }
+                });
+        
+                // Pie Chart
+                const pieCtx = document.getElementById('pieChart').getContext('2d');
+                const pieChart = new Chart(pieCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Unidad A', 'Unidad B', 'Unidad C'],
+                        datasets: [{
+                            data: [300, 500, 200],
+                            backgroundColor: [
+                                'rgba(153, 102, 255, 0.7)',
+                                'rgba(255, 159, 64, 0.7)',
+                                'rgba(54, 162, 235, 0.7)'
+                            ]
+                        }]
+                    },
+                    options: { responsive: true }
+                });
+        */
+
+    </script>
+</body>
+
+</html>
