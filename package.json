@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.8",
+    "chart.js": "^4.5.0",
+    "chokidar": "^4.0.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "highcharts": "^12.4.0",
+    "ol": "^10.7.0",
+    "socket.io": "^4.8.1",
+    "xml2js": "^0.6.2"
+  }
+}

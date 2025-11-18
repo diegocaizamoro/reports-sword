@@ -8,8 +8,8 @@ const resourceNamesLimpios = [];
 const consumoPorRecurso = new Map();
 const asignadoPorRecurso = new Map();
 window.onload = function () {
-    fetch('https://raw.githubusercontent.com/diegocaizamoro/reports-sword/refs/heads/main/orbat.xml') // para produccion
-    //fetch(serverEscucha) para pruebas
+    //fetch('https://raw.githubusercontent.com/diegocaizamoro/reports-sword/refs/heads/main/orbat.xml') // para produccion
+    fetch(serverEscucha) //para pruebas
         .then(response => {
             if (!response.ok) {
                 throw new Error("No se pudo cargar el archivo orbat.xml");
