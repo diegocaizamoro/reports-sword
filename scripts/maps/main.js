@@ -93,6 +93,7 @@ map.on("singleclick", function (evt) {
 
       popupContent.innerHTML = `
         <strong>${realFeature.get("name")}</strong><br>
+        <strong>${realFeature.get("parentName")}</strong><br>
         Estado: ${realFeature.get("percentage") || 0}%
       `;
       overlay.setPosition(evt.coordinate);
@@ -112,30 +113,7 @@ map.on("pointermove", function (evt) {
   });
   map.getTargetElement().style.cursor = hit ? "pointer" : "";
 });
-/*// Capa satelital (ESRI)
-const satelliteLayer = new ol.layer.Tile({
-  source: new ol.source.XYZ({
-    url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-  }),
-});
 
-// Capa de etiquetas (OSM solo labels)
-const labelsLayer = new ol.layer.Tile({
-  source: new ol.source.XYZ({
-    url: "https://{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png",
-  }),
-  opacity: 0.75, // Transparencia para que se vea encima del satélite
-});
-
-// Agregar ambas capas al mapa
-const map = new ol.Map({
-  target: "map",
-  layers: [satelliteLayer, labelsLayer],
-  view: new ol.View({
-    center: ol.proj.fromLonLat([-78.5, -1.6]),
-    zoom: 6,
-  }),
-});*/
 
 // Fuente básica donde metemos puntos UNIT
 let unitSource = new ol.source.Vector();
@@ -224,13 +202,17 @@ function extractUnits(obj) {
   return results;
 }
 
-function searchUnits(node, results) {
+function searchUnits(node, results, parentName = null) {
   if (!node || typeof node !== "object") return;
+
+  // Si el nodo actual es un <automat> y tiene atributo name, lo usamos como parentName
+  if (node.$?.name) {
+    parentName = node.$.name;
+  }
 
   if (node.unit) {
     (node.unit || []).forEach((u) => {
       if (u.position && u.position[0]?.$?.x && u.position[0]?.$?.y) {
-        // Leer estado desde equipments
         let opState = null;
         if (u.equipments && u.equipments[0]?.$?.["operational-state"]) {
           opState = parseFloat(u.equipments[0].$["operational-state"]) * 100;
@@ -238,10 +220,11 @@ function searchUnits(node, results) {
 
         results.push({
           name: u.$?.name || "Unit",
+          parentName: parentName || "Sin padre", // 👈 Nombre del automat padre
           x: parseFloat(u.position[0].$.x),
           y: parseFloat(u.position[0].$.y),
           mgrs: u.position[0]._?.trim() || null,
-          percentage: opState || 0, // <-- (% de vida de la unidad)
+          percentage: opState || 0,
         });
       }
     });
@@ -249,12 +232,13 @@ function searchUnits(node, results) {
 
   Object.values(node).forEach((child) => {
     if (Array.isArray(child)) {
-      child.forEach((c) => searchUnits(c, results));
+      child.forEach((c) => searchUnits(c, results, parentName));
     } else if (typeof child === "object") {
-      searchUnits(child, results);
+      searchUnits(child, results, parentName);
     }
   });
 }
+
 
 function mgrsToLatLon(mgrsString) {
   try {
@@ -286,6 +270,7 @@ function updateMap(units) {
 
       return new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
+        parentName: u.parentName,
         name: u.name,
         percentage: u.percentage,
         color: color, // ← Usamos el color dinámico
