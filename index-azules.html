@@ -155,8 +155,12 @@ round	Batallón de Infantería	Grupo de Caballería Blindada	Grupo de Caballerí
                     </select>
                 </div>
                 <div id="map" class="map">
-                    <div id="popup"></div>
+                    <div id="popup" class="ol-popup">
+                        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                        <div id="popup-content"></div>
+                    </div>
                 </div>
+
             </div>
 
         </div>
@@ -199,7 +203,7 @@ round	Batallón de Infantería	Grupo de Caballería Blindada	Grupo de Caballerí
     <script src="scripts/arbol-valores.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/mgrs/dist/mgrs.js"></script>
-    <script type="module" src="scripts/maps/main.js"></script>
+    <script  src="scripts/maps/main.js"></script>
 </body>
 
 </html>

@@ -34,6 +34,11 @@ const layers = {
 
 // Mapa
 const map = new ol.Map({
+  
+  controls: [
+  new ol.control.FullScreen(),
+  new ol.control.ScaleLine(),
+],
   target: "map",
   layers: Object.values(layers),
   view: new ol.View({
@@ -53,6 +58,60 @@ document
     }
   });
 
+// --- Overlay del popup ---
+const popup = document.getElementById("popup");
+const popupContent = document.getElementById("popup-content");
+const popupCloser = document.getElementById("popup-closer");
+
+const overlay = new ol.Overlay({
+  element: popup,
+  autoPan: {
+    animation: {
+      duration: 250,
+    },
+  },
+});
+map.addOverlay(overlay);
+
+// --- Cerrar popup ---
+popupCloser.onclick = function () {
+  overlay.setPosition(undefined);
+  popupCloser.blur();
+  return false;
+};
+
+// --- Evento de click para mostrar popup ---
+map.on("singleclick", function (evt) {
+  let featureFound = false;
+
+  map.forEachFeatureAtPixel(
+    evt.pixel,
+    function (feature) {
+      const realFeature = feature.get("features")
+        ? feature.get("features")[0]
+        : feature;
+
+      popupContent.innerHTML = `
+        <strong>${realFeature.get("name")}</strong><br>
+        Estado: ${realFeature.get("percentage") || 0}%
+      `;
+      overlay.setPosition(evt.coordinate);
+      featureFound = true;
+    },
+    {
+      hitTolerance: 10, // Mejor manejo del clic
+    }
+  );
+
+  if (!featureFound) overlay.setPosition(undefined);
+});
+
+map.on("pointermove", function (evt) {
+  const hit = map.hasFeatureAtPixel(evt.pixel, {
+    hitTolerance: 10, // Aumenta el área de detección en píxeles
+  });
+  map.getTargetElement().style.cursor = hit ? "pointer" : "";
+});
 /*// Capa satelital (ESRI)
 const satelliteLayer = new ol.layer.Tile({
   source: new ol.source.XYZ({
@@ -83,7 +142,7 @@ let unitSource = new ol.source.Vector();
 
 // Fuente de clustering (agrupación automática)
 let clusterSource = new ol.source.Cluster({
-  distance: 10, // Ajusta: distancia en píxeles entre puntos para agrupar
+  distance: 50, // Ajusta: distancia en píxeles entre puntos para agrupar
   source: unitSource,
 });
 
@@ -101,7 +160,7 @@ const clusterLayer = new ol.layer.Vector({
       return new ol.style.Style({
         image: new ol.style.Circle({
           radius: 20,
-          fill: new ol.style.Fill({ color: "#2b7cff" }),
+          fill: new ol.style.Fill({ color: "#6e9fefff" }),
           stroke: new ol.style.Stroke({ color: "#fff", width: 2 }),
         }),
         text: new ol.style.Text({
@@ -121,7 +180,7 @@ const clusterLayer = new ol.layer.Vector({
           fill: new ol.style.Fill({ color: "#79a1f2ff" }),
           stroke: new ol.style.Stroke({ color: "#fff", width: 2 }),
         }),
-       /* text: text
+        /* text: text
           ? new ol.style.Text({
               text: text,
               font: "15px Arial",
@@ -251,7 +310,7 @@ const unitLayer = new ol.layer.Vector({
     const zoom = map.getView().getZoom();
 
     // No mostrar nada si estamos muy lejos
-    if (zoom < 13) {
+    if (zoom < 12) {
       return null;
     }
 
@@ -280,6 +339,5 @@ const unitLayer = new ol.layer.Vector({
     return baseStyle;
   },
 });
-
 
 map.addLayer(unitLayer);
