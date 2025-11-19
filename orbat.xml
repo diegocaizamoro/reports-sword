@@ -413,7 +413,7 @@
               <unit command-post="false" id="9" name="EC.INF.Pelotón.Morteros-81mm [9]" sort-id="1" type="EC.INF.Pelotón.Morteros-81mm">
                 <position x="43199.415248199111" y="52941.495348444063">17MNS9654211697</position>
                 <direction x="0.97523444008107241" y="0.22117365774376804"/>
-                <equipments major-operational-state="1" operational-state="1">
+                <equipments major-operational-state="1" operational-state="0.50">
                   <equipment id="2" type="EC.INF.VEH.JEEP.AMET">
                     <humans>
                       <human id="6" rank="Tropa"/>

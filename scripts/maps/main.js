@@ -1,55 +1,57 @@
-proj4.defs("EPSG:32717", "+proj=utm +zone=17 +south +datum=WGS84 +units=m +no_defs");
-
-
-
+proj4.defs(
+  "EPSG:32717",
+  "+proj=utm +zone=17 +south +datum=WGS84 +units=m +no_defs"
+);
 
 // Capas base
 const layers = {
   osm: new ol.layer.Tile({
     visible: true,
-    source: new ol.source.OSM()
+    source: new ol.source.OSM(),
   }),
 
   topo: new ol.layer.Tile({
     visible: false,
     source: new ol.source.XYZ({
-      url: "https://tile.opentopomap.org/{z}/{x}/{y}.png"
+      url: "https://tile.opentopomap.org/{z}/{x}/{y}.png",
     }),
   }),
 
   esriTerrain: new ol.layer.Tile({
     visible: false,
     source: new ol.source.XYZ({
-      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}'
-    })
+      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}",
+    }),
   }),
 
   esriSat: new ol.layer.Tile({
     visible: false,
     source: new ol.source.XYZ({
-      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-    })
+      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    }),
   }),
 };
 
 // Mapa
- const map = new ol.Map({
-  target: 'map',
+const map = new ol.Map({
+  target: "map",
   layers: Object.values(layers),
   view: new ol.View({
     center: ol.proj.fromLonLat([-78.48, -0.18]), // Quito ejemplo
-    zoom: 12
-  })
+    zoom: 12,
+  }),
 });
 
 // Selector de capas
-document.getElementById('baseLayerSelect').addEventListener('change', function() {
-  const selectedLayer = this.value;
+document
+  .getElementById("baseLayerSelect")
+  .addEventListener("change", function () {
+    const selectedLayer = this.value;
 
-  for (const key in layers) {
-    layers[key].setVisible(key === selectedLayer);
-  }
-});
+    for (const key in layers) {
+      layers[key].setVisible(key === selectedLayer);
+    }
+  });
 
 /*// Capa satelital (ESRI)
 const satelliteLayer = new ol.layer.Tile({
@@ -81,7 +83,7 @@ let unitSource = new ol.source.Vector();
 
 // Fuente de clustering (agrupación automática)
 let clusterSource = new ol.source.Cluster({
-  distance: 50, // Ajusta: distancia en píxeles entre puntos para agrupar
+  distance: 10, // Ajusta: distancia en píxeles entre puntos para agrupar
   source: unitSource,
 });
 
@@ -119,7 +121,7 @@ const clusterLayer = new ol.layer.Vector({
           fill: new ol.style.Fill({ color: "#79a1f2ff" }),
           stroke: new ol.style.Stroke({ color: "#fff", width: 2 }),
         }),
-        text: text
+       /* text: text
           ? new ol.style.Text({
               text: text,
               font: "15px Arial",
@@ -127,7 +129,7 @@ const clusterLayer = new ol.layer.Vector({
               //stroke: new ol.style.Stroke({ color: "#000", width: 3 }),
               offsetY: -15,
             })
-          : null,
+          : null,*/
       });
     }
   },
@@ -169,11 +171,18 @@ function searchUnits(node, results) {
   if (node.unit) {
     (node.unit || []).forEach((u) => {
       if (u.position && u.position[0]?.$?.x && u.position[0]?.$?.y) {
+        // Leer estado desde equipments
+        let opState = null;
+        if (u.equipments && u.equipments[0]?.$?.["operational-state"]) {
+          opState = parseFloat(u.equipments[0].$["operational-state"]) * 100;
+        }
+
         results.push({
           name: u.$?.name || "Unit",
           x: parseFloat(u.position[0].$.x),
           y: parseFloat(u.position[0].$.y),
-          mgrs: u.position[0]._?.trim() || null, // <<< Extrae el MGRS
+          mgrs: u.position[0]._?.trim() || null,
+          percentage: opState || 0, // <-- (% de vida de la unidad)
         });
       }
     });
@@ -206,13 +215,21 @@ function updateMap(units) {
   const features = units
     .filter((u) => u.mgrs) // Usamos el MGRS, no x,y
     .map((u) => {
-      const [lon, lat] = mgrsToLatLon(u.mgrs); // 🔹 Convertir MGRS a lat/lon
-      const coords = ol.proj.fromLonLat([lon, lat]);
+      const [lon, lat] = mgrsToLatLon(u.mgrs);
+      if (!lon || !lat) return null;
+
+      let color =
+        u.percentage < 34
+          ? "#f4a9a9"
+          : u.percentage < 67
+          ? "yellow"
+          : "#99e699";
 
       return new ol.Feature({
-        geometry: new ol.geom.Point(coords),
-        name: u.name || "Unidad sin nombre",
-        mgrs: u.mgrs, // <- opcional, para popup o tooltip
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
+        name: u.name,
+        percentage: u.percentage,
+        color: color, // ← Usamos el color dinámico
       });
     });
 
@@ -227,31 +244,42 @@ function updateMap(units) {
   }
 }
 
-
 // Capa de puntos con estilo visible
 const unitLayer = new ol.layer.Vector({
   source: unitSource,
-  style: function (feature) {
-    return new ol.style.Style({
-      /* image: new ol.style.Circle({
-        radius: 10, // tamaño del punto (puedes subir a 8 o 10)
-        fill: new ol.style.Fill({ color: '#ff0000' }), // rojo visible
-        stroke: new ol.style.Stroke({ color: '#ffffff', width: 1 }),
-      }),*/
-      text: new ol.style.Text({
-        // text: feature.get('name'), // muestra el nombre encima
-        font: "15px Arial",
-        overflow: true,
-        fill: new ol.style.Fill({ color: "#000000ff" }),
-        stroke: new ol.style.Stroke({ color: "#000000", width: 3 }),
-        offsetY: -15, // separa el texto del punto
+  style: function (feature, resolution) {
+    const zoom = map.getView().getZoom();
+
+    // No mostrar nada si estamos muy lejos
+    if (zoom < 13) {
+      return null;
+    }
+
+    // Punto base
+    let baseStyle = new ol.style.Style({
+      image: new ol.style.Circle({
+        radius: zoom < 11 ? 6 : 10, // más pequeño si el zoom es bajo
+        fill: new ol.style.Fill({ color: feature.get("color") }),
+        stroke: new ol.style.Stroke({ color: "#000", width: 1 }),
       }),
     });
+
+    // Mostrar texto solo si el zoom es alto
+    /*if (zoom >= 1) {
+      baseStyle.setText(
+        new ol.style.Text({
+          text: `${feature.get("name")} (${feature.get("percentage") || 0}%)`,
+          font: "bold 12px Arial",
+          fill: new ol.style.Fill({ color: "#ffffff" }),
+          stroke: new ol.style.Stroke({ color: "#000000", width: 3 }),
+          offsetY: -15,
+        })
+      );
+    }*/
+
+    return baseStyle;
   },
 });
+
+
 map.addLayer(unitLayer);
-
-
-
-
-
