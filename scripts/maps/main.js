@@ -2,7 +2,7 @@
   "EPSG:32717",
   "+proj=utm +zone=17 +south +datum=WGS84 +units=m +no_defs"
 );*/
-
+let previousStates = {}; // Guarda estados anteriores por unidad
 // Capas base
 const layers = {
   osm: new ol.layer.Tile({
@@ -302,20 +302,21 @@ function mgrsToLatLon(mgrsString) {
 // Función para actualizar puntos en el mapa con conversión desde MGRS
 function updateMap(units) {
   console.log(units);
+
+  // Guardar centro y zoom actuales
+  const view = map.getView();
+  const currentCenter = view.getCenter();
+  const currentZoom = view.getZoom();
+
   unitSource.clear();
 
   const features = units
-    .filter((u) => u.mgrs) // Usamos el MGRS, no x,y
-    .map((u) => {
+    .filter(u => u.mgrs)
+    .map(u => {
       const [lon, lat] = mgrsToLatLon(u.mgrs);
       if (!lon || !lat) return null;
 
-      let color =
-        u.percentage < 34
-          ? "#f4a9a9"
-          : u.percentage < 67
-          ? "yellow"
-          : "#99e699";
+      let color = u.percentage < 34 ? "#f4a9a9" : u.percentage < 67 ? "yellow" : "#99e699";
 
       return new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
@@ -323,12 +324,14 @@ function updateMap(units) {
         parentName: u.parentName,
         name: u.name,
         percentage: u.percentage,
-        color: color, // ← Usamos el color dinámico
+        color: color,
       });
     });
 
   unitSource.addFeatures(features);
 
+  // ❌ QUITAMOS ESTE BLOQUE
+  /*
   if (features.length > 0) {
     map.getView().fit(unitSource.getExtent(), {
       padding: [50, 50, 50, 50],
@@ -336,7 +339,13 @@ function updateMap(units) {
       duration: 1000,
     });
   }
+  */
+
+  // 🔥 Restaurar la vista original (sin mover el mapa)
+  view.setCenter(currentCenter);
+  view.setZoom(currentZoom);
 }
+
 
 // Capa de puntos con estilo visible
 const unitLayer = new ol.layer.Vector({
