@@ -148,11 +148,25 @@ body {
 }
 
 .tree .folder::before {
-  content: "📂 ";
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('../images/azul2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px;
 }
 
 .tree .folder.open::before {
-  content: "📁 ";
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('../images/azul2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 5px;
 }
 
 .tree .file::before {

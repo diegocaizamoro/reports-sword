@@ -272,19 +272,19 @@ function toggleChildren(event, element) {
 function printImmediateChildren(ulElement) {
     const liChildren = Array.from(ulElement.children).filter(child => child.tagName === "LI");
 
-    console.log("📂 Hijos inmediatos:");
+    //console.log("📂 Hijos inmediatos:");
     liChildren.forEach(child => {
         let nameSpan = Array.from(child.children).find(el => el.tagName === "SPAN");
 
         if (nameSpan) {
-            console.log("- " + nameSpan.textContent.trim());
+           // console.log("- " + nameSpan.textContent.trim());
         } else {
             // Captura el texto directo del <li> (ignorando el <ul>)
             const directText = child.firstChild?.textContent?.trim();
             if (directText) {
-                console.log("- " + directText);
+                //console.log("- " + directText);
             } else {
-                console.log("⚠️ Nodo hijo sin nombre visible");
+                //console.log("⚠️ Nodo hijo sin nombre visible");
             }
         }
     });
@@ -389,14 +389,14 @@ function updateOperationalValues(xmlDoc) {
                 }
             });
 
-            if (automatName === "VCI 1/4") {
+            /*if (automatName === "VCI 1/4") {
                 units.forEach(unit => {
                     const name = unit.getAttribute("name");
                     const id = unit.getAttribute("id");
                     console.log(name, id)
                 });
 
-            }
+            }*/
 
             const avg = count > 0 ? total / count : 0;
             unitMap.set(automatName, avg);

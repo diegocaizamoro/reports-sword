@@ -376,7 +376,7 @@ function actualizarGraficoDesdeNodo(padre, nodo) {
     };
     crearGraficoLineasMunicion(dataSeriesMuni, labelsConValor, padre);
 
-    crearGraficoLineaTiempoPersonal(null,null,null);
+    //crearGraficoLineaTiempoPersonal(null,null,null);
 
 }
 
@@ -1049,7 +1049,7 @@ function crearGraficoLineaTiempoPersonal(dataSeries, categorias, padre) {
         chart.sequenceTimer = undefined;
     }
 
-    function update(sliderClicked) {
+    /*function update(sliderClicked) {
 
         const series = chart.series,
             labels = chart.annotations[0].labels,
@@ -1138,7 +1138,7 @@ function crearGraficoLineaTiempoPersonal(dataSeries, categorias, padre) {
     input.addEventListener('input', function () {
         pause(btn);
         update(true);
-    });
+    });*/
 
 
 }

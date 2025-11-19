@@ -1,7 +1,7 @@
-proj4.defs(
+/*proj4.defs(
   "EPSG:32717",
   "+proj=utm +zone=17 +south +datum=WGS84 +units=m +no_defs"
-);
+);*/
 
 // Capas base
 const layers = {
@@ -34,11 +34,7 @@ const layers = {
 
 // Mapa
 const map = new ol.Map({
-  
-  controls: [
-  new ol.control.FullScreen(),
-  new ol.control.ScaleLine(),
-],
+  controls: [new ol.control.FullScreen(), new ol.control.ScaleLine()],
   target: "map",
   layers: Object.values(layers),
   view: new ol.View({
@@ -91,11 +87,57 @@ map.on("singleclick", function (evt) {
         ? feature.get("features")[0]
         : feature;
 
+      const percentage = realFeature.get("percentage") || 0;
+      const roundedPerc = percentage.toFixed(2); // redondea a 2 decimales
+
+      // Color dinámico según porcentaje (puedes reutilizar tu lógica actual)
+      const barColor =
+        percentage < 34 ? "#f4a9a9" : percentage < 67 ? "yellow" : "#99e699";
+
       popupContent.innerHTML = `
-        <strong>${realFeature.get("name")}</strong><br>
-        <strong>${realFeature.get("parentName")}</strong><br>
-        Estado: ${realFeature.get("percentage") || 0}%
-      `;
+  <div style="font-size:12px; line-height:1.4; max-width:220px;">
+    <span>
+    ${realFeature.get("formationName")?.split("/")[0] || ""}/
+      ${realFeature.get("parentName")?.split("/")[0] || ""} / 
+      <span style="color:blue; font-weight:bold;">
+        ${
+          
+          realFeature.get("name") ||
+          ""
+        }
+      </span>
+    </span><br>
+    <div style="
+      width: 100%;
+      height: 20px;
+      border-radius: 5px;
+      background-color: #ddddddff;
+      overflow: hidden;
+      border: 1px solid #999;
+      position: relative;
+    ">
+      <div style="
+        width: ${percentage}%;
+        height: 100%;
+        background-color: ${barColor};
+        transition: width 0.5s;
+      "></div>
+
+      <div style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        font-weight: bold;
+        color: #000;
+      ">
+        ${roundedPerc}%
+      </div>
+    </div>
+  </div>
+`;
+
       overlay.setPosition(evt.coordinate);
       featureFound = true;
     },
@@ -113,7 +155,6 @@ map.on("pointermove", function (evt) {
   });
   map.getTargetElement().style.cursor = hit ? "pointer" : "";
 });
-
 
 // Fuente básica donde metemos puntos UNIT
 let unitSource = new ol.source.Vector();
@@ -187,7 +228,7 @@ socket.on("connect", () => {
 socket.on("orbatUpdate", (data) => {
   console.log("📡 Actualización de orbat recibida");
 
-  const units = extractUnits(data);
+  const units = extractUnitsMapa(data);
   updateMap(units);
 });
 
@@ -196,17 +237,22 @@ socket.on("orbatChange", () => {
 });
 
 // Extraer las unidades con coordenadas del orbat.xml parseado por xml2js
-function extractUnits(obj) {
+function extractUnitsMapa(obj) {
   const results = [];
   searchUnits(obj, results);
   return results;
 }
 
-function searchUnits(node, results, parentName = null) {
+function searchUnits(node, results, parentName = null, formationName = null) {
   if (!node || typeof node !== "object") return;
 
-  // Si el nodo actual es un <automat> y tiene atributo name, lo usamos como parentName
-  if (node.$?.name) {
+  // Si el nodo actual es un <formation>, guardamos su nombre
+  if (node.$?.name && node.hasOwnProperty("automat")) {
+    formationName = node.$.name; 
+  }
+
+  // Si el nodo actual es un <automat>, guardamos su nombre como padre
+  if (node.$?.name && node.unit) {
     parentName = node.$.name;
   }
 
@@ -220,7 +266,8 @@ function searchUnits(node, results, parentName = null) {
 
         results.push({
           name: u.$?.name || "Unit",
-          parentName: parentName || "Sin padre", // 👈 Nombre del automat padre
+          parentName: parentName || "Sin automat",
+          formationName: formationName || "Sin formation", // 👈 Nueva propiedad
           x: parseFloat(u.position[0].$.x),
           y: parseFloat(u.position[0].$.y),
           mgrs: u.position[0]._?.trim() || null,
@@ -232,9 +279,11 @@ function searchUnits(node, results, parentName = null) {
 
   Object.values(node).forEach((child) => {
     if (Array.isArray(child)) {
-      child.forEach((c) => searchUnits(c, results, parentName));
+      child.forEach((c) =>
+        searchUnits(c, results, parentName, formationName)
+      );
     } else if (typeof child === "object") {
-      searchUnits(child, results, parentName);
+      searchUnits(child, results, parentName, formationName);
     }
   });
 }
@@ -270,6 +319,7 @@ function updateMap(units) {
 
       return new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
+        formationName: u.formationName,
         parentName: u.parentName,
         name: u.name,
         percentage: u.percentage,
