@@ -301,9 +301,6 @@ function mgrsToLatLon(mgrsString) {
 
 // Función para actualizar puntos en el mapa con conversión desde MGRS
 function updateMap(units) {
-  console.log(units);
-
-  // Guardar centro y zoom actuales
   const view = map.getView();
   const currentCenter = view.getCenter();
   const currentZoom = view.getZoom();
@@ -311,12 +308,31 @@ function updateMap(units) {
   unitSource.clear();
 
   const features = units
-    .filter(u => u.mgrs)
-    .map(u => {
+    .filter((u) => u.mgrs)
+    .map((u) => {
       const [lon, lat] = mgrsToLatLon(u.mgrs);
       if (!lon || !lat) return null;
 
-      let color = u.percentage < 34 ? "#f4a9a9" : u.percentage < 67 ? "yellow" : "#99e699";
+      let color =
+        u.percentage < 34 ? "#f4a9a9" :
+        u.percentage < 67 ? "yellow" :
+        "#99e699";
+
+      // === 🔥 Detectar si ha sido atacada ===
+      const prev = previousStates[u.name];
+      if (prev !== undefined && u.percentage < prev) {
+        console.log(`⚠️ Unidad atacada: ${u.name} (${prev} → ${u.percentage})`);
+        
+        // 🔊 Alerta sonora
+        alertVoice(`Unidad ${u.name} bajo ataque`);
+
+        // 🟥 Pintar temporalmente en rojo brillante
+        color = "red";
+        flashUnit(u.name);
+      }
+
+      // 📝 Guardar nuevo valor como histórico
+      previousStates[u.name] = u.percentage;
 
       return new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
@@ -330,22 +346,38 @@ function updateMap(units) {
 
   unitSource.addFeatures(features);
 
-  // ❌ QUITAMOS ESTE BLOQUE
-  /*
-  if (features.length > 0) {
-    map.getView().fit(unitSource.getExtent(), {
-      padding: [50, 50, 50, 50],
-      maxZoom: 13,
-      duration: 1000,
-    });
-  }
-  */
-
-  // 🔥 Restaurar la vista original (sin mover el mapa)
+  // 👁️ Mantener vista actual (no mover el mapa)
   view.setCenter(currentCenter);
   view.setZoom(currentZoom);
 }
 
+
+function flashUnit(unitName) {
+  const feature = unitSource.getFeatures().find(f => f.get("name") === unitName);
+  if (!feature) return;
+
+  feature.setStyle(
+    new ol.style.Style({
+      image: new ol.style.Circle({
+        radius: 15,
+        fill: new ol.style.Fill({ color: "rgba(255,0,0,0.8)" }),
+        stroke: new ol.style.Stroke({ color: "#fff", width: 2 }),
+      })
+    })
+  );
+
+  // Restaurar el estilo luego de 2 segundos
+  setTimeout(() => {
+    feature.setStyle(null);
+  }, 2000);
+}
+
+function alertVoice(text) {
+  const msg = new SpeechSynthesisUtterance(text);
+  msg.lang = "es-ES"; // o "en-US"
+  msg.rate = 1;
+  speechSynthesis.speak(msg);
+}
 
 // Capa de puntos con estilo visible
 const unitLayer = new ol.layer.Vector({
