@@ -7,7 +7,7 @@ let xmlDoc;
 const resourceNamesLimpios = [];
 const consumoPorRecurso = new Map();
 const asignadoPorRecurso = new Map();
-window.onload = function () {
+/*window.onload = function () {
     //fetch('https://raw.githubusercontent.com/diegocaizamoro/reports-sword/refs/heads/main/orbat.xml') // para produccion
     fetch(serverEscucha) //para pruebas
         .then(response => {
@@ -20,7 +20,31 @@ window.onload = function () {
             parseXML(xmlText);
         })
         .catch(error => console.error("Error al cargar el ORBAT:", error));
+};*/
+
+window.onload = function () {
+  if (window.isTimelineActive) {
+    console.log("Timeline activo: no se carga serverEscucha");
+    return; // Evita cargar desde serverEscucha
+  }
+  fetchFromServer();
 };
+
+// Convertimos el código que tenías a una función reutilizable
+function fetchFromServer() {
+  fetch(serverEscucha)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("No se pudo cargar el archivo orbat.xml");
+      }
+      return response.text();
+    })
+    .then(xmlText => {
+      parseXML(xmlText); // Procesa mapa y árbol normalmente
+    })
+    .catch(error => console.error("Error al cargar el ORBAT:", error));
+}
+
 
 function parseXML(xmlText) {
     const parser = new DOMParser();
@@ -291,6 +315,12 @@ function printImmediateChildren(ulElement) {
 }
 // Refrescar valores de orbat.xml cada 8s sin reconstruir el árbol
 setInterval(() => {
+
+    // 🚫 Si está activada la línea de tiempo, NO actualizar desde servidor
+    if (window.isTimelineActive) {
+        console.log("⏸ Timeline activa: no se actualiza desde serverEscucha");
+        return;
+    }
     fetch(serverEscucha)
         .then(response => response.text())
         .then(xmlText => {

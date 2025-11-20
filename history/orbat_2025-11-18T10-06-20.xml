@@ -821,7 +821,7 @@
                 <unit color="0x0055ff" command-post="false" id="2037" name="1/BI1/41" sort-id="1" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="59755.72265625" y="70377.828125">17MQT5469974963</position>
                   <direction x="-0.48247977156373012" y="-0.87590711267337629"/>
-                  <equipments major-operational-state="1" operational-state="0.20">
+                  <equipments major-operational-state="1" operational-state="0.10">
                     <equipment id="1" type="EC.INF.Soldado">
                       <humans>
                         <human id="1" rank="Voluntario"/>

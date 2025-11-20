@@ -821,7 +821,7 @@
                 <unit color="0x0055ff" command-post="false" id="2037" name="1/BI1/41" sort-id="1" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="59755.72265625" y="70377.828125">17MQT5469974963</position>
                   <direction x="-0.48247977156373012" y="-0.87590711267337629"/>
-                  <equipments major-operational-state="1" operational-state="0.20">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1" type="EC.INF.Soldado">
                       <humans>
                         <human id="1" rank="Voluntario"/>
@@ -2128,7 +2128,7 @@
                 <unit color="0x0055ff" command-post="true" id="2045" name="PM2/41" sort-id="0" type="EC.PM 1/301">
                   <position x="61104.3046875" y="73640.5234375">17MQT5605278203</position>
                   <direction x="-0.70707935108858266" y="0.70713421022048495"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="236" state="Detruit" type="EC.Vehículo Armado">
                       <humans>
                         <human id="237" rank="Oficial" state="dead"/>
@@ -2152,7 +2152,7 @@
                 <unit color="0x0055ff" command-post="false" id="2047" name="1/BI3/41" sort-id="1" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="63200.515625" y="72124.5390625">17MQT5814776694</position>
                   <direction x="-0.95020320217131315" y="0.3116309910509264"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="237" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="239" rank="Voluntario" state="dead"/>
@@ -2366,7 +2366,7 @@
                 <unit color="0x0055ff" command-post="false" id="2048" name="2/BI3/41" sort-id="2" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="63112.015625" y="71662.5703125">17MQT5805876235</position>
                   <direction x="-0.99823356033013788" y="0.059411775184866178"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="276" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="278" rank="Voluntario" state="dead"/>
@@ -2581,7 +2581,7 @@
                 <unit color="0x0055ff" command-post="false" id="2049" name="3/BI3/41" sort-id="3" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="63442.69921875" y="71837.9921875">17MQT5838976408</position>
                   <direction x="0.89574749729343406" y="0.44456318009091739"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="315" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="317" rank="Voluntario" state="dead"/>
@@ -2969,7 +2969,7 @@
                 <unit color="0x0055ff" command-post="false" id="2083" name="BI FSR/41" sort-id="2" type="EC.Pelotón Apoyo BI FSR/301">
                   <position x="63548.5" y="70838.9375">17MQT5849475415</position>
                   <direction x="0.55572354345957908" y="-0.83136715309466569"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="380" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="389" rank="Voluntario" state="dead"/>
@@ -3107,7 +3107,7 @@
                 <unit color="0x0055ff" command-post="true" id="2084" name="PM APY/41" sort-id="0" type="EC.PM 1/301">
                   <position x="64752.3984375" y="72413.96875">17MQT5970076979</position>
                   <direction x="-0.70717585144550976" y="-0.70703770418013656"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="403" state="Detruit" type="EC.Vehículo Armado">
                       <humans>
                         <human id="418" rank="Oficial" state="dead"/>
@@ -3209,7 +3209,7 @@
                 <unit color="0x0055ff" command-post="false" id="2052" name="1/BI1/42" sort-id="1" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="58678.19140625" y="63804.0390625">17MQT5361268432</position>
                   <direction x="-0.41761139494121224" y="0.90862573308004813"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="414" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="437" rank="Voluntario" state="dead"/>
@@ -3856,7 +3856,7 @@
                 <unit color="0x0055ff" command-post="true" id="2055" name="PM1/42" sort-id="0" type="EC.PM 1/301">
                   <position x="59857.515625" y="63301.375">17MQT5479167930</position>
                   <direction x="0.70710678118654746" y="-0.70710678118654746"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="531" state="Detruit" type="EC.Vehículo Armado">
                       <humans>
                         <human id="554" rank="Oficial" state="dead"/>
@@ -4547,7 +4547,7 @@
                 <unit color="0x0055ff" command-post="false" id="2062" name="1/BI3/42" sort-id="1" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="62090.49609375" y="65486.0234375">17MQT5702870098</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="650" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="675" rank="Voluntario" state="dead"/>
@@ -4761,7 +4761,7 @@
                 <unit color="0x0055ff" command-post="false" id="2063" name="2/BI3/42" sort-id="2" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="61858.49609375" y="64848.02734375">17MQT5679569464</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="689" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="714" rank="Voluntario" state="dead"/>
@@ -4975,7 +4975,7 @@
                 <unit color="0x0055ff" command-post="false" id="2064" name="3/BI3/42" sort-id="3" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="62728.48828125" y="64722.36328125">17MQT5766569338</position>
                   <direction x="0.9905060756046089" y="0.13746895718800153"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="728" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="753" rank="Voluntario" state="dead"/>
@@ -5190,7 +5190,7 @@
                 <unit color="0x0055ff" command-post="true" id="2065" name="PM3/42" sort-id="0" type="EC.PM 1/301">
                   <position x="63037.8203125" y="65466.6875">17MQT5797570078</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="767" state="ReparableAvecEvacuation" type="EC.Vehículo Armado">
                       <humans>
                         <human id="792" rank="Oficial"/>
@@ -5215,7 +5215,7 @@
                 <unit color="0x0055ff" command-post="false" id="2086" name="BI MOR/42" sort-id="1" type="EC.Pelotón Apoyo BI MOR/301">
                   <position x="61616.83203125" y="65457.0234375">17MQT5655470070</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="768" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="794" rank="Voluntario" state="dead"/>
@@ -6031,7 +6031,7 @@
                 <unit color="0x0055ff" command-post="false" id="2069" name="3/BI1/43" sort-id="3" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="66701.453125" y="73464.421875">17MQT6165278020</position>
                   <direction x="-0.93349632984191111" y="0.35858695203769175"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="905" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="951" rank="Voluntario" state="dead"/>
@@ -6246,7 +6246,7 @@
                 <unit color="0x0055ff" command-post="true" id="2070" name="PM 1/43" sort-id="0" type="EC.PM 1/301">
                   <position x="66701.453125" y="73464.421875">17MQT6165278020</position>
                   <direction x="-1" y="0"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="944" state="Detruit" type="EC.Vehículo Armado">
                       <humans>
                         <human id="990" rank="Oficial" state="dead"/>
@@ -6270,7 +6270,7 @@
                 <unit color="0x0055ff" command-post="false" id="2072" name="1/BI2/43" sort-id="1" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="66701.453125" y="73492.0390625">17MQT6165278048</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="945" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="992" rank="Voluntario" state="dead"/>
@@ -6910,7 +6910,7 @@
                 <unit color="0x0055ff" command-post="true" id="2075" name="PM 2/43" sort-id="0" type="EC.PM 1/301">
                   <position x="66701.453125" y="73492.0390625">17MQT6165278048</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1062" state="Detruit" type="EC.Vehículo Armado">
                       <humans>
                         <human id="1109" rank="Oficial" state="dead"/>
@@ -7362,7 +7362,7 @@
                 <unit color="0x0055ff" command-post="false" id="2079" name="3/BI3/43" sort-id="3" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="66719.8671875" y="73492.0390625">17MQT6167078048</position>
                   <direction x="-0.99382314829842244" y="-0.11097544731251123"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1141" state="Detruit" type="EC.INF.Soldado">
                       <humans>
                         <human id="1189" rank="Voluntario" state="dead"/>
@@ -7576,7 +7576,7 @@
                 <unit color="0x0055ff" command-post="true" id="2080" name="PM 3/43" sort-id="0" type="EC.PM 1/301">
                   <position x="66719.8671875" y="73492.0390625">17MQT6167078048</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1180" state="ReparableAvecEvacuation" type="EC.Vehículo Armado">
                       <humans>
                         <human id="1228" rank="Oficial"/>
@@ -7890,7 +7890,7 @@
                 <unit color="0x0055ff" command-post="true" id="2092" name="PM APY/43" sort-id="0" type="EC.PM 1/301">
                   <position x="66719.8671875" y="73482.828125">17MQT6167078038</position>
                   <direction x="-0.046958700186963492" y="0.99889683174827948"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1229" state="ReparableAvecEvacuation" type="EC.Vehículo Armado">
                       <humans>
                         <human id="1290" rank="Oficial"/>
@@ -7993,7 +7993,7 @@
                 <unit color="0x0055ff" command-post="true" id="2220" name="1/VC 1/44" sort-id="0" type="EC.Pelotón VCI 1/VC 1/52">
                   <position x="66523.3515625" y="72872.1796875">17MQT6147377432</position>
                   <direction x="-1" y="0"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1240" state="ReparableAvecEvacuation" type="EC.CB.VCI">
                       <humans>
                         <human id="1309" rank="Oficial"/>
@@ -8070,7 +8070,7 @@
                 <unit color="0x0055ff" command-post="true" id="2223" name="1/VC 2/44" sort-id="0" type="EC.Pelotón VCI 1/VC 1/52">
                   <position x="66551.515625" y="72700.1328125">17MQT6150177261</position>
                   <direction x="1" y="0"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1244" state="ReparableAvecEvacuation" type="EC.CB.VCI">
                       <humans>
                         <human id="1333" rank="Oficial" state="dead"/>
@@ -8107,7 +8107,7 @@
                 <unit color="0x0055ff" command-post="false" id="2224" name="2/VC 2/44" sort-id="1" type="EC.Pelotón VCI 1/VC 1/52">
                   <position x="66551.515625" y="72700.1328125">17MQT6150177261</position>
                   <direction x="-1" y="0"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1246" state="Detruit" type="EC.CB.VCI">
                       <humans>
                         <human id="1345" rank="Oficial"/>
@@ -8310,7 +8310,7 @@
                 <unit color="0x0055ff" command-post="true" id="2230" name="1/AM 2/44" sort-id="0" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="66770.8125" y="72339.1015625">17MQT6172076902</position>
                   <direction x="-0.70710678118654746" y="-0.70710678118654746"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1260" state="Detruit" type="EC.CB.AMX-13">
                       <humans>
                         <human id="1405" rank="Oficial" state="dead"/>
@@ -8362,7 +8362,7 @@
                 <unit color="0x0055ff" command-post="false" id="2231" name="2/AM 2/44" sort-id="1" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="66770.8125" y="72339.1015625">17MQT6172076902</position>
                   <direction x="-0.70710678118654757" y="-0.70710678118654757"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1264" state="Detruit" type="EC.CB.AMX-13">
                       <humans>
                         <human id="1421" rank="Oficial" state="dead"/>
@@ -8414,7 +8414,7 @@
                 <unit color="0x0055ff" command-post="false" id="2232" name="3/AM 2/44" sort-id="2" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="66770.8125" y="72339.1015625">17MQT6172076902</position>
                   <direction x="-1" y="0"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1268" state="Detruit" type="EC.CB.AMX-13">
                       <humans>
                         <human id="1437" rank="Oficial" state="dead"/>
@@ -8524,7 +8524,7 @@
                 <unit color="0x0055ff" command-post="false" id="2235" name="2/AM 3/44" sort-id="1" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="66893.9375" y="72158.1015625">17MQT6184376722</position>
                   <direction x="-1" y="0"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1276" state="Detruit" type="EC.CB.AMX-13">
                       <humans>
                         <human id="1469" rank="Oficial"/>
@@ -8577,7 +8577,7 @@
                 <unit color="0x0055ff" command-post="false" id="2236" name="3/AM 3/44" sort-id="2" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="66893.9375" y="72158.1015625">17MQT6184376722</position>
                   <direction x="0.70710678118654746" y="-0.70710678118654746"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="1280" state="ReparableAvecEvacuation" type="EC.CB.AMX-13">
                       <humans>
                         <human id="1485" rank="Oficial" state="dead"/>
@@ -8829,7 +8829,7 @@
               <unit color="0x0055ff" command-post="false" id="2097" name="GA2/45" sort-id="2" type="EC.GA1/40">
                 <position x="72409.34375" y="71890.140625">17MQT6736076448</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1311" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="1571" rank="Voluntario" state="dead"/>
@@ -9025,7 +9025,7 @@
               <unit color="0x0055ff" command-post="false" id="2098" name="GA3/45" sort-id="3" type="EC.GA1/40">
                 <position x="70684.640625" y="71049.3046875">17MQT6563375615</position>
                 <direction x="0" y="-0.99999999999999989"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1338" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="1641" rank="Voluntario" state="dead"/>
@@ -9221,7 +9221,7 @@
               <unit color="0x0055ff" command-post="false" id="2099" name="OB GA1/45" sort-id="4" type="EC.Observador Avanzado OB GA1/40">
                 <position x="68101.9609375" y="71112.75">17MQT6305075681</position>
                 <direction x="0.95066794803346455" y="-0.31021033603321779"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1365" state="Detruit" type="EC.ART.Obser.Avanz">
                     <humans>
                       <human id="1711" rank="Voluntario" state="dead"/>
@@ -9250,7 +9250,7 @@
               <unit color="0x0055ff" command-post="false" id="2100" name="OB GA2/45" sort-id="5" type="EC.Observador Avanzado OB GA1/40">
                 <position x="65927.5390625" y="73587.1015625">17MQT6087878143</position>
                 <direction x="-0.48316457437426968" y="0.87552955065476279"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1368" state="Detruit" type="EC.ART.Obser.Avanz">
                     <humans>
                       <human id="1714" rank="Voluntario" state="dead"/>
@@ -9279,7 +9279,7 @@
               <unit color="0x0055ff" command-post="false" id="2101" name="OB GA3/45" sort-id="6" type="EC.Observador Avanzado OB GA1/40">
                 <position x="67068.90625" y="69096.6171875">17MQT6201373679</position>
                 <direction x="0.98139399836258578" y="0.1920047394672772"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1371" state="Detruit" type="EC.ART.Obser.Avanz">
                     <humans>
                       <human id="1717" rank="Voluntario" state="dead"/>
@@ -9309,7 +9309,7 @@
               <unit color="0x0055ff" command-post="true" id="2102" name="PM GA45" sort-id="0" type="EC.PM GA1/40">
                 <position x="70364.90625" y="71049.3046875">17MQT6531475615</position>
                 <direction x="0.95207348458737096" y="0.30586938379913253"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1374" state="Detruit" type="EC.Vehículo Armado">
                     <humans>
                       <human id="1720" rank="Oficial" state="dead"/>
@@ -9967,7 +9967,7 @@
               <unit color="0x0055ff" command-post="false" id="2109" name="2/CAT 15" sort-id="1" type="EC.Pelotón Antitanque FLECHA ROJA">
                 <position x="61620.58203125" y="71327.7578125">17MQT5656675904</position>
                 <direction x="-0.98636240200640612" y="0.16458800657445585"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1486" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="1848" rank="Voluntario" state="dead"/>
@@ -10493,7 +10493,7 @@
               <unit color="0x0055ff" command-post="false" id="2149" name="GAAR 3/39" sort-id="3" type="EC.GAAR 1/1">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="0.59880803617335987" y="0.80089258693922494"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1556" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="1997" rank="Oficial" state="dead"/>
@@ -10665,7 +10665,7 @@
               <unit color="0x0055ff" command-post="false" id="2151" name="OB GA1/39" sort-id="4" type="EC.Observador Avanzado OB GA1/40">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.44450714054230539" y="-0.89577530776802672"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1577" state="Detruit" type="EC.ART.Obser.Avanz">
                     <humans>
                       <human id="2048" rank="Voluntario" state="dead"/>
@@ -10724,7 +10724,7 @@
               <unit color="0x0055ff" command-post="false" id="2153" name="OB GA3/39" sort-id="6" type="EC.Observador Avanzado OB GA1/40">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.27061000684161074" y="-0.96268905893709178"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1583" state="Detruit" type="EC.ART.Obser.Avanz">
                     <humans>
                       <human id="2054" rank="Voluntario" state="dead"/>
@@ -10755,7 +10755,7 @@
               <unit color="0x0055ff" command-post="true" id="2155" name="IGLA 1/181" sort-id="0" type="EC.IGLA 1/41">
                 <position x="65994.1796875" y="72045.84375">17MQT6094276611</position>
                 <direction x="-0.64417510372893683" y="-0.76487805285274935"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1586" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2057" rank="Voluntario" state="dead"/>
@@ -10828,7 +10828,7 @@
               <unit color="0x0055ff" command-post="false" id="2156" name="BA OER 1/181" sort-id="4" type="EC.BA OER/41">
                 <position x="61917.32421875" y="129384.625">17MQU5693233597</position>
                 <direction x="-0.33381544029365379" y="-0.94263845233554622"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1597" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="2070" rank="Voluntario" state="dead"/>
@@ -10886,7 +10886,7 @@
               <unit color="0x0055ff" command-post="false" id="2157" name="AMET 1/181" sort-id="6" type="EC.AMET 1/41">
                 <position x="66290.53125" y="108159.0625">17MQU6128412499</position>
                 <direction x="-0.8765014907388482" y="0.48139914492298058"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1604" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="2084" rank="Oficial" state="dead"/>
@@ -10935,7 +10935,7 @@
               <unit color="0x0055ff" command-post="false" id="2158" name="AMET 2/181" sort-id="7" type="EC.AMET 1/41">
                 <position x="72300.75" y="108991.1328125">17MQU6729813319</position>
                 <direction x="-0.056596471786160625" y="-0.99839713510273975"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1610" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="2092" rank="Voluntario" state="dead"/>
@@ -10984,7 +10984,7 @@
               <unit color="0x0055ff" command-post="false" id="3614" name="IGLA 4/181" sort-id="3" type="EC.IGLA 1/41">
                 <position x="63615.58203125" y="131367.703125">17MQU5863335566</position>
                 <direction x="-0.92016901798523787" y="0.39152136383610403"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1616" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2100" rank="Voluntario" state="dead"/>
@@ -11057,7 +11057,7 @@
               <unit color="0x0055ff" command-post="false" id="3615" name="IGLA 2/181" sort-id="1" type="EC.IGLA 1/41">
                 <position x="66444.0625" y="72029.1796875">17MQT6139276594</position>
                 <direction x="-0.99122780919676579" y="0.13216440623322243"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1627" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2113" rank="Voluntario" state="dead"/>
@@ -11130,7 +11130,7 @@
               <unit color="0x0055ff" command-post="false" id="3616" name="IGLA 3/181" sort-id="2" type="EC.IGLA 1/41">
                 <position x="66194.1328125" y="71679.2734375">17MQT6114276247</position>
                 <direction x="-0.77896030925545467" y="-0.62707323065543674"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1638" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2126" rank="Voluntario" state="dead"/>
@@ -11203,7 +11203,7 @@
               <unit color="0x0055ff" command-post="false" id="3617" name="BA OER 2/181" sort-id="5" type="EC.BA OER/41">
                 <position x="64920.19921875" y="134173.4375">17MQU5994138353</position>
                 <direction x="-0.9999913656680407" y="-0.0041555492256816848"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1649" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="2139" rank="Oficial" state="dead"/>
@@ -11261,7 +11261,7 @@
               <unit color="0x0055ff" command-post="false" id="3619" name="AMET 3/181" sort-id="8" type="EC.AMET 1/41">
                 <position x="67992.0546875" y="107040.0703125">17MQU6298511385</position>
                 <direction x="-0.97350891861301236" y="0.22864904412860185"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1656" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="2153" rank="Voluntario" state="dead"/>
@@ -11310,7 +11310,7 @@
               <unit color="0x0055ff" command-post="false" id="1143829" name="SHILKA" sort-id="9" type="EC.AMET 1/41">
                 <position x="64163.71875" y="107946.28125">17MQU5915612290</position>
                 <direction x="-0.47939112155038349" y="-0.8776013631362849"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1662" state="Detruit" type="EC.INF.Soldado">
                     <humans>
                       <human id="2161" rank="Voluntario" state="dead"/>
@@ -11359,7 +11359,7 @@
               <unit color="0x0055ff" command-post="false" id="1143895" name="IGLA 5/181" sort-id="10" type="EC.IGLA 1/41">
                 <position x="68126.953125" y="70829.5">17MQT6307475400</position>
                 <direction x="-0.5207620838456245" y="0.85370185195345727"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1668" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2169" rank="Voluntario" state="dead"/>
@@ -11432,7 +11432,7 @@
               <unit color="0x0055ff" command-post="false" id="1143896" name="IGLA 6/181" sort-id="11" type="EC.IGLA 1/41">
                 <position x="68493.5234375" y="71012.78125">17MQT6344175581</position>
                 <direction x="-0.53883073758134192" y="0.84241405273033465"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1679" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2182" rank="Voluntario" state="dead"/>
@@ -11505,7 +11505,7 @@
               <unit color="0x0055ff" command-post="false" id="1143897" name="IGLA 7/181" sort-id="12" type="EC.IGLA 1/41">
                 <position x="72568.34375" y="106632.84375">17MQU6756310975</position>
                 <direction x="-0.65448530257469417" y="-0.75607472429232236"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1690" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2195" rank="Voluntario" state="dead"/>
@@ -11578,7 +11578,7 @@
               <unit color="0x0055ff" command-post="false" id="1143898" name="IGLA 8/181" sort-id="13" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.950846727368442" y="-0.3096619141139636"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1701" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2208" rank="Voluntario" state="dead"/>
@@ -11651,7 +11651,7 @@
               <unit color="0x0055ff" command-post="false" id="1143899" name="IGLA 9/181" sort-id="14" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.10649015146860773" y="-0.99431375714117165"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1712" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2221" rank="Voluntario" state="dead"/>
@@ -11724,7 +11724,7 @@
               <unit color="0x0055ff" command-post="false" id="1143900" name="IGLA 10/181" sort-id="15" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.77714638671079128" y="-0.62931986590474132"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1723" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2234" rank="Voluntario" state="dead"/>
@@ -11797,7 +11797,7 @@
               <unit color="0x0055ff" command-post="false" id="1143901" name="IGLA 11/181" sort-id="16" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="0.17501601420989507" y="-0.98456558683009121"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1734" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2247" rank="Oficial" state="dead"/>
@@ -11870,7 +11870,7 @@
               <unit color="0x0055ff" command-post="false" id="1143902" name="IGLA 12/181" sort-id="17" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.96558197021281256" y="-0.26009894040526793"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1745" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2260" rank="Voluntario" state="dead"/>
@@ -11943,7 +11943,7 @@
               <unit color="0x0055ff" command-post="false" id="1143903" name="IGLA 13/181" sort-id="18" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.79448365665906329" y="-0.60728553358502091"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1756" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2273" rank="Voluntario" state="dead"/>
@@ -12016,7 +12016,7 @@
               <unit color="0x0055ff" command-post="false" id="1143904" name="IGLA 14/181" sort-id="19" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="0.24054397295725471" y="-0.97063824212419103"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1767" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2286" rank="Voluntario" state="dead"/>
@@ -12089,7 +12089,7 @@
               <unit color="0x0055ff" command-post="false" id="1143905" name="MISTRAL1" sort-id="20" type="EC.IGLA 1/41">
                 <position x="68135.28125" y="71387.6796875">17MQT6308375954</position>
                 <direction x="-0.8521249617771568" y="0.52333837000193184"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1778" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2299" rank="Voluntario" state="dead"/>
@@ -12162,7 +12162,7 @@
               <unit color="0x0055ff" command-post="false" id="1143906" name="MISTRAL2" sort-id="21" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="0.83615089890759786" y="-0.54849947516475916"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1789" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2312" rank="Voluntario" state="dead"/>
@@ -12235,7 +12235,7 @@
               <unit color="0x0055ff" command-post="false" id="1143907" name="MISTRAL3" sort-id="22" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.21010712898935074" y="-0.97767836958165966"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1800" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2325" rank="Voluntario" state="dead"/>
@@ -12308,7 +12308,7 @@
               <unit color="0x0055ff" command-post="false" id="1143908" name="MISTRAL4" sort-id="23" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.94709195494396625" y="-0.32096234807281754"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1811" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2338" rank="Voluntario" state="dead"/>
@@ -12381,7 +12381,7 @@
               <unit color="0x0055ff" command-post="false" id="1143909" name="MISTRAL5" sort-id="24" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.90517114211996141" y="-0.42504729557220411"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1822" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2351" rank="Voluntario" state="dead"/>
@@ -12454,7 +12454,7 @@
               <unit color="0x0055ff" command-post="false" id="1143910" name="IGLA 15/181" sort-id="25" type="EC.IGLA 1/41">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="-0.7235172363347856" y="-0.69030631514312113"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="1833" state="Detruit" type="EC.ART.Soldado.IGLA">
                     <humans>
                       <human id="2364" rank="Oficial" state="dead"/>
@@ -13669,7 +13669,7 @@
               <unit color="0x0055ff" command-post="false" id="1143833" name="EC.GAAP 3/156" sort-id="3" type="EC.GAAP 1/23">
                 <position x="58219.3125" y="113102.78125">17MQU5321517421</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0.30000000000000004">
+                <equipments major-operational-state="1" operational-state="0.30000000000000004">
                   <equipment id="1997" type="EC.INF.Soldado">
                     <humans>
                       <human id="2705" rank="Voluntario"/>
@@ -13909,7 +13909,7 @@
               <unit color="0x0055ff" command-post="true" id="1143837" name="PM GAAP156" sort-id="0" type="EC.PM GA1/40">
                 <position x="60604.22265625" y="105367">17MQU5559209731</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2026" state="ReparableAvecEvacuation" type="EC.Vehículo Armado">
                     <humans>
                       <human id="2763" rank="Oficial"/>
@@ -14101,7 +14101,7 @@
                 <unit color="0x0055ff" command-post="true" id="3152" name="1/AM 2/100" sort-id="0" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="77925.0625" y="74370.9921875">17MQT7288278906</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2039" state="ReparableAvecEvacuation" type="EC.CB.AMX-13">
                       <humans>
                         <human id="2813" rank="Oficial"/>
@@ -14157,7 +14157,7 @@
                 <unit color="0x0055ff" command-post="false" id="3153" name="2/AM 2/100" sort-id="1" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="77925.0625" y="74370.9921875">17MQT7288278906</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2043" state="ReparableAvecEvacuation" type="EC.CB.AMX-13">
                       <humans>
                         <human id="2829" rank="Oficial"/>
@@ -14213,7 +14213,7 @@
                 <unit color="0x0055ff" command-post="false" id="3154" name="3/AM 2/100" sort-id="2" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="77925.0625" y="74370.9921875">17MQT7288278906</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2047" state="ReparableAvecEvacuation" type="EC.CB.AMX-13">
                       <humans>
                         <human id="2845" rank="Oficial"/>
@@ -14826,7 +14826,7 @@
                 <unit color="0x0055ff" command-post="true" id="2202" name="1/AM 1/101" sort-id="0" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="77925.0625" y="74370.9921875">17MQT7288278906</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2127" state="ReparableAvecEvacuation" type="EC.CB.AMX-13">
                       <humans>
                         <human id="2986" rank="Oficial"/>
@@ -15239,7 +15239,7 @@
                 <unit color="0x0055ff" command-post="false" id="3162" name="3/AM 2/101" sort-id="2" type="EC.Pelotón AMX13 1/AM 1/52">
                   <position x="77925.0625" y="74370.9921875">17MQT7288278906</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2170" state="ReparableAvecEvacuation" type="EC.CB.AMX-13">
                       <humans>
                         <human id="3095" rank="Oficial"/>
@@ -16750,7 +16750,7 @@
               <unit color="0x0055ff" command-post="true" id="2216" name="EC.PM GA1/40 [371]" sort-id="0" type="EC.PM GA1/40">
                 <position x="77925.0625" y="74370.9921875">17MQT7288278906</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2332" state="ReparableAvecEvacuation" type="EC.Vehículo Armado">
                     <humans>
                       <human id="3507" rank="Oficial"/>
@@ -16800,7 +16800,7 @@
               <unit color="0x0055ff" command-post="false" id="3655" name="2/GAE/215" sort-id="1" type="EC.Helicóptero Ataque-Hot">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2334" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3511" rank="Oficial"/>
@@ -16870,7 +16870,7 @@
               <unit color="0x0055ff" command-post="false" id="3658" name="5/GAE/215" sort-id="4" type="EC.Helicóptero Ataque-Hot">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2337" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3517" rank="Oficial"/>
@@ -16917,7 +16917,7 @@
               <unit color="0x0055ff" command-post="false" id="3660" name="7/GAE/215" sort-id="6" type="EC.Helicóptero Ataque-Hot">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2339" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3521" rank="Oficial"/>
@@ -16943,7 +16943,7 @@
               <unit color="0x0055ff" command-post="true" id="3662" name="1/GAE216" sort-id="0" type="EC.Helicóptero Ataque-Rocket">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2340" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3523" rank="Oficial"/>
@@ -16967,7 +16967,7 @@
               <unit color="0x0055ff" command-post="false" id="3663" name="2/GAE216" sort-id="1" type="EC.Helicóptero Ataque-Rocket">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2341" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3525" rank="Oficial"/>
@@ -17014,7 +17014,7 @@
               <unit color="0x0055ff" command-post="false" id="3665" name="4/GAE216" sort-id="3" type="EC.Helicóptero Ataque-Rocket">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2343" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3529" rank="Oficial"/>
@@ -17038,7 +17038,7 @@
               <unit color="0x0055ff" command-post="false" id="3666" name="5/GAE216" sort-id="4" type="EC.Helicóptero Ataque-Rocket">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2344" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3531" rank="Oficial"/>
@@ -17085,7 +17085,7 @@
               <unit color="0x0055ff" command-post="false" id="3668" name="7/GAE216" sort-id="6" type="EC.Helicóptero Ataque-Rocket">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2346" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3535" rank="Oficial"/>
@@ -17157,7 +17157,7 @@
               <unit color="0x0055ff" command-post="false" id="3672" name="3/GAE217" sort-id="2" type="EC.Helicóptero Ataque-Mix">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2349" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3541" rank="Oficial"/>
@@ -17204,7 +17204,7 @@
               <unit color="0x0055ff" command-post="false" id="3674" name="5/GAE217" sort-id="4" type="EC.Helicóptero Ataque-Mix">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2351" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3545" rank="Oficial"/>
@@ -17228,7 +17228,7 @@
               <unit color="0x0055ff" command-post="false" id="3675" name="6/GAE217" sort-id="5" type="EC.Helicóptero Ataque-Mix">
                 <position x="85763.1328125" y="86013.3125">17MQT8074090466</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="0" operational-state="0">
+                <equipments major-operational-state="1" operational-state="1">
                   <equipment id="2352" state="ReparableAvecEvacuation" type="EC.AE.Helicóptero Asalto">
                     <humans>
                       <human id="3547" rank="Oficial"/>
@@ -19232,7 +19232,7 @@
                 <unit color="0x0055ff" command-post="false" id="4163670" name="3/ESC1/1011" sort-id="2" type="EC.Escudron Ataque Tucano">
                   <position x="80283.328125" y="105775.484375">17MQU7528110114</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2689" state="ReparableAvecEvacuation" type="EC.FAE.Super Tucano">
                       <humans>
                         <human id="3933" rank="Oficial"/>
@@ -19277,7 +19277,7 @@
                 <unit color="0x0055ff" command-post="false" id="4163672" name="5/ESC1/1011" sort-id="4" type="EC.Escudron Ataque Tucano">
                   <position x="80283.328125" y="105775.484375">17MQU7528110114</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2691" state="ReparableAvecEvacuation" type="EC.FAE.Super Tucano">
                       <humans>
                         <human id="3937" rank="Oficial"/>
@@ -19300,7 +19300,7 @@
                 <unit color="0x0055ff" command-post="false" id="4163673" name="6/ESC1/1011" sort-id="5" type="EC.Escudron Ataque Tucano">
                   <position x="80283.328125" y="105775.484375">17MQU7528110114</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2692" state="ReparableAvecEvacuation" type="EC.FAE.Super Tucano">
                       <humans>
                         <human id="3939" rank="Oficial"/>
@@ -19389,7 +19389,7 @@
                 <unit color="0x0055ff" command-post="false" id="4163677" name="10/ESC1/1011" sort-id="9" type="EC.Escudron Ataque Tucano">
                   <position x="80283.328125" y="105775.484375">17MQU7528110114</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2696" state="ReparableAvecEvacuation" type="EC.FAE.Super Tucano">
                       <humans>
                         <human id="3947" rank="Oficial"/>
@@ -19438,7 +19438,7 @@
                 <unit color="0x0055ff" command-post="false" id="9427386" name="2/ESC1/2012" sort-id="1" type="EC.Escuadron.Ataque Cheeta">
                   <position x="80283.328125" y="105775.484375">17MQU7528110114</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2698" state="ReparableAvecEvacuation" type="EC.FAE.Cheetah">
                       <humans>
                         <human id="3951" rank="Oficial"/>
@@ -19483,7 +19483,7 @@
                 <unit color="0x0055ff" command-post="false" id="9427388" name="4/ESC1/2012" sort-id="3" type="EC.Escuadron.Ataque Cheeta">
                   <position x="80283.328125" y="105775.484375">17MQU7528110114</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2700" state="ReparableAvecEvacuation" type="EC.FAE.Cheetah">
                       <humans>
                         <human id="3955" rank="Oficial"/>
@@ -19550,7 +19550,7 @@
                 <unit color="0x0055ff" command-post="false" id="9427391" name="7/ESC1/2012" sort-id="6" type="EC.Escuadron.Ataque Cheeta">
                   <position x="80283.328125" y="105775.484375">17MQU7528110114</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2703" state="ReparableAvecEvacuation" type="EC.FAE.Cheetah">
                       <humans>
                         <human id="3961" rank="Oficial"/>
@@ -19573,7 +19573,7 @@
                 <unit color="0x0055ff" command-post="false" id="9427392" name="8/ESC1/2012" sort-id="7" type="EC.Escuadron.Ataque Cheeta">
                   <position x="80283.328125" y="105775.484375">17MQU7528110114</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2704" state="ReparableAvecEvacuation" type="EC.FAE.Cheetah">
                       <humans>
                         <human id="3963" rank="Oficial"/>
@@ -19618,7 +19618,7 @@
                 <unit color="0x0055ff" command-post="false" id="9427394" name="10/ESC1/2012" sort-id="9" type="EC.Escuadron.Ataque Cheeta">
                   <position x="80283.328125" y="105775.484375">17MQU7528110114</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="0" operational-state="0">
+                  <equipments major-operational-state="1" operational-state="1">
                     <equipment id="2706" state="ReparableAvecEvacuation" type="EC.FAE.Cheetah">
                       <humans>
                         <human id="3967" rank="Oficial"/>

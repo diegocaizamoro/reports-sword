@@ -38,6 +38,19 @@
 </head>
 
 <body>
+    <!-- TIMELINE HEADER -->
+<!-- Checkbox -->
+<label>
+  <input type="checkbox" id="enableTimeline" >
+  Habilitar Línea de Tiempo
+</label>
+
+<!-- Contenedor timeline -->
+<div id="timelineContainer" style="display:none; padding:10px;">
+  <div id="timelineMarks" class="timeline-line"></div>
+  <button id="prevBtn">◀ Anterior</button>
+  <button id="nextBtn">Siguiente ▶</button>
+</div>
 
     <!--<script>
         // Verifica si el usuario está logueado
@@ -210,6 +223,7 @@ round	Batallón de Infantería	Grupo de Caballería Blindada	Grupo de Caballerí
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/mgrs/dist/mgrs.js"></script>
     <script src="scripts/maps/main.js"></script>
+    <script src="scripts/timeline.js"></script>
 </body>
 
 </html>
