@@ -100,11 +100,7 @@ map.on("singleclick", function (evt) {
     ${realFeature.get("formationName")?.split("/")[0] || ""}/
       ${realFeature.get("parentName")?.split("/")[0] || ""} / 
       <span style="color:blue; font-weight:bold;">
-        ${
-          
-          realFeature.get("name") ||
-          ""
-        }
+        ${realFeature.get("name") || ""}
       </span>
     </span><br>
     <div style="
@@ -248,7 +244,7 @@ function searchUnits(node, results, parentName = null, formationName = null) {
 
   // Si el nodo actual es un <formation>, guardamos su nombre
   if (node.$?.name && node.hasOwnProperty("automat")) {
-    formationName = node.$.name; 
+    formationName = node.$.name;
   }
 
   // Si el nodo actual es un <automat>, guardamos su nombre como padre
@@ -279,15 +275,12 @@ function searchUnits(node, results, parentName = null, formationName = null) {
 
   Object.values(node).forEach((child) => {
     if (Array.isArray(child)) {
-      child.forEach((c) =>
-        searchUnits(c, results, parentName, formationName)
-      );
+      child.forEach((c) => searchUnits(c, results, parentName, formationName));
     } else if (typeof child === "object") {
       searchUnits(child, results, parentName, formationName);
     }
   });
 }
-
 
 function mgrsToLatLon(mgrsString) {
   try {
@@ -302,58 +295,132 @@ function mgrsToLatLon(mgrsString) {
 // Función para actualizar puntos en el mapa con conversión desde MGRS
 function updateMap(units) {
   const view = map.getView();
-  const currentCenter = view.getCenter();
-  const currentZoom = view.getZoom();
 
-  unitSource.clear();
+  // 🔹 Obtener los features actuales del mapa
+  const existingFeatures = unitSource.getFeatures();
+  const featureMap = new Map(existingFeatures.map((f) => [f.get("name"), f]));
 
-  const features = units
-    .filter((u) => u.mgrs)
-    .map((u) => {
-      const [lon, lat] = mgrsToLatLon(u.mgrs);
-      if (!lon || !lat) return null;
+  units.forEach((u) => {
+    if (!u.mgrs) return;
+    const [lon, lat] = mgrsToLatLon(u.mgrs);
+    if (!lon || !lat) return;
 
-      let color =
-        u.percentage < 34 ? "#f4a9a9" :
-        u.percentage < 67 ? "yellow" :
-        "#99e699";
+    let feature = featureMap.get(u.name);
 
-      // === 🔥 Detectar si ha sido atacada ===
+    // === Si el feature ya existe → solo actualizar ===
+    if (feature) {
+      // 📌 Actualizar posición solamente si cambió
+      const geom = feature.getGeometry();
+      const newCoords = ol.proj.fromLonLat([lon, lat]);
+      geom.setCoordinates(newCoords);
+
+      // 🎯 Detectar ataque comparando historial
       const prev = previousStates[u.name];
-      if (prev !== undefined && u.percentage < prev) {
-        console.log(`⚠️ Unidad atacada: ${u.name} (${prev} → ${u.percentage})`);
-        
-        // 🔊 Alerta sonora
-        alertVoice(`Unidad ${u.name} bajo ataque`);
-
-        // 🟥 Pintar temporalmente en rojo brillante
-        color = "red";
-        flashUnit(u.name);
+      if (!window.isTimelineActive) {
+        if (prev !== undefined && u.percentage < prev) {
+          alertVoice(`Unidad ${u.name} bajo ataque`);
+          flashUnit(u.name);
+        }
       }
 
-      // 📝 Guardar nuevo valor como histórico
       previousStates[u.name] = u.percentage;
 
-      return new ol.Feature({
+      // 🎨 Actualizar color y atributos
+      feature.setProperties({
+        percentage: u.percentage,
+        formationName: u.formationName,
+        parentName: u.parentName,
+        color:
+          u.percentage < 34
+            ? "#f4a9a9"
+            : u.percentage < 67
+            ? "yellow"
+            : "#99e699",
+      });
+    } else {
+      // === ⚠ Si no existe, es nueva unidad → la creamos ===
+      const newFeature = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
         formationName: u.formationName,
         parentName: u.parentName,
         name: u.name,
         percentage: u.percentage,
-        color: color,
+        color:
+          u.percentage < 34
+            ? "#f4a9a9"
+            : u.percentage < 67
+            ? "yellow"
+            : "#99e699",
       });
-    });
+      unitSource.addFeature(newFeature);
+    }
+  });
 
-  unitSource.addFeatures(features);
-
-  // 👁️ Mantener vista actual (no mover el mapa)
-  view.setCenter(currentCenter);
-  view.setZoom(currentZoom);
+  // 👁 Mantener vista sin mover ni recargar nada
+  view.setCenter(view.getCenter());
+  view.setZoom(view.getZoom());
 }
 
+//fuincion para mapa con linea de tiempo********************
+//******************************************************** */
+function processOrbatForMap(xmlDoc) {
+  const units = [];
+
+  function recursiveSearch(node, parentName = null, formationName = null) {
+    if (!node || !node.tagName) return; // Ignorar nodos no válidos
+
+    // Detectar <formation>
+    if (node.tagName === "formation" && node.getAttribute("name")) {
+      formationName = node.getAttribute("name");
+    }
+
+    // Detectar <automat>
+    if (node.tagName === "automat" && node.getAttribute("name")) {
+      parentName = node.getAttribute("name");
+    }
+
+    // Detectar <unit>
+    if (node.tagName === "unit") {
+      const position = node.querySelector("position");
+      const equipments = node.querySelector("equipments");
+
+      if (position) {
+        const mgrs = (position.textContent || "").trim();
+        const x = parseFloat(position.getAttribute("x"));
+        const y = parseFloat(position.getAttribute("y"));
+
+        let percentage = 0;
+        if (equipments && equipments.getAttribute("operational-state")) {
+          percentage =
+            parseFloat(equipments.getAttribute("operational-state")) * 100;
+        }
+
+        units.push({
+          name: node.getAttribute("name") || "Sin nombre",
+          parentName: parentName || "Sin padre",
+          formationName: formationName || "Sin formation",
+          mgrs,
+          x,
+          y,
+          percentage,
+        });
+      }
+    }
+
+    // Recorrer los HIJOS reales (ElementNodes)
+    Array.from(node.children).forEach((child) =>
+      recursiveSearch(child, parentName, formationName)
+    );
+  }
+
+  recursiveSearch(xmlDoc.documentElement); // Inicia desde raíz
+  updateMap(units); // ⬅️ Usa tu función original, sin tocarla
+}
 
 function flashUnit(unitName) {
-  const feature = unitSource.getFeatures().find(f => f.get("name") === unitName);
+  const feature = unitSource
+    .getFeatures()
+    .find((f) => f.get("name") === unitName);
   if (!feature) return;
 
   feature.setStyle(
@@ -362,7 +429,7 @@ function flashUnit(unitName) {
         radius: 15,
         fill: new ol.style.Fill({ color: "rgba(255,0,0,0.8)" }),
         stroke: new ol.style.Stroke({ color: "#fff", width: 2 }),
-      })
+      }),
     })
   );
 

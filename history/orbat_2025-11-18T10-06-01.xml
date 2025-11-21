@@ -1034,7 +1034,7 @@
                 <unit color="0x0055ff" command-post="false" id="2038" name="2/BI1/41" sort-id="2" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="60179.73828125" y="71174.234375">17MQT5512475753</position>
                   <direction x="-0.8527522867536399" y="0.52231555350806669"/>
-                  <equipments major-operational-state="1" operational-state="1">
+                  <equipments major-operational-state="1" operational-state="0.10">
                     <equipment id="40" type="EC.INF.Soldado">
                       <humans>
                         <human id="40" rank="Voluntario"/>
@@ -1462,7 +1462,7 @@
                 <unit color="0x0055ff" command-post="true" id="2040" name="PM1/41" sort-id="0" type="EC.PM 1/301">
                   <position x="60721.84375" y="70852.78125">17MQT5566675433</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="1" operational-state="1">
+                  <equipments major-operational-state="1" operational-state="0.30">
                     <equipment id="118" type="EC.Vehículo Armado">
                       <humans>
                         <human id="118" rank="Oficial"/>
@@ -4310,7 +4310,7 @@
                 <unit color="0x0055ff" command-post="false" id="2059" name="3/BI2/42" sort-id="3" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="59855.09765625" y="66503.4296875">17MQT5479371112</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="1" operational-state="1">
+                  <equipments major-operational-state="1" operational-state="0.40">
                     <equipment id="610" type="EC.INF.Soldado">
                       <humans>
                         <human id="634" rank="Voluntario"/>
@@ -4523,7 +4523,7 @@
                 <unit color="0x0055ff" command-post="true" id="2060" name="PM2/42" sort-id="0" type="EC.PM 1/301">
                   <position x="59023.7734375" y="67663.4140625">17MQT5396372266</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="1" operational-state="1">
+                  <equipments major-operational-state="1" operational-state="0.50">
                     <equipment id="649" type="EC.Vehículo Armado">
                       <humans>
                         <human id="673" rank="Oficial"/>
@@ -5501,7 +5501,7 @@
                 <unit color="0x0055ff" command-post="true" id="2088" name="PM APY/42" sort-id="0" type="EC.PM 1/301">
                   <position x="62409.4921875" y="65099.359375">17MQT5734669713</position>
                   <direction x="0" y="1"/>
-                  <equipments major-operational-state="1" operational-state="1">
+                  <equipments major-operational-state="1" operational-state="0.40">
                     <equipment id="816" type="EC.Vehículo Armado">
                       <humans>
                         <human id="854" rank="Oficial"/>
@@ -5523,7 +5523,7 @@
                 <unit color="0x0055ff" command-post="false" id="2238" name="BI AT/42" sort-id="3" type="EC.Pelotón Antitanque MAPATS">
                   <position x="62757.48828125" y="65447.35546875">17MQT5769570059</position>
                   <direction x="-0.70710109679711586" y="-0.70711246553028306"/>
-                  <equipments major-operational-state="1" operational-state="1">
+                  <equipments major-operational-state="1" operational-state="0.10">
                     <equipment id="817" type="EC.INF.Soldado.MAPATS">
                       <humans>
                         <human id="856" rank="Voluntario"/>
@@ -6484,7 +6484,7 @@
                 <unit color="0x0055ff" command-post="false" id="2073" name="2/BI2/43" sort-id="2" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="66701.453125" y="73492.0390625">17MQT6165278048</position>
                   <direction x="-0.90351746289655421" y="0.42855127375959767"/>
-                  <equipments major-operational-state="1" operational-state="1">
+                  <equipments major-operational-state="1" operational-state="0.40">
                     <equipment id="984" type="EC.INF.Soldado">
                       <humans>
                         <human id="1031" rank="Voluntario"/>
@@ -6697,7 +6697,7 @@
                 <unit color="0x0055ff" command-post="false" id="2074" name="3/BI2/43" sort-id="3" type="EC.Pelotón Infantería 1/BI1/301">
                   <position x="66701.453125" y="73492.0390625">17MQT6165278048</position>
                   <direction x="-0.78789509675908909" y="0.61580948068618235"/>
-                  <equipments major-operational-state="1" operational-state="1">
+                  <equipments major-operational-state="1" operational-state="0.60">
                     <equipment id="1023" type="EC.INF.Soldado">
                       <humans>
                         <human id="1070" rank="Voluntario"/>

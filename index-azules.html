@@ -39,18 +39,18 @@
 
 <body>
     <!-- TIMELINE HEADER -->
-<!-- Checkbox -->
-<label>
-  <input type="checkbox" id="enableTimeline" >
-  Habilitar Línea de Tiempo
-</label>
+    <!-- Checkbox -->
+    <label>
+        <input type="checkbox" id="enableTimeline">
+        Habilitar Línea de Tiempo
+    </label>
 
-<!-- Contenedor timeline -->
-<div id="timelineContainer" style="display:none; padding:10px;">
-  <div id="timelineMarks" class="timeline-line"></div>
-  <button id="prevBtn">◀ Anterior</button>
-  <button id="nextBtn">Siguiente ▶</button>
-</div>
+    <!-- Contenedor timeline -->
+    <div id="timelineContainer" style="display:none; padding:10px;">
+        <div id="timelineMarks" class="timeline-line"></div>
+        <button id="prevBtn">◀ Anterior</button>
+        <button id="nextBtn">Siguiente ▶</button>
+    </div>
 
     <!--<script>
         // Verifica si el usuario está logueado
@@ -159,25 +159,27 @@ round	Batallón de Infantería	Grupo de Caballería Blindada	Grupo de Caballerí
             </div>
             <div class="tab-content" id="tab4">
                 <h2>Mapa</h2>
-                <div class="layer-switcher">
-                    <label>Mapa Base:</label>
-                    <select id="baseLayerSelect">
-                        <option value="osm">OSM</option>
-                        <option value="topo">topo</option>
-                        <option value="esriSat">ESRI Satelital</option>
-                    </select>
-                    
-                </div>
-                
+
+
                 <div id="map" class="map">
                     <div id="legend" class="map-legend">
                         <h4>🔎 Leyenda</h4>
-                        <div><span class="legend-box" style="background:#f4a9a9;"></span>Menos del 34%  &nbsp;&nbsp; &nbsp; <span class="legend-box" style="background:yellow;"></span>Menos del 67%  &nbsp;&nbsp; &nbsp; <span class="legend-box" style="background:#99e699;"></span>Mayor al 67%</div>
+                        <div><span class="legend-box" style="background:#f4a9a9;"></span>Menos del 34% &nbsp;&nbsp;
+                            &nbsp; <span class="legend-box" style="background:yellow;"></span>Menos del 67% &nbsp;&nbsp;
+                            &nbsp; <span class="legend-box" style="background:#99e699;"></span>Mayor al 67%</div>
+                            <label>Mapa Base:</label>
+                            <select id="baseLayerSelect">
+                                <option value="osm">OSM</option>
+                                <option value="topo">TOPO</option>
+                                <option value="esriSat">ESRI SATELITAL</option>
+                            </select>
+
                     </div>
                     <div id="popup" class="ol-popup">
                         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
                         <div id="popup-content"></div>
                     </div>
+
                 </div>
 
             </div>

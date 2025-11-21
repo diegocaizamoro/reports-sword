@@ -9755,7 +9755,7 @@
               <unit color="0x0055ff" command-post="false" id="2106" name="3/CE 46" sort-id="2" type="EC.Pelotón Ingenieros 1/CE 7 (contramovilidad)">
                 <position x="57620.45703125" y="67765.453125">17MQT5255972370</position>
                 <direction x="0" y="1"/>
-                <equipments major-operational-state="1" operational-state="1">
+                <equipments major-operational-state="1" operational-state="0.20">
                   <equipment id="1449" type="EC.ING.Vehiculo">
                     <humans>
                       <human id="1806" rank="Voluntario"/>

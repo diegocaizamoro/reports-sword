@@ -39,7 +39,6 @@ async function loadHistoryFiles() {
     currentIndex = 0;
     highlightMark(0);
     loadOrbat(historyFiles[0]);
-
   } catch (err) {
     console.error("Error cargando history:", err);
   }
@@ -72,10 +71,12 @@ function renderTimelineMarks() {
 
 // --- DESTACAR EL PUNTO ACTUAL ---
 function highlightMark(index) {
-  document.querySelectorAll(".time-mark").forEach((m) =>
-    m.classList.remove("active")
+  document
+    .querySelectorAll(".time-mark")
+    .forEach((m) => m.classList.remove("active"));
+  const activeMark = document.querySelector(
+    `.time-mark[data-index="${index}"]`
   );
-  const activeMark = document.querySelector(`.time-mark[data-index="${index}"]`);
   if (activeMark) activeMark.classList.add("active");
 }
 
@@ -104,7 +105,11 @@ function loadOrbat(filename) {
   fetch(url)
     .then((r) => r.text())
     .then((xmlText) => {
-      parseXML(xmlText); // ⬅️ Tu función actual que procesa XML
+      //parseXML(xmlText); // ⬅️ Tu función actual que procesa XML
+      const parser = new DOMParser();
+      const units = parser.parseFromString(xmlText, "text/xml");
+      updateOperationalValues(units);
+      processOrbatForMap(units);
     })
     .catch((err) => console.error("Error cargando ORBAT:", err));
 }
@@ -117,6 +122,29 @@ enableTimelineCheckbox.addEventListener("change", function () {
     loadHistoryFiles(); // Activa timeline
   } else {
     console.log("Timeline desactivado, usando servidor en vivo.");
-    fetchFromServer(); // ⬅️ Recupera modo real
+    window.location.reload();
+
+    //fetchFromServer(); // ⬅️ Recupera modo real
   }
 });
+
+
+
+async function loadOrbatXML(fileUrl) {
+  try {
+    const response = await fetch(fileUrl);
+    if (!response.ok) throw new Error("No se pudo cargar el archivo: " + fileUrl);
+
+    const xmlText = await response.text();
+
+    // Convertir XML string a objeto JavaScript usando DOMParser
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+
+    return xmlDoc; // ⬅️ Ya tienes el XML parseado
+  } catch (error) {
+    console.error("Error cargando ORBAT:", error);
+    return null;
+  }
+}
+
